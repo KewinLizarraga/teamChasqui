@@ -1,0 +1,11 @@
+require('./Business');
+require('./Country');
+require('./District');
+require('./MoneyType');
+require('./Province');
+require('./Question');
+require('./Reply');
+require('./Request');
+require('./Review');
+require('./Role');
+require('./User');

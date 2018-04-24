@@ -5,6 +5,8 @@ const logger = require('morgan');
 
 const { config } = require('./config/keys');
 
+require('./models');
+
 const app = express();
 
 mongoose.connect(config.mongoURI)

@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 const bcrypt = require('bcryptjs');
+const { Schema } = mongoose;
+const GeoLocationSchema = require('./common/GeoLocation');
+
 const SALT_WORK_FACTOR = 10;
 
-const geoLocationSchema = new Schema({
-  lat: Number,
-  lng: Number
-}, { _id: false });
-
 const UserSchema = new Schema({
-  nickname: { type: String, required: true, unique: true },
+  nickname: { type: String, unique: true },
   email: { type: String, required: true, unique: true },
   hashed_password: { type: String, default: '' },
   first_name: { type: String, required: true },
@@ -19,7 +16,7 @@ const UserSchema = new Schema({
   province_id: { type: Schema.Types.ObjectId, ref: 'Province' },
   district_id: { type: Schema.Types.ObjectId, ref: 'District' },
   address: String,
-  geo_location: geoLocationSchema,
+  geo_location: GeoLocationSchema,
   review_count: { type: Number, default: 0 }
 }, { timestamps: true });
 
