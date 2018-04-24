@@ -22,5 +22,7 @@ app.get('/', (req, res) => {
   res.send('Chasqui backend');
 });
 
+require('./routes')(app);
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
