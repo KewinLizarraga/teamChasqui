@@ -6,9 +6,9 @@ const GeoLocationSchema = require('./common/GeoLocation');
 const SALT_WORK_FACTOR = 10;
 
 const UserSchema = new Schema({
-  nickname: { type: String, unique: true },
+  nickname: { type: String },
   email: { type: String, required: true, unique: true },
-  hashed_password: { type: String, default: '' },
+  hashed_password: { type: String, default: '', select: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   role_id: { type: Schema.Types.ObjectId, ref: 'Role' },
@@ -31,22 +31,42 @@ UserSchema.pre('save', function (next) {
   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
     if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, (err, hash) => {
+    bcrypt.hash(user._password, salt, (err, hash) => {
       if (err) return next(err);
-
       user.hashed_password = hash;
       next();
     });
   });
 });
 
-UserSchema.methods.comparePassword = (candidatePassword, cb) => {
-  bcrypt.compare(candidatePassword, this.hashed_password, (err, isMatch) => {
+// UserSchema.methods.comparePassword = function (candidatePassword, cb) {
+//   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+//     console.log('candidate ->', candidatePassword);
+//     console.log('no-candidate ->', this);
+//     if (err) return cb(err);
+//     cb(null, isMatch);
+//   });
+// }
+
+// UserSchema.methods = {
+//   comparePassword: function (candidatePassword, cb) {
+//     bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+//       console.log('candidate ->', candidatePassword);
+//       console.log('no-candidate ->', this.hashed_password);
+//       if (err) return cb(err);
+//       cb(null, isMatch);
+//     });
+//   }
+// }
+
+UserSchema.methods.comparePassword = function (candidatePassword, cb) {
+  console.log('CANDIDATE ->', candidatePassword);
+  console.log('NO-CANDIDATE ->', this.hashed_password)
+  bcrypt.compare(candidatePassword, this.hashed_password, function (err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
-  });
+  })
 }
-
 mongoose.model('User', UserSchema);
 
 

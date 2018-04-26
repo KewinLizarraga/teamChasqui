@@ -4,7 +4,7 @@ const Business = require('mongoose').model('Business');
 // const businessC = require('../controllers/businessC');
 
 router.get('/', (req, res) => {
-  const filter = req.query.filter;
+  const { filter } = req.query;
   Business.find(filter, (err, businesses) => {
     if (err) {
       return res.status(500).send(err);
