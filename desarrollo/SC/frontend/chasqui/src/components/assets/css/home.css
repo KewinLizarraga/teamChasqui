@@ -1,0 +1,32 @@
+.Home {
+  position: relative;
+  background-color: #e6e6e6;
+}
+
+.main-container {
+  position: relative;
+  height: calc( 100vh - 60px);
+}
+
+.main-section {
+  margin-left: 250px;
+  transition: .5s all;
+  padding: 10px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-section .box-center {
+  max-width: 1270px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-shrink: 1;
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.main-section.toggle-margin {
+  margin-left: 0;
+}

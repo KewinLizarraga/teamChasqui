@@ -1,0 +1,69 @@
+.List-services {
+  flex-basis: 350px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: 20px;
+}
+
+@media screen and (max-width: 1270px) {
+  .List-services {
+    display: none;
+  }
+}
+
+.List-services h2 {
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  font-weight: normal;
+  word-spacing: 4px;
+}
+
+.List-services .list-container {
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  max-height: 480px;
+  overflow: hidden;
+}
+
+.List-services .list-container .services-null {
+  text-align: center;
+}
+
+.List-services .list-container .services {
+  margin-bottom: 2px;
+  list-style: none;
+}
+
+.List-services .list-container .services .service {
+  padding: 5px;
+  font-size: .85rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+.List-services .list-container .services .service:nth-child(odd) {
+  background-color: #e6e6e6;
+}
+
+.List-services .submit {
+  float: right;
+  margin-top: 20px;
+  outline: none;
+  border: 1px solid #038acc;
+  background-color: #039be5;
+  color: #fff;
+  line-height: 30px;
+  font-size: .85rem;
+  font-family: "Roboto", sans-serif;
+  padding: 0 40px;
+  cursor: pointer;
+  transition: .2s all;
+}
+
+.List-services .submit:hover {
+  background-color: #0279b3;
+}

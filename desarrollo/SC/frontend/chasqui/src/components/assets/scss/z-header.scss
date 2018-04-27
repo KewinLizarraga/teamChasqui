@@ -1,0 +1,49 @@
+@import './variables';
+
+.header{
+    background-color: $first-color;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    .pictures{
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+        .menu-burger{
+           font-size: 2rem;
+           cursor: pointer;
+           color: white;
+        }
+        .logo{
+            width: 180px;
+            height: 30px;
+            margin-left: 25px;
+            cursor: pointer;
+        }
+    }
+
+    .info-user{
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        font-family: $font-paragraph;
+        font-size: .95rem;
+        color: #fff;
+
+        .user-name{
+            margin-right: 10px;
+        }
+
+        .container-photo{
+            
+            .user-photo{
+                border-radius: 50%;
+                width: 38px;
+                height: 38px;
+            }
+        }
+    }
+    
+}

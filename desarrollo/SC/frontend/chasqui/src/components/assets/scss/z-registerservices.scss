@@ -1,0 +1,65 @@
+@import '_variables';
+
+.Register-services{
+    flex-grow: 1;
+    padding: 20px;
+    max-width: 720px;
+    @media screen and (max-width: 1270px){
+    
+    }
+    h2{ 
+        padding: 10px 20px;
+        background-color: $box-bgcolor;
+        box-shadow: $box-shadow-2;
+        font-family: $font-titles;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        font-weight: normal;
+        word-spacing: 4px;
+    }
+
+    .container-items{
+        padding: 10px;
+        background-color: $box-bgcolor;
+        box-shadow: $box-shadow-2;
+        display: flex;
+        justify-content: space-between;
+       
+        .item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+            flex-basis:32%;
+            text-align: center;
+            img{
+                padding: 4px;
+                background-color: $first-color;
+                box-sizing: content-box;
+                max-width: 100%;
+                min-height: 180px;
+                display: block;
+                @media screen and (max-width: 1270px){
+                    min-height: 150px;
+                }
+            }
+            input[type="submit"], button{
+                color: #fff;
+                line-height: 30px;
+                font-size: .85rem;
+                font-family: $font-button;
+                outline: none;
+                cursor: pointer;
+                padding: 0 10px;
+                border: 1px solid darken($color-button,5);
+                background-color: $color-button;
+                margin-top: 15px;
+                transition: .3s all;
+                &:hover{
+                    background-color: darken($color-button,10);
+                }
+               
+            }
+        }
+    }
+}
