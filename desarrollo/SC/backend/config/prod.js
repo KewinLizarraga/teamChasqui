@@ -3,6 +3,6 @@ module.exports = {
     mongoURI: process.env.NODE_ENV
   },
   keys: {
-    jwtKeySecret: proces.env.JWT_KEY_SECRET
+    jwtKeySecret: process.env.JWT_KEY_SECRET
   }
 }
