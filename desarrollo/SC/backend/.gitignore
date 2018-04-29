@@ -89,5 +89,6 @@ typings/
 
 # For me
 dev.js
+ecosystem.config.js
 
 # End of https://www.gitignore.io/api/node,macos
