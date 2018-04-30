@@ -9,3 +9,4 @@ require('./Request');
 require('./Review');
 require('./Role');
 require('./User');
+require('./VerificationToken');

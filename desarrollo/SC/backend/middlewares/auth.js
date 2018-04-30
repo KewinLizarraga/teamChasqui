@@ -9,12 +9,14 @@ exports.auth = (req, res, next) => {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token', error: err });
       }
+      req.decoded = decoded;
+      return next();
     });
-    return next();
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'Token not found'
+    })
   }
 
-  return res.status(403).send({
-    success: false,
-    message: 'Token not found'
-  })
 }

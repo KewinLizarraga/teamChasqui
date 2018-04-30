@@ -11,7 +11,7 @@ const app = express();
 
 mongoose.connect(config.mongoURI)
   .then(db => console.log('Connected to MongoDB'))
-  .catch(err => console.log(err));
+  .catch(err => { throw err });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

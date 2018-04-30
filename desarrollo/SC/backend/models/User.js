@@ -8,6 +8,8 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
   nickname: { type: String },
   email: { type: String, required: true, unique: true },
+  photo: { type: String, default: '' },
+  isVerified: { type: Boolean, default: false },
   hashed_password: { type: String, default: '', select: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
@@ -39,29 +41,7 @@ UserSchema.pre('save', function (next) {
   });
 });
 
-// UserSchema.methods.comparePassword = function (candidatePassword, cb) {
-//   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-//     console.log('candidate ->', candidatePassword);
-//     console.log('no-candidate ->', this);
-//     if (err) return cb(err);
-//     cb(null, isMatch);
-//   });
-// }
-
-// UserSchema.methods = {
-//   comparePassword: function (candidatePassword, cb) {
-//     bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-//       console.log('candidate ->', candidatePassword);
-//       console.log('no-candidate ->', this.hashed_password);
-//       if (err) return cb(err);
-//       cb(null, isMatch);
-//     });
-//   }
-// }
-
 UserSchema.methods.comparePassword = function (candidatePassword, cb) {
-  console.log('CANDIDATE ->', candidatePassword);
-  console.log('NO-CANDIDATE ->', this.hashed_password)
   bcrypt.compare(candidatePassword, this.hashed_password, function (err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
