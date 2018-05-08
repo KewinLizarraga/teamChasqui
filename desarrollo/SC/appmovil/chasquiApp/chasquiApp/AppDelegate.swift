@@ -7,18 +7,48 @@
 //
 
 import UIKit
+import Firebase
+import SwiftyTimer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var remoteConfig: RemoteConfig?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
+        self.remoteConfig = RemoteConfig.remoteConfig()
+        
+        if let config = RemoteConfigSettings(developerModeEnabled: true) {
+            self.remoteConfig?.configSettings = config
+            setupRemoteConfigDefaults()
+            fetchRemoteConfig()
+        }
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = CustomTabBarController()
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
+    
+    func setupRemoteConfigDefaults() {
+        self.remoteConfig?.setDefaults(Globals.remoteConfig)
+    }
+    
+    func fetchRemoteConfig() {
+        self.remoteConfig?.fetch(withExpirationDuration: 0, completionHandler: { [unowned self] (status, error) in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            self.remoteConfig?.activateFetched()
+        })
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

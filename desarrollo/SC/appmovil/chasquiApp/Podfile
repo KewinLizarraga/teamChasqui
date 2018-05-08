@@ -11,5 +11,17 @@ target 'chasquiApp' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'SwiftyUserDefaults'
+  pod 'SwiftyTimer'
+
+  #RemoteConfig
+  pod 'Firebase/Core'
+  pod 'Firebase/RemoteConfig'
+
+  #IGListKit
+  pod 'IGListKit'
+
+  #Rating
+  pod 'Cosmos'
+
 
 end
