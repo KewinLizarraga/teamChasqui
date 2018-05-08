@@ -5,21 +5,25 @@ const GeoLocationSchema = require('./common/GeoLocation');
 
 const SALT_WORK_FACTOR = 10;
 
+// TODO: add photo, verified, hashed_password, review_count, deleted, reset_password_token, reset_password_expires withing db model
+// TODO: Change district to city or see how it will be better
+
 const UserSchema = new Schema({
   nickname: { type: String },
   email: { type: String, required: true, unique: true },
   photo: { type: String, default: '' },
-  isVerified: { type: Boolean, default: false },
+  verified: { type: Boolean, default: false },
   hashed_password: { type: String, default: '', select: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   role_id: { type: Schema.Types.ObjectId, ref: 'Role' },
-  country_id: { type: Schema.Types.ObjectId, ref: 'Country' },
-  province_id: { type: Schema.Types.ObjectId, ref: 'Province' },
   district_id: { type: Schema.Types.ObjectId, ref: 'District' },
   address: String,
   geo_location: GeoLocationSchema,
-  review_count: { type: Number, default: 0 }
+  review_count: { type: Number, default: 0 },
+  reset_password_token: String,
+  reset_password_expires: Date,
+  deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
 UserSchema.virtual('password').set(function (password) {

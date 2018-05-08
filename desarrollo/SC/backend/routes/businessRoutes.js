@@ -1,17 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Business = require('mongoose').model('Business');
-// const businessC = require('../controllers/businessC');
+const businessController = require('../controllers/businessController');
 
-router.get('/', (req, res) => {
-  const { filter } = req.query;
-  Business.find(filter, (err, businesses) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    return res.status(200).send(businesses);
-  })
-});
+router.get('/', businessController.getAll);
 
 // router.get('/setup', (req, res) => {
 //   businesses = [{
