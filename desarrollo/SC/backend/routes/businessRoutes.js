@@ -3,20 +3,7 @@ const router = express.Router();
 const businessController = require('../controllers/businessController');
 
 router.get('/', businessController.getAll);
-
-// router.get('/setup', (req, res) => {
-//   businesses = [{
-//     type: 'restaurant',
-//     name: 'Rico Rico'
-//   },{
-//     type: 'hotel',
-//     name: 'El Cielo'
-//   }];
-
-//   Business.create(businesses, (err, data) => {
-//     res.send(data);s
-//   })
-// });
+// router.get('/setup', businessController.setup);
 
 
 module.exports = router;
