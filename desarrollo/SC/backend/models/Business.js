@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const GeoLocation = require('./common/GeoLocation');
+const Price = require('./Price');
 
 const address = new Schema({
   details: String,
   reference: String,
 }, { _id: false });
 
+// DOING
+
 const businessSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'User'},
-  country_id: { type: Schema.Types.ObjectId, ref: 'Country' },
-  province_id: { type: Schema.Types.ObjectId, ref: 'Province' },
   district_id: { type: Schema.Types.ObjectId, ref: 'District' },
   money_types: [{ type: Schema.Types.ObjectId, ref: 'MoneyType' }],
   type: { type: String, required: true },
@@ -26,7 +27,12 @@ const businessSchema = new Schema({
   photos: [String],
   stars: { type: Number, default: 0 },
   review_count: { type: Number, default: 0 },
-  details: { type: Schema.Types.Mixed },
+  restaurant_detail: {},
+  hotel_detail: {},
+  travel_agency_detail: {},
+  deleted: { type: Boolean, default: false },
+  business_hours: Schema.Types.Mixed,
+  price: Price
 }, { timestamps: true });
 
 mongoose.model('Business', businessSchema);

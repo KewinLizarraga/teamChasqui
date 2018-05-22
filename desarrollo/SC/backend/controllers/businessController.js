@@ -7,3 +7,10 @@ exports.getAll = (req, res) => {
     return res.status(200).send(businesses);
   });
 }
+
+exports.create = (req, res) => {
+  const { type } = req.body;
+  Business.create(req.body, (err, newBusiness) => {
+    res.send(newBusiness);
+  });
+}

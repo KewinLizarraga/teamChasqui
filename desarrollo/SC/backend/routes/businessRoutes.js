@@ -3,6 +3,7 @@ const router = express.Router();
 const businessController = require('../controllers/businessController');
 
 router.get('/', businessController.getAll);
+router.post('/', businessController.create)
 
 // router.get('/setup', (req, res) => {
 //   businesses = [{
