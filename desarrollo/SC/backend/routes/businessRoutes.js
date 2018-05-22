@@ -3,9 +3,6 @@ const router = express.Router();
 const businessController = require('../controllers/businessController');
 
 router.get('/', businessController.getAll);
-<<<<<<< HEAD
-// router.get('/setup', businessController.setup);
-=======
 router.post('/', businessController.create)
 
 // router.get('/setup', (req, res) => {
@@ -21,7 +18,6 @@ router.post('/', businessController.create)
 //     res.send(data);s
 //   })
 // });
->>>>>>> joshua
 
 
 module.exports = router;
