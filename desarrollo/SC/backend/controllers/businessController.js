@@ -19,27 +19,9 @@ exports.getAll = (req, res) => {
   });
 }
 
-exports.setup = (req, res) => {
-  const photos = ['http://thednetworks.com/wp-content/uploads/2012/01/picture_not_available_400-300.png'];
-  businesses = [{
-    photos,
-    type: 'restaurant',
-    name: 'Habla Causa'
-  }, {
-    photos,
-    type: 'hotel',
-    name: 'The Hipson'
-  }, {
-    photos,
-    type: 'travel_agency',
-    name: 'Tu Ruta'
-  }, {
-    photos,
-    type: 'hotel',
-    name: 'KhaKheKi'
-  }];
-
-  Business.create(businesses, (err, data) => {
-    res.send(data);
-  })
+exports.create = (req, res) => {
+  const { type } = req.body;
+  Business.create(req.body, (err, newBusiness) => {
+    res.send(newBusiness);
+  });
 }
