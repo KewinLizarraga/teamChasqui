@@ -16,11 +16,13 @@ class CustomTabBarController: UITabBarController {
         setupViewControllers()
     }
     
-    fileprivate func configureTabBar() {
+    //MARK: Tab Bar configuration
+    
+    private func configureTabBar() {
         self.view.backgroundColor = UIColor.white
         self.tabBar.isTranslucent = true
         self.tabBar.tintColor = UIColor.black
-        self.tabBar.barTintColor = UIColor.lightGray
+//        self.tabBar.barTintColor = UIColor(hexString: "F6F0F0")
     }
     
     //MARK: Setup View Controllers
@@ -28,7 +30,7 @@ class CustomTabBarController: UITabBarController {
     private func setupViewControllers() {
         
         let vc1 = UINavigationController(rootViewController: HomeController())
-        vc1.view.backgroundColor = UIColor.white
+        vc1.view.backgroundColor = UIColor(hexString: "F6F0F0")
         vc1.tabBarItem.image = #imageLiteral(resourceName: "home").withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         vc1.tabBarItem.selectedImage = #imageLiteral(resourceName: "home (1)").withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         vc1.tabBarItem.title = "Home"

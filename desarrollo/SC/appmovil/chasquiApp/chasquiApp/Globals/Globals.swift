@@ -10,8 +10,11 @@ import UIKit
 
 class Globals {
     
+    static var isInProduction = false
+    
     static var baseURL: String {
-        return (UIApplication.shared.delegate as! AppDelegate).remoteConfig?.configValue(forKey: parameters.rest_dev.rawValue).stringValue ?? ""
+        let enviroment = isInProduction ? MyRemoteConfig.rest_prod : MyRemoteConfig.rest_dev
+        return (UIApplication.shared.delegate as! AppDelegate).remoteConfig?.configValue(forKey: enviroment).stringValue ?? MyRemoteConfig.remoteConfig[enviroment] as! String
     }
     
     //Auth
@@ -25,21 +28,5 @@ class Globals {
     //Business
     
     static let business = baseURL + "businesses"
-    
-    
-    
-    private enum parameters: String {
-        case rest_dev = "rest_dev"
-        case rest_prod = "rest_prod"
-    }
-    
-    static var remoteConfig: [String : NSObject] = [
-        parameters.rest_dev.rawValue : "hola mundo" as NSObject
-    ]
-    
-    
-    
-    
-    
     
 }

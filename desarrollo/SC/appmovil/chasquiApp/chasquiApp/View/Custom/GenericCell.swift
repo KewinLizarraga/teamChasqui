@@ -10,11 +10,7 @@ import UIKit
 
 class GenericCell<Item> : UICollectionViewCell {
     
-    var item: Item! {
-        didSet {
-            updateUI()
-        }
-    }
+    var item: Item!
     
     
     func updateUI() {

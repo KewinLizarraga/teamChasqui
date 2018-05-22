@@ -21,31 +21,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         self.remoteConfig = RemoteConfig.remoteConfig()
         
+        //FIXME: - Delete this when submit to production
         if let config = RemoteConfigSettings(developerModeEnabled: true) {
             self.remoteConfig?.configSettings = config
             setupRemoteConfigDefaults()
-            fetchRemoteConfig()
+            fetchRemoteConfig { [unowned self] in
+                self.configureWindow()
+            }
         }
-        
+        return true
+    }
+    
+    func configureWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = CustomTabBarController()
         window?.makeKeyAndVisible()
-        
-        return true
     }
 
     
     func setupRemoteConfigDefaults() {
-        self.remoteConfig?.setDefaults(Globals.remoteConfig)
+        self.remoteConfig?.setDefaults(MyRemoteConfig.remoteConfig)
     }
     
-    func fetchRemoteConfig() {
+    func fetchRemoteConfig(_ completion: @escaping () -> ()) {
         self.remoteConfig?.fetch(withExpirationDuration: 0, completionHandler: { [unowned self] (status, error) in
             guard error == nil else {
                 print(error!)
+                completion()
                 return
             }
             self.remoteConfig?.activateFetched()
+            completion()
         })
     }
     

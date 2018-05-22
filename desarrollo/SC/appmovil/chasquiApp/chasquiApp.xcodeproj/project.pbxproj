@@ -12,12 +12,27 @@
 		1C2A65C220A21944002C4C4C /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2A65C120A21944002C4C4C /* ApiService.swift */; };
 		1C2A65C420A23D9C002C4C4C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2A65C320A23D9C002C4C4C /* Util.swift */; };
 		1C2A65C620A24622002C4C4C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2A65C520A24622002C4C4C /* Category.swift */; };
+		1C41588C20B46A3400FFB9D4 /* ServiceSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C41588B20B46A3400FFB9D4 /* ServiceSectionController.swift */; };
+		1C41588E20B46BBE00FFB9D4 /* ServiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C41588D20B46BBE00FFB9D4 /* ServiceHeaderView.swift */; };
+		1C41589020B47FAC00FFB9D4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C41588F20B47FAC00FFB9D4 /* Colors.swift */; };
+		1C41589220B4A17A00FFB9D4 /* FeaturedServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C41589120B4A17A00FFB9D4 /* FeaturedServices.swift */; };
 		1C58966C208E555C001A5D5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58966B208E555C001A5D5D /* AppDelegate.swift */; };
 		1C589673208E555C001A5D5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C589672208E555C001A5D5D /* Assets.xcassets */; };
+		1C661AC520B4C07700D2F985 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C661AC420B4C07700D2F985 /* CustomSearchBar.swift */; };
+		1C661AC720B4C82900D2F985 /* HorizontalSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C661AC620B4C82900D2F985 /* HorizontalSectionController.swift */; };
+		1C661AC920B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C661AC820B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift */; };
+		1C661ACB20B4CB6500D2F985 /* EmbeddedSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C661ACA20B4CB6500D2F985 /* EmbeddedSectionController.swift */; };
 		1C70C77C208E702C00F93CB7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C70C77B208E702C00F93CB7 /* Default-568h@2x.png */; };
 		1C70C77E208E877A00F93CB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C70C77D208E877A00F93CB7 /* GoogleService-Info.plist */; };
 		1CC5DCC7208FE65F00FF16B5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5DCC6208FE65F00FF16B5 /* HomeController.swift */; };
 		1CC5DCCA208FEFFE00FF16B5 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */; };
+		1CD00F0620A3386F00B893A5 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD00F0520A3386F00B893A5 /* CategoryCell.swift */; };
+		1CD00F0920A33CAB00B893A5 /* Avenir Next.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 1CD00F0820A33CAB00B893A5 /* Avenir Next.ttc */; };
+		1CD00F0B20A33E6300B893A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD00F0A20A33E6300B893A5 /* Fonts.swift */; };
+		1CD00F0D20A34DBC00B893A5 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD00F0C20A34DBC00B893A5 /* RemoteConfig.swift */; };
+		1CD00F1020A395DD00B893A5 /* CategorySectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD00F0F20A395DD00B893A5 /* CategorySectionController.swift */; };
+		1CD00F1520A4FEF900B893A5 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD00F1420A4FEF900B893A5 /* ServiceCell.swift */; };
+		1CD00F1720A4FF1D00B893A5 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD00F1620A4FF1D00B893A5 /* Service.swift */; };
 		1CF3D567209CCDD700A2F896 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF3D566209CCDD700A2F896 /* GenericCell.swift */; };
 		A52CE9F93A4DBA3F35F392B7 /* Pods_chasquiApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225B5E591109310F079BD383 /* Pods_chasquiApp.framework */; };
 /* End PBXBuildFile section */
@@ -28,14 +43,29 @@
 		1C2A65C120A21944002C4C4C /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		1C2A65C320A23D9C002C4C4C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		1C2A65C520A24622002C4C4C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		1C41588B20B46A3400FFB9D4 /* ServiceSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSectionController.swift; sourceTree = "<group>"; };
+		1C41588D20B46BBE00FFB9D4 /* ServiceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHeaderView.swift; sourceTree = "<group>"; };
+		1C41588F20B47FAC00FFB9D4 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		1C41589120B4A17A00FFB9D4 /* FeaturedServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedServices.swift; sourceTree = "<group>"; };
 		1C589668208E555C001A5D5D /* chasquiApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chasquiApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C58966B208E555C001A5D5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C589672208E555C001A5D5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C589677208E555C001A5D5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C661AC420B4C07700D2F985 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		1C661AC620B4C82900D2F985 /* HorizontalSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSectionController.swift; sourceTree = "<group>"; };
+		1C661AC820B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedCollectionViewCell.swift; sourceTree = "<group>"; };
+		1C661ACA20B4CB6500D2F985 /* EmbeddedSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedSectionController.swift; sourceTree = "<group>"; };
 		1C70C77B208E702C00F93CB7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1C70C77D208E877A00F93CB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CC5DCC6208FE65F00FF16B5 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		1CD00F0520A3386F00B893A5 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		1CD00F0820A33CAB00B893A5 /* Avenir Next.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Avenir Next.ttc"; sourceTree = "<group>"; };
+		1CD00F0A20A33E6300B893A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		1CD00F0C20A34DBC00B893A5 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
+		1CD00F0F20A395DD00B893A5 /* CategorySectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionController.swift; sourceTree = "<group>"; };
+		1CD00F1420A4FEF900B893A5 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
+		1CD00F1620A4FF1D00B893A5 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		1CF3D566209CCDD700A2F896 /* GenericCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
 		21376E2EADDFE1ED10C892BA /* Pods-chasquiApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chasquiApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chasquiApp/Pods-chasquiApp.debug.xcconfig"; sourceTree = "<group>"; };
 		225B5E591109310F079BD383 /* Pods_chasquiApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chasquiApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +87,7 @@
 		1C2A65BA20A1DA31002C4C4C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1CD00F0420A3384C00B893A5 /* Home */,
 				1CF3D565209CCDB100A2F896 /* Custom */,
 			);
 			path = View;
@@ -65,7 +96,7 @@
 		1C2A65BB20A1DA37002C4C4C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C2A65C520A24622002C4C4C /* Category.swift */,
+				1CD00F1120A3AB1E00B893A5 /* Home */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -117,6 +148,7 @@
 		1C58966A208E555C001A5D5D /* chasquiApp */ = {
 			isa = PBXGroup;
 			children = (
+				1CD00F0720A33C3D00B893A5 /* Resources */,
 				1C2A65C020A21932002C4C4C /* ApiService */,
 				1C2A65BD20A217E1002C4C4C /* Utilities */,
 				1C2A65BB20A1DA37002C4C4C /* Model */,
@@ -135,6 +167,7 @@
 		1C70C77F208E879000F93CB7 /* RemoteConfig */ = {
 			isa = PBXGroup;
 			children = (
+				1CD00F0C20A34DBC00B893A5 /* RemoteConfig.swift */,
 			);
 			path = RemoteConfig;
 			sourceTree = "<group>";
@@ -152,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				1CC5DCC6208FE65F00FF16B5 /* HomeController.swift */,
+				1CD00F0E20A395C200B893A5 /* Sections */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -160,8 +194,51 @@
 			isa = PBXGroup;
 			children = (
 				1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */,
+				1CD00F0A20A33E6300B893A5 /* Fonts.swift */,
+				1C41588F20B47FAC00FFB9D4 /* Colors.swift */,
 			);
 			path = Globals;
+			sourceTree = "<group>";
+		};
+		1CD00F0420A3384C00B893A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				1CD00F0520A3386F00B893A5 /* CategoryCell.swift */,
+				1C41588D20B46BBE00FFB9D4 /* ServiceHeaderView.swift */,
+				1CD00F1420A4FEF900B893A5 /* ServiceCell.swift */,
+				1C661AC420B4C07700D2F985 /* CustomSearchBar.swift */,
+				1C661AC820B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		1CD00F0720A33C3D00B893A5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1CD00F0820A33CAB00B893A5 /* Avenir Next.ttc */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1CD00F0E20A395C200B893A5 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				1CD00F0F20A395DD00B893A5 /* CategorySectionController.swift */,
+				1C41588B20B46A3400FFB9D4 /* ServiceSectionController.swift */,
+				1C661AC620B4C82900D2F985 /* HorizontalSectionController.swift */,
+				1C661ACA20B4CB6500D2F985 /* EmbeddedSectionController.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		1CD00F1120A3AB1E00B893A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				1C2A65C520A24622002C4C4C /* Category.swift */,
+				1CD00F1620A4FF1D00B893A5 /* Service.swift */,
+				1C41589120B4A17A00FFB9D4 /* FeaturedServices.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		1CF3D565209CCDB100A2F896 /* Custom */ = {
@@ -250,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CD00F0920A33CAB00B893A5 /* Avenir Next.ttc in Resources */,
 				1C589673208E555C001A5D5D /* Assets.xcassets in Resources */,
 				1C70C77C208E702C00F93CB7 /* Default-568h@2x.png in Resources */,
 				1C70C77E208E877A00F93CB7 /* GoogleService-Info.plist in Resources */,
@@ -322,15 +400,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C661ACB20B4CB6500D2F985 /* EmbeddedSectionController.swift in Sources */,
 				1CC5DCCA208FEFFE00FF16B5 /* Globals.swift in Sources */,
 				1C2A65BF20A217F1002C4C4C /* Extensions.swift in Sources */,
 				1C2A65B920A1D9E2002C4C4C /* CustomTabBarController.swift in Sources */,
+				1CD00F1020A395DD00B893A5 /* CategorySectionController.swift in Sources */,
 				1C2A65C420A23D9C002C4C4C /* Util.swift in Sources */,
 				1CF3D567209CCDD700A2F896 /* GenericCell.swift in Sources */,
 				1C2A65C620A24622002C4C4C /* Category.swift in Sources */,
+				1C41588C20B46A3400FFB9D4 /* ServiceSectionController.swift in Sources */,
 				1C58966C208E555C001A5D5D /* AppDelegate.swift in Sources */,
+				1C41589220B4A17A00FFB9D4 /* FeaturedServices.swift in Sources */,
+				1C661AC920B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift in Sources */,
+				1CD00F0D20A34DBC00B893A5 /* RemoteConfig.swift in Sources */,
+				1CD00F1720A4FF1D00B893A5 /* Service.swift in Sources */,
 				1C2A65C220A21944002C4C4C /* ApiService.swift in Sources */,
+				1C41589020B47FAC00FFB9D4 /* Colors.swift in Sources */,
+				1C661AC520B4C07700D2F985 /* CustomSearchBar.swift in Sources */,
+				1CD00F0B20A33E6300B893A5 /* Fonts.swift in Sources */,
+				1CD00F1520A4FEF900B893A5 /* ServiceCell.swift in Sources */,
 				1CC5DCC7208FE65F00FF16B5 /* HomeController.swift in Sources */,
+				1CD00F0620A3386F00B893A5 /* CategoryCell.swift in Sources */,
+				1C41588E20B46BBE00FFB9D4 /* ServiceHeaderView.swift in Sources */,
+				1C661AC720B4C82900D2F985 /* HorizontalSectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 53T27AM783;
 				INFOPLIST_FILE = chasquiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -466,6 +559,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 53T27AM783;
 				INFOPLIST_FILE = chasquiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -14,6 +14,15 @@ class ApiService {
     
     static let sharedInstance = ApiService()
     
+    //MARK: - Get business
+    
+    func getBusinesses(_ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        ApiService.sharedInstance.request(url: Globals.business, httpMethod: .get, parameters: nil, headers: nil, completion: completion)
+    }
+    
+    
+    
+    
     //MARK: - Request for all methods
     
     func request(url: String,
@@ -21,7 +30,7 @@ class ApiService {
                  parameters: Parameters?,
                  encoding: ParameterEncoding = URLEncoding.default,
                  headers: HTTPHeaders?,
-                 completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> ()) {
+                 completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
         Alamofire.request(url, method: httpMethod, parameters: parameters, encoding: encoding, headers: headers).responseJSON { (dataResponse) in
             if let error = dataResponse.error {
                 DispatchQueue.main.async {
