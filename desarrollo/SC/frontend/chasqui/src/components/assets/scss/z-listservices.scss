@@ -1,0 +1,72 @@
+@import '_variables';
+
+.List-services{
+    flex-basis: 350px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 20px;
+
+    @media screen and (max-width: 1270px){
+        display: none;
+    }
+    
+    h2{
+        padding: 10px 20px;
+        background-color: $box-bgcolor;
+        box-shadow: $box-shadow-2;
+        font-family: $font-titles;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        font-weight: normal;
+        word-spacing: 4px;
+    
+    }
+
+    .list-container{
+
+        padding: 10px;
+        background-color: $box-bgcolor;
+        box-shadow: $box-shadow-2;
+        max-height: 480px;
+        overflow: hidden;
+
+        .services-null{
+            text-align: center;
+        }
+        
+        .services{
+            //overflow-y: scroll;
+            margin-bottom: 2px;
+            list-style: none;
+            .service{
+                padding: 5px;
+                font-size: .85rem;
+                font-family: $font-paragraph;
+                &:nth-child(odd){
+                    background-color: lighten(grey, 40);
+                }
+            }
+
+        }
+    }
+
+    .submit{
+        float: right;
+        margin-top: 20px;
+        outline: none;
+        border: 1px solid darken($color-button,5);
+        background-color: $color-button;
+        color: #fff;
+        line-height: 30px;
+        font-size: .85rem;
+        font-family: $font-button;
+        padding: 0 40px;
+        cursor: pointer;
+        transition: .2s all;
+
+        &:hover{
+            background-color: darken($color-button,10);
+        }
+    }
+    
+}

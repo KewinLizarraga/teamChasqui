@@ -1,0 +1,61 @@
+@import '_variables.scss';
+
+.Menu{
+
+    &.show-fade{
+        left: -250px;
+    }
+    height: 100%;
+    position: absolute;
+    width: 250px;
+    top: 0;
+    left: 0;
+    background-color: lighten( $third-color,10);
+    box-shadow: $box-shadow;
+    transition: .5s all;
+  
+    ul{
+        margin-top: 150px;
+        li{
+            font-family: $font-paragraph;
+            font-size: .8rem;
+            
+            a{  
+                display: block;
+                padding: 15px 10px;
+                text-decoration: none;
+                color: #fff;
+                background-color: $first-color;
+                text-indent: 20px;
+                transition: .2s all;
+                
+                &:hover{       
+                   color: $third-color;
+           
+                }
+                &:active{
+                    color: #fff;
+                }
+            }
+        }
+
+    }
+
+    .container-logout{
+        position: absolute;
+        bottom: 0;
+        background-color: $first-color;
+        width: 100%;
+        text-align: center;
+
+        .logout{
+            color: #fff;
+            font-size: 1.7rem;
+            cursor: pointer;
+            line-height: 41px;
+            &:active{
+                color: $third-color;
+            }
+        }       
+    }
+}

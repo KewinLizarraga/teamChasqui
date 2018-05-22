@@ -1,0 +1,98 @@
+.Register {
+  background: #2c3849;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+.register-container {
+  max-width: 960px;
+  margin: 20px auto;
+  margin-top: 40px;
+  background-color: white;
+}
+
+@media screen and (max-width: 1400px) {
+  .register-container {
+    width: 85%;
+  }
+}
+
+.register-title {
+  background-color: #ebebeb;
+  border-bottom: 20px solid #2c3849;
+  padding: 15px 5px;
+}
+
+.register-title h2 {
+  color: #404854;
+  font-family: "Lato", sans-serif;
+  text-transform: uppercase;
+  padding-left: 30px;
+}
+
+.register-form {
+  background-color: #ebebeb;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 40px 10px 90px;
+  position: relative;
+}
+
+.register-form [class^=group] {
+  flex-basis: 40%;
+}
+
+.register-form .input-group {
+  margin-bottom: 15px;
+}
+
+.register-form .input-group label {
+  color: #2c3849;
+  font-family: "Open Sans", sans-serif;
+  font-size: .8rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.register-form .input-group input[type="text"] {
+  color: #404854;
+  font-family: "Open Sans", sans-serif;
+  font-size: .8rem;
+  width: 100%;
+  outline: none;
+  padding: 5px;
+  border: none;
+  border: 1px solid grey;
+  text-indent: 5px;
+}
+
+.register-form .input-group input[type="text"]:focus {
+  border: 1px solid #039be5;
+}
+
+.register-form .buttons {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+}
+
+.register-form .buttons .return, .register-form .buttons .submit {
+  background-color: #039be5;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  line-height: 40px;
+  padding: 0 40px;
+  border: none;
+  border-color: #039be5;
+  cursor: pointer;
+}
+
+.register-form .buttons .return:hover, .register-form .buttons .submit:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.register-form .buttons .return {
+  margin-right: 50px;
+  text-decoration: none;
+}
