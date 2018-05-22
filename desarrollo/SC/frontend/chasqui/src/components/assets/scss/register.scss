@@ -1,0 +1,97 @@
+@import '_variables.scss';
+
+.Register{
+    background: $first-color;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.register-container{
+    max-width: 960px;
+    margin: 20px auto;
+    margin-top: 40px;
+    background-color: white;
+    @media screen and ( max-width: 1400px) {
+        width: 85%;
+    }
+
+}
+
+
+.register-title{
+    background-color: darken($box-bgcolor, 8);
+    border-bottom: 20px solid $first-color ;
+    padding: 15px 5px;
+    h2{
+        color: $first-border-color;
+        font-family: $font-titles;
+        text-transform: uppercase;
+        padding-left: 30px;
+    }
+}
+.register-form{
+    background-color: darken($box-bgcolor, 8);
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 40px 10px 90px;
+
+    position: relative;
+
+    [class ^= group]{
+        flex-basis: 40%;
+    }
+
+    .input-group{
+        margin-bottom: 15px;
+        label{
+            color: $first-color;
+            font-family: $font-paragraph;
+            font-size: .8rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"]{
+           color: $first-border-color;
+           font-family: $font-paragraph;
+           font-size: .8rem;
+           width: 100%;
+           outline: none;
+           padding: 5px;
+           border: none;
+           border: 1px solid grey;
+           text-indent: 5px;
+
+           &:focus{
+            border: 1px solid $third-color;
+           }
+        }
+    }
+
+    .buttons{
+        position: absolute;
+        bottom: 20px;
+        display: flex;
+        
+        .return, .submit{
+            
+            background-color: $color-button;
+            color: #fff;
+            font-family: $font-button;
+            line-height: 40px;
+            padding: 0 40px;
+            border: none;
+            border-color: $third-color;
+            cursor: pointer;
+            &:hover{
+                box-shadow: $box-shadow--hover;
+            }
+        }
+        .return{
+            margin-right: 50px;
+            text-decoration: none;
+        }
+        
+    }
+}

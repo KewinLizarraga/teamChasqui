@@ -9,7 +9,9 @@ import Header from '../helpers/Header'
 import Menu from '../helpers/Menu'
 import RegisterServices from  '../helpers/RegisterServices'
 import ListServices from '../helpers/ListServices'
-
+import withAuth from '../../actions/withAuth'
+import AuthService from '../../actions/AuthService'
+const Auth = new AuthService()
 
 class Home extends Component{
     constructor(...props){
@@ -18,31 +20,36 @@ class Home extends Component{
 
         }
         this.onToogleMenu=this.onToogleMenu.bind(this)
+        this.handleLogout= this.handleLogout.bind(this)
     }
 
     onToogleMenu(){
-        console.log("f")
         $("#Menu").toggleClass("show-fade")
         $(".main-section").toggleClass("toggle-margin")
     }
 
+    handleLogout(){
+        Auth.logout()
+        this.props.history.replace('/login')
+    }
+
     render(){
+       
         return(
            <section className="Home">
                 <Header nameUser="Franco Ademir" emailUser="francoade04@gmail.com" logo={logo} toggleMenu={this.onToogleMenu}/>
                 <main className="main-container" >                                
-                        <Menu/>    
+                        <Menu logout={this.handleLogout}/>
                         <section className="main-section">
                             <div className="box-center">
                                 <RegisterServices />
                                 <ListServices />
                             </div>
                         </section>
-                    
                 </main>
            </section>
         )
     }
 }
 
-export default Home
+export default withAuth(Home)

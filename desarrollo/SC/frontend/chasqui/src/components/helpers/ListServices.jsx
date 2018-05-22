@@ -2,7 +2,7 @@ import React from 'react'
 
 import '../assets/css/z-listservices.css'
 
-const servicesState =false;
+const servicesState = true;
 
 const ListServices = (props) => (
     <div className="List-services">
@@ -14,103 +14,8 @@ const ListServices = (props) => (
                 : 
                 (
                     <ul className="services">
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
                         
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li> <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li> <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li> <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li> <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li> <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li> <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li> <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        
-                        <li className="service">Hotel California</li>
-                        <li className="service">Hotel California</li>
-                        <li className="service">Restaurante Norteño</li>
-                        <li className="service">Empresa Dest</li>
-                        <li className="service">Hotel California</li>
-                            
-                        <li className="service">Empresa Dest</li>
-                    </ul>
-                        
+                    </ul>                   
                 )
                    
             }

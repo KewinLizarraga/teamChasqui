@@ -8,9 +8,8 @@ const Menu = (props) => (
             <li><a href="">Editar Datos de Usuario</a></li>
             <li><a href="">Lista de Servicios</a></li>
         </ul>
-
         <div className="container-logout">
-            <i className="material-icons logout">power_settings_new</i>
+            <i className="material-icons logout"  onClick={props.logout}>power_settings_new</i>
         </div>
    </div>
 )
