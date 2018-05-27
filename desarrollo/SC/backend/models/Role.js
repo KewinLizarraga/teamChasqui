@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const RoleSchema = new Schema({
-  categories: [String],
-  name: { type: String, unique: true, required: true }
+  belong_to: [String],
+  name: { type: String, unique: true, required: true },
+  delete: { type: Boolean, default: false }
 }, { timestamps: true });
 
 mongoose.model('Role', RoleSchema);

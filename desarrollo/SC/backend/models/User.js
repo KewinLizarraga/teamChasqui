@@ -23,7 +23,8 @@ const UserSchema = new Schema({
   review_count: { type: Number, default: 0 },
   reset_password_token: String,
   reset_password_expires: Date,
-  deleted: { type: Boolean, default: false }
+  deleted: { type: Boolean, default: false },
+  type: { type: String, default: 'tourist' } // tourist or businessman
 }, { timestamps: true });
 
 UserSchema.virtual('password').set(function (password) {

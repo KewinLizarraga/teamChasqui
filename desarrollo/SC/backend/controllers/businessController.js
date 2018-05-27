@@ -20,7 +20,6 @@ exports.getAll = (req, res) => {
 }
 
 exports.create = (req, res) => {
-  const { type } = req.body;
   Business.create(req.body, (err, newBusiness) => {
     res.send(newBusiness);
   });
