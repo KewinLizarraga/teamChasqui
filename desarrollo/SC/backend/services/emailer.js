@@ -4,6 +4,7 @@ const path = require('path');
 
 const { keys } = require('../config/keys');
 
+console.log(keys.sendGridUser, keys.sendGridPass);
 const smtpTransport = nodemailer.createTransport({
   service: 'SendGrid', //pasar a config
   auth: {

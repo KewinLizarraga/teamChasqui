@@ -40,7 +40,7 @@ exports.signup = (req, res) => {
   User.findOne({ email }, (err, user) => {
     if (err) throw err;
 
-    if (user) return res.status(400).send({ success: false, message: 'We were unable to find a user with that email.' });
+    if (user) return res.status(400).send({ success: false, message: 'The email address is already being used.' });
 
     // Create user
     const userModel = new User({
