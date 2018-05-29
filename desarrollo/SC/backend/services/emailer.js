@@ -32,7 +32,7 @@ exports.sendVerification = (options, callback) => {
     subject: 'Account Verification Token',
     template: 'verify-email',
     context: {
-      url: `http://${host}/confirmation/${token}`,
+      url: `http://localhost:3000/confirmation/${token}`,
       name
     }
   };
