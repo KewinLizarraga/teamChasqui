@@ -4,12 +4,13 @@ const { keys } = require('../config/keys');
 module.exports = {
   generate: userModel => {
     const userJS = userModel.toJSON();
-    const { first_name, last_name, email, _id, photo, isVerified } = userModel;
+    const { first_name, last_name, email, _id, photo, type } = userModel;
     const payload = {
       _id,
       photo,
       full_name: `${first_name} ${last_name}`,
-      email
+      email,
+      type
     }
 
     delete userJS.hashed_password;
