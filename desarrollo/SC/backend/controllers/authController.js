@@ -35,6 +35,8 @@ exports.login = (req, res) => {
 exports.signup = (req, res) => {
   const { email, password, last_name, first_name, password2 } = req.body;
 
+  if (!password) return res.status(400).send({ success: false, message: 'Password must not be null' });
+
   if (password !== password2) return res.status(400).send({ success: false, message: 'The passwords are different' });
 
   User.findOne({ email }, (err, user) => {
