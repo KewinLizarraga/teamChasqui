@@ -1,2 +1,2 @@
 require('./Product');
-require('./PlanService');
+require('./ServicePlan');
