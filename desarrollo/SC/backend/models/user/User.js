@@ -1,12 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const { Schema } = mongoose;
-const GeoLocationSchema = require('./common/GeoLocation');
+const GeoLocationSchema = require('../common/GeoLocation');
 
 const SALT_WORK_FACTOR = 10;
-
-// TODO: add photo, verified, hashed_password, review_count, deleted, reset_password_token, reset_password_expires withing db model
-// TODO: Change district to city or see how it will be better
 
 const UserSchema = new Schema({
   nickname: { type: String },
@@ -24,7 +21,7 @@ const UserSchema = new Schema({
   reset_password_token: String,
   reset_password_expires: Date,
   deleted: { type: Boolean, default: false },
-  type: { type: String, default: 'tourist' } // tourist or businessman
+  type: { type: String, default: 'tourist' } // tourist or businessman or admin
 }, { timestamps: true });
 
 UserSchema.virtual('password').set(function (password) {

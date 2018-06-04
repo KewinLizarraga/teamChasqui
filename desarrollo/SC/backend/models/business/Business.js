@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const GeoLocation = require('./common/GeoLocation');
-const Price = require('./Price');
+const GeoLocationSchema = require('../common/GeoLocation');
+const PriceSchema = require('./Price');
+const RestaurantDetailSchema = require('./RestaurantDetail');
+const HotelDetailSchema = require('./HotelDetail');
+const AgencyDetailSchema = require('./AgencyDetail');
 
-const address = new Schema({
+const AddressSchema = new Schema({
   details: String,
   reference: String,
 }, { _id: false });
-
-// DOING
 
 const businessSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'User'},
@@ -18,8 +19,8 @@ const businessSchema = new Schema({
   name: { type: String, required: true },
   description: String,
   city_code: String,
-  address: address,
-  geo_location: GeoLocation,
+  address: AddressSchema,
+  geo_location: GeoLocationSchema,
   phone: String,
   email: String,
   web_page: String,
@@ -27,12 +28,12 @@ const businessSchema = new Schema({
   photos: [String],
   stars: { type: Number, default: 0 },
   review_count: { type: Number, default: 0 },
-  restaurant_detail: {},
-  hotel_detail: {},
-  travel_agency_detail: {},
+  restaurant_detail: RestaurantDetailSchema,
+  hotel_detail: HotelDetailSchema,
+  travel_agency_detail: AgencyDetailSchema,
   deleted: { type: Boolean, default: false },
   business_hours: Schema.Types.Mixed,
-  price: Price
+  price: PriceSchema
 }, { timestamps: true });
 
 mongoose.model('Business', businessSchema);

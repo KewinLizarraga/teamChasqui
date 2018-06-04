@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const Price = new Schema({
+const PriceSchema = new Schema({
   min: Number,
   max: Number,
   average: Number
 }, { _id: false });
 
-module.exports = Price;
+module.exports = PriceSchema;

@@ -6,7 +6,7 @@ const BodySchema = new Schema({
   message: { type: String, required: true }
 }, { _id: false });
 
-const AdmiReplySchema = new Schema({
+const AdminReplySchema = new Schema({
   message: String
 }, {
   _id: false,
@@ -17,11 +17,12 @@ const QuestionSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'User' },
   business_id: { type: Schema.Types.ObjectId, ref: 'Business' },
   month_visited: { type: Date, required: true },
-  visitor_type: { type: String, required: true },
+  visitor_type: { type: Schema.Types.ObjectId, ref: 'VisitorType' },
   body: BodySchema,
-  admi_reply: AdmiReplySchema, 
+  admin_reply: AdminReplySchema, 
   photo: String,
-  start: { type: Number, default: 0 },
+  stars: { type: Number, default: 0 },
+  deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
 mongoose.model('Review', QuestionSchema);

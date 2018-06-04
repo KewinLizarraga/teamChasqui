@@ -1,0 +1,2 @@
+require('./Invoice');
+require('./FinancialTransaction');

@@ -6,7 +6,8 @@ const QuestionSchema = new Schema({
   business_id: { type: Schema.Types.ObjectId, ref: 'Business' },
   message: { type: String, required: true },
   notify: { type: Boolean, default: true },
-  reply_count: { type: Number, default: 0 }
+  reply_count: { type: Number, default: 0 },
+  deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
 mongoose.model('Question', QuestionSchema);

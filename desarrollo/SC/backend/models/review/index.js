@@ -1,0 +1,2 @@
+require('./Review');
+require('./VisitorType');
