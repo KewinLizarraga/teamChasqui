@@ -6,8 +6,6 @@ exports.getAll = (req, res) => {
     hiddenFields = [];
   }
 
-  // hacer que el populate funciona usando mode=populated
-
   Country.find({}).select(hiddenFields).exec((err, countries) => {
     if (err) throw err;
     res.status(200).send(countries);
