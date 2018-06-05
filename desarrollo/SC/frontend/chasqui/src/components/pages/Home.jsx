@@ -37,7 +37,7 @@ class Home extends Component{
        
         return(
            <section className="Home">
-                <Header nameUser="Franco Ademir" emailUser="francoade04@gmail.com" logo={logo} toggleMenu={this.onToogleMenu}/>
+                <Header nameUser={localStorage.getItem('name')+" "+localStorage.getItem('lastname')} logo={logo} toggleMenu={this.onToogleMenu}/>
                 <main className="main-container" >                                
                         <Menu logout={this.handleLogout}/>
                         <section className="main-section">

@@ -1,0 +1,48 @@
+@import '_variables.scss';
+
+.Confirmation{
+    background: $first-color;
+    min-height: 100vh;
+    position: relative;
+    
+    .main-cont{
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        flex-direction: column;
+
+        .submit{
+            font-family: $font-button;
+            font-weight: normal;
+            background-color: $color-button;
+            border: 0;
+            outline: 0;
+            padding: 0 29px;
+            display: block;
+            margin: 0 auto;
+            color: #fff;
+            letter-spacing: .2px;
+            height: 40px;
+            line-height: 40px;
+            width: 200px;
+            cursor: pointer;
+            font-size: .85rem;
+
+            &:hover{
+                 box-shadow: $box-shadow--hover;
+            }
+                
+            &:active{
+                background-color: $color-button;
+            }
+        }
+        
+        .message{
+            text-align: center;
+            font-family: $font-paragraph;
+            color: #fff;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+    }
+}

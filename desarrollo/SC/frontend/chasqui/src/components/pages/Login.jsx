@@ -66,9 +66,10 @@ class Login extends Component{
     error(){
         let contentError = document.getElementById("form-error")
         let form = document.getElementById("login-user")
-        contentError.textContent="Datos Incorrectos, Intentalo de nuevo !"
         form.reset()
+        contentError.textContent="Datos Incorrectos, Intentalo de nuevo !"
     }
+    
     render(){
         
         return(
@@ -84,7 +85,7 @@ class Login extends Component{
                                 type= "email"  
                                 id= "user-username" 
                                 name= "email" 
-                            
+                                required
                                 autoFocus
                                 autoComplete= "off"
                                 value= {this.state.email}
