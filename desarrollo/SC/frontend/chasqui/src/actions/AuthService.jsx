@@ -37,6 +37,8 @@ export default class AuthService {
 
     logout() {
         localStorage.removeItem('id_token');
+        localStorage.removeItem('name');
+        localStorage.removeItem('lastname');
     }
 
     getProfile() {
@@ -51,7 +53,12 @@ export default class AuthService {
         return axios.post('http://206.189.175.34:8000/api/v1/auth/login', user)
         .then(this._checkStatus)
         .then(response => {
+
+            // Datos que se necesita por ahora 
             this.setToken(response.data.token)
+            localStorage.setItem('name', response.data.user.first_name)
+            localStorage.setItem('lastname', response.data.user.last_name)
+
             return response
         })           
     }

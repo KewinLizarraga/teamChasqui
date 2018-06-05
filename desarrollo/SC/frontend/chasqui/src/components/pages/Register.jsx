@@ -53,7 +53,6 @@ class Register extends Component{
             axios.post('http://206.189.175.34:8000/api/v1/auth/signup', {first_name, last_name, email, password, password2})
             .then(function(response){                
                 let message = response.data.message
-                console.log(_this)
                 _this.setState({
                     message: message
                 })
