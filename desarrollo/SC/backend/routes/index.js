@@ -8,6 +8,7 @@ const countryRoutes = require('./countryRoutes');
 const departmentRoutes = require('./departmentRoutes');
 const provinceRoutes = require('./provinceRoutes');
 const districtRoutes = require('./districtRoutes');
+const billingRoutes = require('./billingRoutes');
 
 module.exports = (app) => {
   app.use('/api/v1/auth', authRoutes)
@@ -20,4 +21,5 @@ module.exports = (app) => {
   app.use('/api/v1/departments', departmentRoutes);
   app.use('/api/v1/provinces', provinceRoutes);
   app.use('/api/v1/districts', districtRoutes);
+  app.use('/api/v1/stripe', billingRoutes);
 }
