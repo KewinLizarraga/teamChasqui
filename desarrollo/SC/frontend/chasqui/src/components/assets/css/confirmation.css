@@ -1,0 +1,46 @@
+.Confirmation {
+  background: #2c3849;
+  min-height: 100vh;
+  position: relative;
+}
+
+.Confirmation .main-cont {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.Confirmation .main-cont .submit {
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  background-color: #039be5;
+  border: 0;
+  outline: 0;
+  padding: 0 29px;
+  display: block;
+  margin: 0 auto;
+  color: #fff;
+  letter-spacing: .2px;
+  height: 40px;
+  line-height: 40px;
+  width: 200px;
+  cursor: pointer;
+  font-size: .85rem;
+}
+
+.Confirmation .main-cont .submit:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.Confirmation .main-cont .submit:active {
+  background-color: #039be5;
+}
+
+.Confirmation .main-cont .message {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  max-width: 600px;
+  margin: 30px auto;
+}

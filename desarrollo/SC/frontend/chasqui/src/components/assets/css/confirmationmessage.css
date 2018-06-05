@@ -1,0 +1,53 @@
+.Confirmation-Message {
+  background: transparent;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.Confirmation-Message .main-content {
+  width: 40%;
+  max-width: 600px;
+  background: #fff;
+  padding: 20px;
+}
+
+.Confirmation-Message .main-content p {
+  font-family: "Open Sans", sans-serif;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.Confirmation-Message .main-content a {
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  background-color: #039be5;
+  border: 0;
+  outline: 0;
+  padding: 0 29px;
+  display: block;
+  margin: 0 auto;
+  color: #fff;
+  letter-spacing: .2px;
+  height: 40px;
+  line-height: 40px;
+  width: 200px;
+  cursor: pointer;
+  font-size: .85rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.Confirmation-Message .main-content a:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.Confirmation-Message .main-content a:active {
+  background-color: #039be5;
+}
