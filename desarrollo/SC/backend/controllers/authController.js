@@ -174,7 +174,6 @@ exports.forgot = (req, res) => {
 
 exports.reset = (req, res) => {
   if (req.body.password !== req.body.password2) return res.status(400).send({ success: false, message: 'The passwords are different' });
-  console.log(req.body)
   User.findOne({
     reset_password_token: req.body.token,
     reset_password_expires: {

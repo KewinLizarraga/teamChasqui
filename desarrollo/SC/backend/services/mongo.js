@@ -1,5 +1,4 @@
-exports.getPopulateOptions = (populatePaths, hiddenFields, option) => {
-  console.log(populatePaths)
+const getPopulateOptions = (populatePaths, hiddenFields, option) => {
   let count = 0;
   if (option === 'populated') {
     count = 0;
@@ -24,4 +23,9 @@ exports.getPopulateOptions = (populatePaths, hiddenFields, option) => {
   }
 
   return populate;
+}
+
+exports.setQueryOptions = (query, populatePaths, hiddenFields, option) => {
+  const populateOption = getPopulateOptions(populatePaths, hiddenFields, option);
+  return query.populate(populateOption).select(hiddenFields);
 }
