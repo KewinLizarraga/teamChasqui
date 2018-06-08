@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   email: { type: String, required: true, unique: true },
   photo: { type: String, default: '' },
   verified: { type: Boolean, default: false },
-  hashed_password: { type: String, default: '', select: true },
+  hashed_password: { type: String, default: '' },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   role_id: { type: Schema.Types.ObjectId, ref: 'Role' },
@@ -21,7 +21,8 @@ const UserSchema = new Schema({
   reset_password_token: String,
   reset_password_expires: Date,
   deleted: { type: Boolean, default: false },
-  type: { type: String, default: 'tourist' } // tourist or businessman or admin
+  type: { type: String, default: 'tourist' }, // tourist or businessman or admin
+  subscribed: { type: Boolean, default: false }
 }, { timestamps: true });
 
 UserSchema.virtual('password').set(function (password) {

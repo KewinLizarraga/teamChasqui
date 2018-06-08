@@ -1,17 +1,20 @@
 const Product = require('mongoose').model('Product');
+const { setQueryOptions } = require('../services/mongo');
 
 exports.getAll = (req, res) => {
   // filter -> type (to know if a product is either plan or ad)
   // filter -> name (to filter by name)
 
-  let populatePath = '';
-  const fields = req.query.fields || ['order', 'description'];
-
-  if (req.query.mode === 'populated') {
-    populatePath = 'plan_detail.service_plans';
+  let hiddenFields = ['-createdAt', '-updatedAt', '-__v', '-belongs_to'];
+  if (req.query.details === 'true') {
+    hiddenFields = [];
   }
 
-  Product.find(req.query.filter).populate(populatePath, fields).exec((err, products) => {
+  const populatePath = ['plan_detail.service_plans', '', ''];
+
+  const query = setQueryOptions(Product.find(req.query.filter), populatePath, hiddenFields, req.query.mode);
+
+  query.exec((err, products) => {
     if (err) throw err;
     res.status(200).send(products);
   });

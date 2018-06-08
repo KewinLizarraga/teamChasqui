@@ -13,7 +13,7 @@ const AddressSchema = new Schema({
 
 const businessSchema = new Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'User'},
-  district_id: { type: Schema.Types.ObjectId, ref: 'District' },
+  district_id: { type: String, ref: 'District' },
   money_types: [{ type: Schema.Types.ObjectId, ref: 'MoneyType' }],
   type: { type: String, required: true },
   name: { type: String, required: true },
