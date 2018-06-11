@@ -2,7 +2,7 @@ const Business = require('mongoose').model('Business');
 
 exports.getAll = (req, res) => {
   const { filter } = req.query;
-  
+
   let hiddenFields = [
     'name',
     'geo_location',
@@ -17,8 +17,6 @@ exports.getAll = (req, res) => {
   if (req.query.details === 'true') {
     hiddenFields = [];
   }
-
-  const populatePaths = ['money_types', 'user_id', 'hotel_detail.services'];
 
   Business.find(filter).select(hiddenFields).exec((err, businesses) => {
     if (err) throw err;
@@ -42,7 +40,34 @@ exports.getAll = (req, res) => {
 }
 
 exports.getOne = (req, res) => {
-  Business.findById(req.params.id, (err, business) => {
+  let hiddenFields = ['-createdAt', '-updatedAt', '-__v'];
+  if (req.query.details ==='true') {
+    hiddenFields = [];
+  }
+
+  const query = Business.findById(req.params.id);
+
+  const populatePaths = [{
+    path: 'money_types',
+    fields: ['name']
+  }, {
+    path: 'user_id',
+    fields: ['first_name', 'last_name', 'email']
+  }, {
+    path: 'hotel_detail.services',
+    fields: ['name',  'deleted']
+  }];
+  if (req.query.mode == 'populated') {
+    for (path of populatePaths) {
+      console.log(path);
+      query.populate({
+        path: path.path,
+        select: req.query.details === 'true' ? [] : path.fields
+      });
+    }
+  }
+
+  query.select(hiddenFields).exec((err, business) => {
     if (err || !business) return res.status(400).send({ success: false, message: `Business has not been found with ${req.params.id}` });
     res.status(200).send(business);
   })
@@ -56,7 +81,7 @@ exports.create = (req, res) => {
 
 exports.getReviews = (req, res) => {
   let hiddenFields = ['-createdAt', '-updatedAt', '-__v'];
-  if (req.query.details === 'true') { 
+  if (req.query.details === 'true') {
     hiddenFields = [];
   }
   Business.getReviews(req.params.id, hiddenFields, (err, reviews) => {
