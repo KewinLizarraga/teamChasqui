@@ -2,7 +2,25 @@ const Business = require('mongoose').model('Business');
 
 exports.getAll = (req, res) => {
   const { filter } = req.query;
-  Business.find(filter, (err, businesses) => {
+  
+  let hiddenFields = [
+    'name',
+    'geo_location',
+    'stars',
+    'type',
+    'photos',
+    'review_count',
+    'question_count',
+    'deleted',
+    'price'
+  ];
+  if (req.query.details === 'true') {
+    hiddenFields = [];
+  }
+
+  const populatePaths = ['money_types', 'user_id', 'hotel_detail.services'];
+
+  Business.find(filter).select(hiddenFields).exec((err, businesses) => {
     if (err) throw err;
     if (!filter) {
       const orderedBusinesses = {
