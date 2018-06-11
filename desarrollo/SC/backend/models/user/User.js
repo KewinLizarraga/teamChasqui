@@ -50,6 +50,7 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
     cb(null, isMatch);
   })
 }
+
 mongoose.model('User', UserSchema);
 
 

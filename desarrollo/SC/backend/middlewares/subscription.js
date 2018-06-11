@@ -1,5 +1,5 @@
 exports.isSubscribed = (req, res, next) => {
-  console.log(req.decoded.subscribed)
+  if(req.decoded.type === 'admin') return next();
   if(!req.decoded.subscribed) {
     return next();
   }

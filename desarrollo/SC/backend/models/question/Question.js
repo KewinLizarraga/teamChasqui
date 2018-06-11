@@ -2,12 +2,21 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const QuestionSchema = new Schema({
-  user_id: { type: Schema.Types.ObjectId, ref: 'User' },
-  business_id: { type: Schema.Types.ObjectId, ref: 'Business' },
+  user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  business_id: { type: Schema.Types.ObjectId, ref: 'Business', required: true },
   message: { type: String, required: true },
-  notify: { type: Boolean, default: true },
+  notify: { type: Boolean, default: true , required: true },
   reply_count: { type: Number, default: 0 },
   deleted: { type: Boolean, default: false }
 }, { timestamps: true });
+
+QuestionSchema.statics.getReplies = (question_id, hiddenFields, cb) => {
+  const Reply = require('mongoose').model('Reply');
+
+  Reply.find({ question_id }).select(hiddenFields).exec((err, replies) => {
+    if (!replies) return cb({ success: false, message: 'Business ID invalid' });
+    cb(err, replies);
+  });
+}
 
 mongoose.model('Question', QuestionSchema);

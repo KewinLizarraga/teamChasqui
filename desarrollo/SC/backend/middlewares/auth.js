@@ -8,9 +8,10 @@ exports.auth = (req, res, next) => {
     jwt.verify(token, keys.jwtKeySecret, (err, decoded) => {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token', error: err });
+      } else {
+        req.decoded = decoded;
+        next();
       }
-      req.decoded = decoded;
-      return next();
     });
   } else {
     return res.status(403).send({

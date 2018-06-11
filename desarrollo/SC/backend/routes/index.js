@@ -11,6 +11,12 @@ const districtRoutes = require('./districtRoutes');
 const billingRoutes = require('./billingRoutes');
 const moneyTypeRoutes = require('./moneyTypeRoutes');
 const serviceRoutes = require('./serviceRoutes');
+const reviewRoutes = require('./reviewRoutes');
+const visitorTypeRoutes = require('./visitorTypeRoutes');
+const invoiceRoutes = require('./invoiceRoutes');
+const financialTransactionRoutes = require('./financialTransactionRoutes');
+const questionRoutes = require('./questionRoutes');
+const replyRoutes = require('./replyRoutes');
 
 module.exports = (app) => {
   app.use('/api/v1/auth', authRoutes)
@@ -26,4 +32,10 @@ module.exports = (app) => {
   app.use('/api/v1/stripe', billingRoutes);
   app.use('/api/v1/money-types', moneyTypeRoutes);
   app.use('/api/v1/services', serviceRoutes);
+  app.use('/api/v1/reviews', reviewRoutes);
+  app.use('/api/v1/visitor-types', visitorTypeRoutes);
+  app.use('/api/v1/invoices', invoiceRoutes);
+  app.use('/api/v1/financial-transactions', financialTransactionRoutes);
+  app.use('/api/v1/questions', questionRoutes);
+  app.use('/api/v1/replies', replyRoutes);
 }

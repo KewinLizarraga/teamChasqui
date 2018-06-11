@@ -2,11 +2,10 @@ const async = require('async');
 const User = require('mongoose').model('User');
 const Business = require('mongoose').model('Business');
 const Invoice = require('mongoose').model('Invoice'); // crear endpoints para Envoice
-const FinancialTransaction = require('mongoose').model('Invoice'); // create endpoint
+const FinancialTransaction = require('mongoose').model('FinancialTransaction'); // create endpoint
 const Subscription = require('mongoose').model('Subscription'); // create endpoint
 
 exports.pay_and_register = (req, res) => {
-  console.log(req.decoded);
   const id = req.decoded._id;
   const { stripe_token, user, business, product } = req.body;
   // Realizamos pago
@@ -26,12 +25,12 @@ exports.pay_and_register = (req, res) => {
         if (!user) return cb({ stuts: 404, data: { success: false, message: 'User has not found' } });
 
         const response = {
-          user
+          user: req.decoded
         }
         cb(null, response);
       });
     }, (response, cb) => {
-      Business.create(business, (err, createdBusiness) => {
+      Business.create({ user_id: req.decoded._id, ...business }, (err, createdBusiness) => {
         if (err) return cb({ status: 500, data: { success: false, message: err.message } });
         response.business = createdBusiness;
         cb(null, response);
@@ -51,6 +50,7 @@ exports.pay_and_register = (req, res) => {
         invoice_id: response.invoice._id,
         payment_detail
       }, (err, financialTransaction) => {
+        console.log(financialTransaction);
         if (err) return cb({ status: 500, data: { success: false, message: err.message } });
         response.financialTransaction = financialTransaction;
         cb(null, response);
@@ -77,8 +77,8 @@ exports.pay_and_register = (req, res) => {
       })
     }
   ], (err, result) => {
-    if (err) return res.status(err.status).send(err.data);
-    res.status(200).send(result);
+      if (err) return res.status(err.status).send(err.data);
+      res.status(200).send(result);
   });
   // creamos business
 
