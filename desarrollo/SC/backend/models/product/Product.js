@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const PlanDetailSchema = new Schema({
   price_per_month: { type: Number, required: true },
-  price_per_year: Number
+  price_per_year: Number,
+  service_plans: [{ type: Schema.Types.ObjectId, ref: 'ServicePlan', default: [] }]
 }, { _id: false });
 
 const AdTypeDetailSchema = new Schema({
