@@ -52,4 +52,4 @@ class Home extends Component{
     }
 }
 
-export default withAuth(Home)
+export default Home

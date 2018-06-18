@@ -59,7 +59,6 @@ exports.getOne = (req, res) => {
   }];
   if (req.query.mode == 'populated') {
     for (path of populatePaths) {
-      console.log(path);
       query.populate({
         path: path.path,
         select: req.query.details === 'true' ? [] : path.fields

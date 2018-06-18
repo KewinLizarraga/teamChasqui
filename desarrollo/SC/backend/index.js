@@ -12,7 +12,7 @@ const app = express();
 
 mongoose.connect(config.mongoURI)
   .then(db => console.log('Connected to MongoDB'))
-  .catch(err => { throw err });
+  .catch(err => console.log('Not connected to database', err));
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,4 +27,4 @@ app.get('/', (req, res) => {
 require('./routes')(app);
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.listen(PORT, (err) => console.log(`Listening on port ${PORT}`));

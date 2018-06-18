@@ -121,7 +121,7 @@ exports.resend = (req, res) => {
         token: verificationToken.token
       }
 
-      emailer.sendForgot(options, (err, info) => {
+      emailer.sendVerification(options, (err, info) => {
         if (err) return res.status(500).send({ success: false, message: err.message });
 
         res.status(200).send({ success: true, message: 'A verification email has been sent to ' + user.email + '.' });

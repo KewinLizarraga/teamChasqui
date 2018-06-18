@@ -17,6 +17,7 @@ const invoiceRoutes = require('./invoiceRoutes');
 const financialTransactionRoutes = require('./financialTransactionRoutes');
 const questionRoutes = require('./questionRoutes');
 const replyRoutes = require('./replyRoutes');
+const foodTypeRoutes = require('./foodTypeRoutes');
 
 module.exports = (app) => {
   app.use('/api/v1/auth', authRoutes)
@@ -38,4 +39,5 @@ module.exports = (app) => {
   app.use('/api/v1/financial-transactions', financialTransactionRoutes);
   app.use('/api/v1/questions', questionRoutes);
   app.use('/api/v1/replies', replyRoutes);
+  app.use('/api/v1/food-types', foodTypeRoutes);
 }

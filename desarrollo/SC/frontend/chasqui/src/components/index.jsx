@@ -6,6 +6,8 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 import Error404 from './pages/Error404'
 import Confirmation from './pages/Confirmation'
+import withAuth from '../actions/withAuth'
+
 
 class Chasqui extends Component {
     constructor(...props){
@@ -20,6 +22,7 @@ class Chasqui extends Component {
                         <Route exact path="/" component={Home}/>
                         <Route exact path='/register' component={Register}/>
                         <Route exact path='/login' component={Login}/>
+                        <Route exact path='/asd' component={withAuth(Home)} />
                         <Route exact path='/confirmation/:confirmationToken' component={Confirmation}/>
                         <Route path='*' component={Error404}/>
                     </Switch>
