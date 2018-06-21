@@ -1,5 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 
 class CustomSelect extends React.Component {
   rendenSelectOptions = (options) => {
@@ -11,14 +14,23 @@ class CustomSelect extends React.Component {
     ));
   }
   render = () => {
-    console.log(this.props);
+    const { options, labelName, name } = this.props;
     return (
-      <div>
-        <select {...this.props.input}>
-          <option value=''>Elija</option>
-          {this.rendenSelectOptions(this.props.options)}
-        </select>
-      </div>
+      <FormControl style={{ width: '100%'}}>
+        <InputLabel htmlFor={`${name}-native-simple`}>{labelName}</InputLabel>
+        <Select
+          native
+          value={''}
+          {...this.props.input}
+          inputProps={{
+            name,
+            id: `${name}-native-simple`
+          }}
+        >
+          <option value="" />
+          {this.rendenSelectOptions(options)}
+        </Select>
+      </FormControl>
     );
   }
 }

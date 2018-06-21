@@ -78,6 +78,7 @@ const HeaderLinks = ({ ...props }) => {
         type: 'action',
         action: (dispatch, event) => {
           dispatch(logout());
+          window.location.replace('/login');
         }
       }],
       onlyWhen: 'connected'

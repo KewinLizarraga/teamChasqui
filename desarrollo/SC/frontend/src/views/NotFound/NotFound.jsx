@@ -20,9 +20,9 @@ class NotFound extends React.Component {
     return (
       <form style={{marginTop: '200px'}} onSubmit={handleSubmit(values => console.log(values))}>
         <Field onInvalid={this.setCustomValidate} type="text" required name="passwordField" component="input" />
-        <Field name="select" component={CustomSelect} options={{
+        <Field onChange={() => console.log(this.props)} name="select" component={CustomSelect} labelName='Paises' options={{
           123: 'pais1',
-          124: 'pais2'
+          124: 'pais2 asdhhjas asjdhajsdha'
         }} />
         <button type="submit">Submit</button>
       </form>
