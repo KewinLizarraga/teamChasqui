@@ -11,9 +11,7 @@ class CustomSnackbar extends React.Component {
     this.props.dispatch(clearError());
   }
 
-
   render = () => {
-    console.log('snacbaaaar', this.props, this.state)
     const { open, message } = this.props;
     return (
       <div>

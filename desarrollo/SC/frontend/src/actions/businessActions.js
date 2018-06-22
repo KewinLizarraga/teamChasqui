@@ -1,16 +1,50 @@
-import axios from 'axios';
+import _axios from 'axios';
+import axios from '../services/axios';
 import _ from 'lodash';
-export const FETCH_PLANS_BEGIN = 'FETCH_PLANS_BEGIN';
+import async from 'async';
+export const FETCH_BEGIN = 'FETCH_BEGIN';
 export const FETCH_PLANS_SUCCESS = 'FETCH_PLANS_SUCCESS';
-export const FETCH_PLANS_FAILED = 'FETCH_PLANS_FAILED';
+export const FETCH_FAILED = 'FETCH_FAILED';
 export const CHANGE_CURRENT_PLAN = 'CHANGE_CURRENT_PLAN';
+export const SET_PRODUCT = 'SET_PRODUCT';
+export const CHANGE_NEXT = 'CHANGE_NEXT';
+export const SET_GENERAL_INFO = 'SET_GENERAL_INFO';
+export const BACK_STEP = 'SET_BACK_STEP';
+export const FETCH_RC_SUCCESS = 'FETCH_RC_SUCCESS';
+export const FETCH_DEPARTMENTS_SUCCESS = 'FETCH_DEPARTMENTS_SUCCESS';
 
+export const fetchDepartmentsSuccess = (data) => {
+  const departments = dataToSelect(data);
+  return {
+    type: FETCH_DEPARTMENTS_SUCCESS,
+    payload: departments
+  }
+}
+export const fetchRCSuccess = (data) => {
+  const userRoles = dataToSelect(data[0]);
+  const countries = dataToSelect(data[1]);
+  return {
+    type: FETCH_RC_SUCCESS,
+    payload: {
+      userRoles,
+      countries
+    }
+  }
+}
+export const setGeneralInfo = (values) => ({
+  type: SET_GENERAL_INFO,
+  payload: values
+});
+export const bacoStep = () => ({
+  type: BACK_STEP
+});
+export const changeNext = (newStatus) => ({
+  type: CHANGE_NEXT,
+  payload: newStatus
+});
 export const changeCurrentPlan = (data) => ({
   type: CHANGE_CURRENT_PLAN,
   payload: data
-});
-export const fetchPlansBegin = () => ({
-  type: FETCH_PLANS_BEGIN
 });
 export const fetchPlansSuccess = (plans) => {
   const filteredPlans = filterPlans(plans);
@@ -19,27 +53,80 @@ export const fetchPlansSuccess = (plans) => {
     payload: filteredPlans
   });
 }
-export const fetchPlansFailed = (error) => ({
-  type: FETCH_PLANS_FAILED,
+export const fetchBegin = () => ({
+  type: FETCH_BEGIN
+});
+export const fetchFailed = (error) => ({
+  type: FETCH_FAILED,
   payload: error
+});
+export const setProduct = () => ({
+  type: SET_PRODUCT
 });
 
 export const fetchPlans = () => dispatch => {
-  dispatch(fetchPlansBegin());
+  dispatch(fetchBegin());
   return axios({
     method: 'get',
-    url: 'http://206.189.175.34:8000/api/v1/products?filter[type]=plan&mode=populated',
-    validateStatus: (status) => {
-      return status < 500
-    }
+    url: 'products?filter[type]=plan&mode=populated'
   }).then(response => {
     if (response.statusText === 'OK') {
       dispatch(fetchPlansSuccess(response.data));
     } else {
-      dispatch(fetchPlansFailed(response.data))
+      dispatch(fetchFailed(response.data))
     }
     return response;
-  }, err => Promise.reject(err.response))
+  }, err => Promise.reject(err.response));
+}
+export const fetchUserRoles = (type) => dispatch => {
+  dispatch(fetchBegin());
+
+  async.parallel([(cb) => {
+    axios({
+      method: 'get',
+      url: `/roles`,
+      params: {
+        'filter[belong_to]': type
+      }
+    }).then(response => {
+      if (response.statusText === 'OK') {
+        cb(null, response.data);
+      } else {
+        cb(response.data);
+      }
+    })
+  }, (cb) => {
+    axios({
+      method: 'get',
+      url: '/countries'
+    }).then(response => {
+      if (response.statusText === 'OK') {
+        cb(null, response.data);
+      } else {
+        cb(response.data);
+      }
+    })
+  }], (err, results) => {
+    if (err) return dispatch(fetchFailed(err));
+    dispatch(fetchRCSuccess(results));
+  });
+}
+export const fetchDepartments = (country_id) => dispatch => {
+  // dispatch(fetchBegin());
+  axios({
+    method: 'get',
+    url: '/departments',
+    params: {
+      'filter[country_id]': country_id
+    }
+  }).then(response => {
+    if (response.statusText === 'OK') {
+      fetchDepartmentsSuccess(response.data);
+    } else {
+      fetchFailed(response.data);
+    }
+  }, error => Promise.reject(error))
+
 }
 
 const filterPlans = (plans) => {
@@ -66,4 +153,14 @@ const filterPlans = (plans) => {
       }
     }
   })
+}
+
+const dataToSelect = (array) => {
+  let options = {};
+  _.each(array, data => {
+    if (!data.deleted) {
+      options[data._id] = data.name;
+    }
+  });
+  return options;
 }

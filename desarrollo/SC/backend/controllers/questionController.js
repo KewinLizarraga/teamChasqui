@@ -68,8 +68,23 @@ exports.getReplies = (req, res) => {
   if (req.query.details === 'true') {
     hiddenFields = [];
   }
-  Question.getReplies(req.params.id, hiddenFields, (err, replies) => {
-    if (err) return res.status(400).send(err);
-    res.status(200).send(replies);
-  });
+
+  const populatePaths = [{
+    path: 'question_id',
+    fields: ['reply_count', 'message']
+  }, {
+    path: 'user_id',
+    fields: ['first_name', 'last_name', 'email']
+  }];
+
+  Question.getReplies(
+    req.params.id,
+    hiddenFields,
+    populatePaths,
+    req,
+    (err, replies) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).send(replies);
+    }
+  );
 }

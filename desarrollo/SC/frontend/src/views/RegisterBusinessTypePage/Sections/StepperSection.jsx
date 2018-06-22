@@ -14,20 +14,17 @@ import PlanForm from './PlanForm';
 import { connect } from 'react-redux';
 import Progress from '../../../components/Progress/Progress';
 import GeneralForm from './GeneralForm';
+import { setProduct, bacoStep, setGeneralInfo } from '../../../actions/businessActions';
+
 function getSteps() {
   return ['Elegir plan', 'Llenar información general', 'Llenar información detallada', 'Confirmar Pago'];
 }
-
-
 const theme = createMuiTheme({
   pallete: {
     primary: { main: '#9c27b0' }
   }
-})
+});
 class StepperSection extends React.Component {
-  state = {
-    activeStep: 1,
-  };
 
   getStepContent(stepIndex) {
     const { business, dispatch } = this.props;
@@ -42,7 +39,10 @@ class StepperSection extends React.Component {
         );
       case 1:
         return (
-          <GeneralForm />
+          <GeneralForm
+            dispatch={dispatch}
+            business={business}
+          />
         );
       case 2:
         return 'This is the bit I really care about!';
@@ -52,19 +52,40 @@ class StepperSection extends React.Component {
   }
 
   handleNext = () => {
-    const { activeStep } = this.state;
-    console.log(this.props)
+    const { form, business } = this.props;
+    console.log(this.props);
+    const { activeStep } = business;
 
-    this.setState({
-      activeStep: activeStep + 1,
-    });
+
+    switch (activeStep) {
+      case 0: {
+        console.log('Guardar datos del producto');
+        this.props.dispatch(setProduct());
+        break;
+      }
+      case 1: {
+        console.log('Guardar datos generales');
+        const { generalForm: { values } } = form;
+        this.props.dispatch(setGeneralInfo(values));
+        break;
+      }
+      case 2: {
+        console.log('Guardar datos especificos');
+        break;
+      }
+      case 3: {
+        console.log('Pagar');
+        break;
+      }
+      default:
+        console.log('faillll')
+        break;
+    }
+
   };
 
   handleBack = () => {
-    const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep - 1,
-    });
+    this.props.dispatch(bacoStep());
   };
 
   handleReset = () => {
@@ -77,7 +98,8 @@ class StepperSection extends React.Component {
     // eslint-disable-next-line
     const { classes, dispatch, business } = this.props;
     const steps = getSteps();
-    const { activeStep } = this.state;
+    const { activeStep } = business;
+    console.log('StepperSection ->', this.props)
     return (
       <MuiThemeProvider theme={theme}>
         <GridItem xs={12} sm={12} md={12}>
@@ -92,24 +114,24 @@ class StepperSection extends React.Component {
           </Stepper>
         </GridItem>
         <GridContainer justify='center'>
-          {this.state.activeStep === steps.length ? (
+          {activeStep === steps.length ? (
             <GridContainer justify='center'>
               <Button onClick={this.handleReset}>Reset</Button>
             </GridContainer>
           ) : (
               <GridItem xs={12} sm={12} md={12}>
                 <div className={classNames(classes.main, classes.mainRaised, classes.mainCenterContent)}>
-                  {this.getStepContent(this.state.activeStep)}
+                  {this.getStepContent(activeStep)}
                 </div>
                 <div className={classes.mainCenterContent}>
-                  <Button
+                  {/*<Button
                     disabled={activeStep === 0}
                     onClick={this.handleBack}
                     className={classes.backButton}
                   >
                     Atras
-                  </Button>
-                  <Button variant="contained" color="primary" onClick={this.handleNext}>
+                  </Button>*/}
+                  <Button disabled={!business.canNext} variant="contained" color="primary" onClick={this.handleNext}>
                     {activeStep === steps.length - 1 ? 'Pagar' : 'Siguiente'}
                   </Button>
                 </div>

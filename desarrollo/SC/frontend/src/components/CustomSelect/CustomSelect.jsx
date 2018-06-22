@@ -14,20 +14,20 @@ class CustomSelect extends React.Component {
     ));
   }
   render = () => {
-    const { options, labelName, name } = this.props;
+    const { options, labelName, name, currentValue, disabled = false } = this.props;
     return (
-      <FormControl style={{ width: '100%'}}>
+      <FormControl style={{ width: '100%' }} disabled={disabled} >
         <InputLabel htmlFor={`${name}-native-simple`}>{labelName}</InputLabel>
         <Select
           native
-          value={''}
           {...this.props.input}
           inputProps={{
+            value: currentValue,
             name,
             id: `${name}-native-simple`
           }}
         >
-          <option value="" />
+          <option value='' />
           {this.rendenSelectOptions(options)}
         </Select>
       </FormControl>

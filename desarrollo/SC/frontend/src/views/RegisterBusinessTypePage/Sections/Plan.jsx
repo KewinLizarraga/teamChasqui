@@ -8,12 +8,6 @@ import classNames from 'classnames';
 import { changeCurrentPlan } from '../../../actions/businessActions';
 
 class Plan extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
   renderServices = (services) => {
     return _.map(services, service => (
       <li key={service.id}>
@@ -29,7 +23,6 @@ class Plan extends React.Component {
   }
   render = () => {
     const { plan, classes, currentPlan } = this.props;
-    console.log(plan, currentPlan)
     const cardClass = classNames({
       [classes.planContainer]: true,
       [classes.focus]: currentPlan.id === plan.id

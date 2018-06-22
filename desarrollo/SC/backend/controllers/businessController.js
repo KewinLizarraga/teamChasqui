@@ -41,7 +41,7 @@ exports.getAll = (req, res) => {
 
 exports.getOne = (req, res) => {
   let hiddenFields = ['-createdAt', '-updatedAt', '-__v'];
-  if (req.query.details ==='true') {
+  if (req.query.details === 'true') {
     hiddenFields = [];
   }
 
@@ -55,7 +55,7 @@ exports.getOne = (req, res) => {
     fields: ['first_name', 'last_name', 'email']
   }, {
     path: 'hotel_detail.services',
-    fields: ['name',  'deleted']
+    fields: ['name', 'deleted']
   }];
   if (req.query.mode == 'populated') {
     for (path of populatePaths) {
@@ -83,10 +83,28 @@ exports.getReviews = (req, res) => {
   if (req.query.details === 'true') {
     hiddenFields = [];
   }
-  Business.getReviews(req.params.id, hiddenFields, (err, reviews) => {
-    if (err) return res.status(400).send(err);
-    res.status(200).send(reviews);
-  });
+
+  const populatePaths = [{
+    path: 'user_id',
+    fields: ['first_name', 'last_name', 'email']
+  }, {
+    path: 'business_id',
+    fields: ['stars', 'review_count', 'question_count', 'type', 'name']
+  }, {
+    path: 'visitor_type',
+    fields: ['name']
+  }];
+
+  Business.getReviews(
+    req.params.id,
+    hiddenFields,
+    populatePaths,
+    req,
+    (err, reviews) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).send(reviews);
+    }
+  );
 }
 
 exports.getQuestions = (req, res) => {
@@ -94,8 +112,23 @@ exports.getQuestions = (req, res) => {
   if (req.query.details === 'true') {
     hiddenFields = [];
   }
-  Business.getQuestions(req.params.id, hiddenFields, (err, questions) => {
-    if (err) return res.status(400).send(err);
-    res.status(200).send(questions);
-  });
+
+  const populatePaths = [{
+    path: 'business_id',
+    fields: ['stars', 'review_count', 'question_count', 'type', 'name']
+  }, {
+    path: 'user_id',
+    fields: ['first_name', 'last_name', 'email']
+  }];
+
+  Business.getQuestions(
+    req.params.id,
+    hiddenFields,
+    populatePaths,
+    req,
+    (err, questions) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).send(questions);
+    }
+  );
 }

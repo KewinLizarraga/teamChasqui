@@ -6,7 +6,13 @@ exports.getAll = (req, res) => {
   if (belong_to) {
     filter = { belong_to };
   }
-  Role.find(filter, (err, roles) => {
+
+  let hiddenFields = ['-createdAt', '-updatedAt', '-__v', '-belongs_to'];
+  if (req.query.details === 'true') {
+    hiddenFields = [];
+  }
+
+  Role.find(filter).select(hiddenFields).exec((err, roles) => {
     if (err) throw err;
     res.status(200).send(roles);
   })
