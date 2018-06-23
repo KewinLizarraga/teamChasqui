@@ -28,8 +28,8 @@ import headerLinksStyle from '../../assets/jss/material-kit-react/components/hea
 // Component class
 const HeaderLinks = ({ ...props }) => {
   const links = [
-    { type: 'iconButton', id: 'facebook', name: 'facebook', icon: 'fab fa-facebook', to: 'https://facebook.com', onlyWhen: 'disconnected' },
-    { type: 'iconButton', id: 'instagram', name: 'instagram', icon: 'fab fa-instagram', to: 'https://instagram.com', onlyWhen: 'disconnected' },
+    { type: 'iconButton', id: 'facebook', name: 'facebook', icon: 'fab fa-facebook', to: 'https://facebook.com/TinkuyTurismo-154459255417648/', onlyWhen: 'disconnected' },
+    { type: 'iconButton', id: 'instagram', name: 'instagram', icon: 'fab fa-instagram', to: 'https://instagram.com/tinkuyturismo/', onlyWhen: 'disconnected' },
     { type: 'iconButton', id: 'twitter', name: 'twitter', icon: 'fab fa-twitter', to: 'https://twitter.com', onlyWhen: 'disconnected' },
     { type: 'iconTextButton', id: 'login', name: 'Iniciar sesion', icon: 'person', to: '/login', onlyWhen: 'disconnected' },
     { type: 'iconTextButton', id: 'register', name: 'Registrarse', icon: 'person_add', to: '/register', onlyWhen: 'disconnected' },

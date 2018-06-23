@@ -1,6 +1,6 @@
 module.exports = {
   config: {
-    mongoURI: 'mongodb://joshua:password@ds247699.mlab.com:47699/chasqui-dev-db'
+    mongoURI: 'mongodb://localhost:27017/chasqui-db'
   },
   keys: {
     jwtKeySecret: 'letmein123',

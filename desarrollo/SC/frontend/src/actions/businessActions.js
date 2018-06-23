@@ -12,7 +12,23 @@ export const SET_GENERAL_INFO = 'SET_GENERAL_INFO';
 export const BACK_STEP = 'SET_BACK_STEP';
 export const FETCH_RC_SUCCESS = 'FETCH_RC_SUCCESS';
 export const FETCH_DEPARTMENTS_SUCCESS = 'FETCH_DEPARTMENTS_SUCCESS';
+export const FETCH_PROVINCES_SUCCESS = 'FETCH_PROVINCES_SUCCESS';
+export const FETCH_DISTRICTS_SUCCESS = 'FETCH_DISTRICTS_SUCCESS';
 
+export const fetchDistrictsSuccess = data => {
+  const districts = dataToSelect(data);
+  return {
+    type: FETCH_DISTRICTS_SUCCESS,
+    payload: districts
+  }
+}
+export const fetchProvincesSuccess = (data) => {
+  const provinces = dataToSelect(data);
+  return {
+    type: FETCH_PROVINCES_SUCCESS,
+    payload: provinces
+  }
+}
 export const fetchDepartmentsSuccess = (data) => {
   const departments = dataToSelect(data);
   return {
@@ -31,10 +47,39 @@ export const fetchRCSuccess = (data) => {
     }
   }
 }
-export const setGeneralInfo = (values) => ({
-  type: SET_GENERAL_INFO,
-  payload: values
-});
+export const setGeneralInfo = (values) => {
+  const {
+    businessName,
+    district_id,
+    address,
+    city_code,
+    reference,
+    role_id
+  } = values;
+
+  const user = {
+    role_id,
+    type: 'businessman',
+    subscribed: true
+  }
+
+  const business = {
+    name: businessName,
+    district_id,
+    address: {
+      details: address,
+      reference
+    },
+    city_code
+  }
+  return {
+    type: SET_GENERAL_INFO,
+    payload: {
+      user,
+      business
+    }
+  }
+};
 export const bacoStep = () => ({
   type: BACK_STEP
 });
@@ -68,7 +113,11 @@ export const fetchPlans = () => dispatch => {
   dispatch(fetchBegin());
   return axios({
     method: 'get',
-    url: 'products?filter[type]=plan&mode=populated'
+    url: '/products',
+    params: {
+      'filter[type]': 'plan',
+      'mode': 'populated'
+    }
   }).then(response => {
     if (response.statusText === 'OK') {
       dispatch(fetchPlansSuccess(response.data));
@@ -112,7 +161,7 @@ export const fetchUserRoles = (type) => dispatch => {
   });
 }
 export const fetchDepartments = (country_id) => dispatch => {
-  // dispatch(fetchBegin());
+  dispatch(fetchBegin());
   axios({
     method: 'get',
     url: '/departments',
@@ -121,12 +170,43 @@ export const fetchDepartments = (country_id) => dispatch => {
     }
   }).then(response => {
     if (response.statusText === 'OK') {
-      fetchDepartmentsSuccess(response.data);
+      dispatch(fetchDepartmentsSuccess(response.data));
     } else {
-      fetchFailed(response.data);
+      dispatch(fetchFailed(response.data));
     }
-  }, error => Promise.reject(error))
-
+  }, error => Promise.reject(error));
+}
+export const fetchProvinces = (department_id) => dispatch => {
+  dispatch(fetchBegin());
+  axios({
+    method: 'get',
+    url: '/provinces',
+    params: {
+      'filter[department_id]': department_id
+    }
+  }).then(response => {
+    if (response.statusText === 'OK') {
+      dispatch(fetchProvincesSuccess(response.data));
+    } else {
+      dispatch(fetchFailed(response.data));
+    }
+  })
+}
+export const fetchDistricts = (province_id) => dispatch => {
+  dispatch(fetchBegin());
+  axios({
+    method: 'get',
+    url: '/districts',
+    params: {
+      'filter[province_id]': province_id
+    }
+  }).then(response => {
+    if (response.statusText === 'OK') {
+      dispatch(fetchDistrictsSuccess(response.data));
+    } else {
+      dispatch(fetchFailed(response.data));
+    }
+  });
 }
 
 const filterPlans = (plans) => {
