@@ -31,7 +31,7 @@ exports.sendVerification = (options, callback) => {
     subject: 'Account Verification Token',
     template: 'verify-email',
     context: {
-      url: `http://206.189.175.34:3000/handle-confirmation/${token}`,
+      url: `http://localhost:3000/handle-confirmation/${token}`,
       name
     }
   };
@@ -51,7 +51,7 @@ exports.sendForgot = (options, callback) => {
     subject: 'Password help has arrived!',
     template: 'forgot-password-email',
     context: {
-      url: `http://206.189.175.34:3000/reset-password/${token}`,
+      url: `http://localhost:3000/reset-password/${token}`,
       name
     }
   };
