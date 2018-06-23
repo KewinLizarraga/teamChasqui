@@ -25,7 +25,7 @@ class ConfirmEmailPage extends React.Component {
     const { token } = this.props.match.params;
     axios({
       method: 'post',
-      url: 'http://206.189.175.34:8000/api/v1/auth/confirmation',
+      url: 'http://localhost:8000/api/v1/auth/confirmation',
       data: { token },
       validateStatus: (status) => {
         return status < 500

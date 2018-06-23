@@ -27,7 +27,7 @@ class HandleConfirmation extends React.Component {
     const { email } = querySearch(this.props.location.search || '');
     axios({
       method: 'post',
-      url: 'http://206.189.175.34:8000/api/v1/auth/resend',
+      url: 'http://localhost:8000/api/v1/auth/resend',
       data : { email },
       validateStatus: (status) => {
         return status < 500
