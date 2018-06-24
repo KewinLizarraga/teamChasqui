@@ -11,7 +11,7 @@ class Plan extends React.Component {
   renderServices = (services) => {
     return _.map(services, service => (
       <li key={service.id}>
-        <Typography color="primary" variant="body1" component="p">
+        <Typography variant="body1" component="p">
           {`${service.description}.`}
         </Typography>
       </li>
@@ -32,7 +32,7 @@ class Plan extends React.Component {
         <a className={cardClass} onClick={this.handleClick}>
           <Card className={classes.card}>
             <CardContent>
-              <Typography variant="display2" component="h1">
+              <Typography color="primary" variant="display2" component="h1">
                 {plan.name}
               </Typography>
               <hr />

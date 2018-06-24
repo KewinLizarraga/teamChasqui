@@ -4,13 +4,21 @@
 // TODO: llenar todo de forma ordenada (ver la mejor forma)
 // TODO: Cuando elija pais, consultar los departamentos (solo falta funcion linea 55)
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import generalFormStyle from '../../../assets/jss/material-kit-react/views/registerTypeSections/generalFormStyle';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
 import CustomInput from '../../../components/CustomInput/CustomInput';
 import CustomSelect from '../../../components/CustomSelect/CustomSelect';
 import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
-import { changeNext, fetchUserRoles, fetchDepartments } from '../../../actions/businessActions';
+import {
+  changeNext,
+  fetchUserRoles,
+  fetchDepartments,
+  fetchProvinces,
+  fetchDistricts
+} from '../../../actions/businessActions';
 
 let DISPATCH = null;
 let CANNEXT = undefined;
@@ -63,30 +71,58 @@ class GeneralForm extends React.Component {
 
   countryHandleChange = (ev) => {
     const country_id = ev.target.value;
-    console.log(country_id)
     this.props.dispatch(fetchDepartments(country_id));
   }
+  departmentHandleChange = (ev) => {
+    const deparment_id = ev.target.value;
+    this.props.dispatch(fetchProvinces(deparment_id));
+  }
+  provinceHandleChange = (ev) => {
+    const province_id = ev.target.value;
+    this.props.dispatch(fetchDistricts(province_id));
+  }
   render = () => {
-    const { dispatch, business } = this.props;
+    const { dispatch, business, classes } = this.props;
     const formData = business.data.business || {};
-    const { canNext, userRoles, countries, departments, provinces, districts } = business;
+    const {
+      canNext,
+      userRoles,
+      countries,
+      departments,
+      provinces,
+      districts
+    } = business;
     DISPATCH = dispatch;
     CANNEXT = canNext;
-    console.log('GeneralForm ->', departments)
     return (
-      <form style={{ width: '100%', margin: '20px' }}>
+      <form className={classes.formContainer}>
         <GridContainer justify='center' >
-          <GridItem>
+          <GridItem xs={12} sm={12} md={10} className={classes.gridItem}>
             <Field
               name='role_id'
               labelName='Rol del usuario'
               component={CustomSelect}
               currentValue={formData.role_id}
-              onChange={() => console.log('aaa')}
               options={userRoles}
             />
           </GridItem>
-          <GridItem>
+          <GridItem xs={12} sm={12} md={10} >
+            <Field
+              type='text'
+              name='businessName'
+              labelText='Nombre del negocio'
+              id='businessName'
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                type: 'businessName'
+              }}
+              required
+              component={CustomInput}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={6} md={5} className={classes.gridItem}>
             <Field
               disabled={_.isEmpty(countries)}
               name='country_id'
@@ -97,37 +133,84 @@ class GeneralForm extends React.Component {
               options={countries}
             />
           </GridItem>
-          <GridItem>
+          <GridItem xs={12} sm={6} md={5} className={classes.gridItem}>
             <Field
-
+              disabled={_.isEmpty(departments)}
               name='deparment_id'
               labelName='Departamento'
               component={CustomSelect}
               currentValue={formData.deparment_id}
-              onChange={() => console.log('aaa')}
+              onChange={this.departmentHandleChange}
               options={departments}
             />
           </GridItem>
-          <GridItem>
+          <GridItem xs={12} sm={6} md={5} className={classes.gridItem}>
             <Field
               disabled={_.isEmpty(provinces)}
               name='province_id'
               labelName='Provincia'
               component={CustomSelect}
               currentValue={formData.province_id}
-              onChange={() => console.log('aaa')}
+              onChange={this.provinceHandleChange}
               options={provinces}
             />
           </GridItem>
-          <GridItem>
+          <GridItem xs={12} sm={6} md={5} className={classes.gridItem}>
             <Field
               disabled={_.isEmpty(districts)}
               name='district_id'
               labelName='Distrito'
               component={CustomSelect}
               currentValue={formData.district_id}
-              onChange={() => console.log('aaa')}
               options={districts}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={6} md={5} >
+            <Field
+              type='text'
+              name='address'
+              labelText='Dirección'
+              id='address'
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                type: 'address'
+              }}
+              required
+              component={CustomInput}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={6} md={5} >
+            <Field
+              type='text'
+              name='city_code'
+              labelText='Código postal'
+              id='city_code'
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                type: 'city_code'
+              }}
+              required
+              component={CustomInput}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={10} >
+            <Field
+              type='text'
+              name='reference'
+              labelText='Referencia'
+              id='reference'
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                type: 'reference'
+              }}
+              required
+              component={CustomInput}
             />
           </GridItem>
         </GridContainer>
@@ -139,10 +222,7 @@ class GeneralForm extends React.Component {
 const validate = (values) => {
   const errors = {};
 
-  console.log('Validate ->', values)
-
   if (!values.role_id) errors.role_id = 'error';
-  
 
   if (_.isEmpty(errors) && !CANNEXT) {
     DISPATCH(changeNext(true));
@@ -157,4 +237,4 @@ const validate = (values) => {
 export default reduxForm({
   validate,
   form: 'generalForm'
-})(GeneralForm);
+})(withStyles(generalFormStyle)(GeneralForm));

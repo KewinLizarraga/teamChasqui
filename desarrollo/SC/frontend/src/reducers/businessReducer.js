@@ -8,7 +8,9 @@ import {
   BACK_STEP,
   SET_GENERAL_INFO,
   FETCH_RC_SUCCESS,
-  FETCH_DEPARTMENTS_SUCCESS
+  FETCH_DEPARTMENTS_SUCCESS,
+  FETCH_PROVINCES_SUCCESS,
+  FETCH_DISTRICTS_SUCCESS
 } from '../actions/businessActions';
 
 const initialState = {
@@ -28,11 +30,28 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    // no se que pasaaaaa no entra a este action
-    case FETCH_DEPARTMENTS_SUCCESS: {
-      console.log('adsasd')
+    case FETCH_DISTRICTS_SUCCESS: {
       return {
-        ...state
+        ...state,
+        loading: false,
+        districts: action.payload
+      }
+    }
+    case FETCH_PROVINCES_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        provinces: action.payload,
+        districts: {}
+      }
+    }
+    case FETCH_DEPARTMENTS_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        departments: action.payload,
+        provinces: {},
+        districts: {}
       }
     }
     case FETCH_RC_SUCCESS: {
@@ -41,12 +60,12 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         userRoles,
-        countries
+        countries 
       }
     }
     case SET_GENERAL_INFO: {
       const { data, activeStep } = state;
-      const { payload } = action;
+      const { payload: { user, business } } = action;
       return {
         ...state,
         canNext: false,
@@ -54,14 +73,10 @@ export default (state = initialState, action) => {
         data: {
           ...data,
           user: {
-            ...data.user,
-            role_id: payload.role_id,
-            type: 'businessman',
-            subscribed: true
+            ...user
           },
           business: {
-            ...data.business,
-            ...payload
+            ...business
           }
         }
       }
