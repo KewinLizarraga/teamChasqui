@@ -22,6 +22,9 @@ target 'chasquiApp' do
 
   #Rating
   pod 'Cosmos'
+  
+  #Images
+  pod 'SDWebImage'
 
 
 end

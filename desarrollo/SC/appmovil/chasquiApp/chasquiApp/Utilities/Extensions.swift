@@ -33,7 +33,7 @@ extension UIColor {
 }
 extension Double {
     var solesString:String {
-        return String(format: "S/.%.2f", self)
+        return String(format: "S/ %.2f", self)
     }
 }
 

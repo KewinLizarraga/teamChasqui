@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SwiftyTimer
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var remoteConfig: RemoteConfig?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        sleep(2)
+        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
         
         FirebaseApp.configure()
         self.remoteConfig = RemoteConfig.remoteConfig()
@@ -45,12 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func fetchRemoteConfig(_ completion: @escaping () -> ()) {
         self.remoteConfig?.fetch(withExpirationDuration: 0, completionHandler: { [unowned self] (status, error) in
-            guard error == nil else {
-                print(error!)
-                completion()
-                return
+            if let error = error {
+                print(error)
+            }else {
+                self.remoteConfig?.activateFetched()
             }
-            self.remoteConfig?.activateFetched()
             completion()
         })
     }

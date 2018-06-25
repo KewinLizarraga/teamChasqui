@@ -28,15 +28,28 @@
 		<true/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>thednetworks</key>
+			<string>http://thednetworks.com</string>
+		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>necesito tu ubicacion siempre</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>necesito tu ubicacion mientras uses el app</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Avenir Next.ttc</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -48,5 +61,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
