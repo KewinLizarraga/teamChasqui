@@ -39,7 +39,6 @@ const businessSchema = new Schema({
 }, { timestamps: true });
 
 businessSchema.statics.getNewStars = (stars, review_count, newStar = 0) => {
-  console.log(stars, review_count, newStar);
   return (review_count * stars + newStar) / (review_count + 1);
 }
 

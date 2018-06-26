@@ -3,7 +3,6 @@ const { keys } = require('../config/keys');
 
 exports.auth = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
-  console.log('TOKEN->', token)
   if (token) {
     jwt.verify(token, keys.jwtKeySecret, (err, decoded) => {
       if (err) {

@@ -47,7 +47,6 @@ exports.create = (req, res) => {
           });
         }, (cb) => {
           const newStars = Business.getNewStars(response.business.stars, response.business.review_count, req.body.stars);
-          console.log(newStars);
           response.business.stars = newStars;
           response.business.review_count++;
           response.business.save((err, newBusiness) => {
@@ -73,7 +72,6 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  console.log(req.body)
   Review.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, (err, review) => {
     if (err) return res.status(500).send({ success: false, message: err.message });
     return res.status(200).send(review);

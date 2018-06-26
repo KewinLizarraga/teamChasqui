@@ -9,16 +9,12 @@ const stripe = require('stripe')(keys.stripeSecretKey);
 exports.pay_and_register = async (req, res) => {
   const id = req.decoded._id;
   const { stripe_token, user, business, product } = req.body;
-  // Realizamos pago
-  // supuesto response del pago
-  console.log(stripe_token)
   const charge = await stripe.charges.create({
     amount: product.amount * 100,
     currency: 'usd',
     description: 'asd',
     source: stripe_token.id
   });
-  console.log(charge);
   const payment_detail = {
     payment_id: charge.source.id,
     last4: charge.source.last4,
@@ -34,7 +30,7 @@ exports.pay_and_register = async (req, res) => {
         {
           $set: {
             ...user,
-            // type: `${req.decoded.type === admin ? 'admin' : 'businessman'}`
+            type: `${req.decoded.type === admin ? 'admin' : 'businessman'}`
           }
         },
         { new: true },
@@ -68,7 +64,6 @@ exports.pay_and_register = async (req, res) => {
         invoice_id: response.invoice._id,
         payment_detail
       }, (err, financialTransaction) => {
-        console.log(financialTransaction);
         if (err) return cb({ status: 500, data: { success: false, message: err.message } });
         response.financialTransaction = financialTransaction;
         cb(null, response);
