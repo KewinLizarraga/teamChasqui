@@ -1,7 +1,7 @@
-import _axios from 'axios';
-import axios from '../services/axios';
+import { tinkuyAxios, stripeAxios } from '../services/axios';
 import _ from 'lodash';
 import async from 'async';
+const CLOUDINARY_PRESET = 'kfz8wwny';
 export const FETCH_BEGIN = 'FETCH_BEGIN';
 export const FETCH_PLANS_SUCCESS = 'FETCH_PLANS_SUCCESS';
 export const FETCH_FAILED = 'FETCH_FAILED';
@@ -14,6 +14,160 @@ export const FETCH_RC_SUCCESS = 'FETCH_RC_SUCCESS';
 export const FETCH_DEPARTMENTS_SUCCESS = 'FETCH_DEPARTMENTS_SUCCESS';
 export const FETCH_PROVINCES_SUCCESS = 'FETCH_PROVINCES_SUCCESS';
 export const FETCH_DISTRICTS_SUCCESS = 'FETCH_DISTRICTS_SUCCESS';
+export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
+export const SET_CURRENT_IMAGE = 'SET_CURRENT_IMAGE';
+export const SET_BUSINESS_TIME = 'SET_BUSINESS_TIME';
+export const FETCH_MONEY_TYPES_SUCCESS = 'FETCH_MONEY_TYPES_SUCCESS';
+export const FETCH_SERVICES_SUCCESS = 'FETCH_SERVICES_SUCCESS';
+export const CHANGE_COMPLETED = 'CHANGE_COMPLETED';
+export const SET_DETAILED_INFO = 'SET_DETAILED_INFO';
+export const SET_CURRENT_SERVICES = 'SET_CURRENT_SERVICES';
+export const SET_CURRENT_MONEY_TYPES = 'SET_CURRENT_MONEY_TYPES';
+export const BUSINESS_PAYMENT = 'BUSINESS_PAYMENT';
+
+const getIds = (data, idLabel) => {
+  if (_.isObject(data)) {
+    return data[idLabel]
+  }
+}
+
+export const businessPayment = (data) => dispatch => {
+
+  async.waterfall([(cb) => {
+    const { photos } = data.business;
+    const formData = new FormData();
+    formData.append('file', photos[0]);
+    formData.append('upload_preset', CLOUDINARY_PRESET);
+
+    stripeAxios({
+      method: 'post',
+      url: '/upload',
+      data: formData
+    }).then(response => {
+      cb(null, response.data);
+    }).catch(err => {
+      cb(err);
+    })
+  }, (image, cb) => {
+    const { secure_url } = image;
+    const { user, product, business, stripe_token } = data;
+    const { role, ...restUser } = user;
+    const { name, ...restProduct } = product;
+    const { country, department, province, district, ...restBusiness } = business;
+    const specificData = business[`${business.type}_detail`]; 
+    const newUser = {
+      ...restUser,
+      role_id: getIds(role, 'role_id')
+    }
+    const newProduct = {
+      ...restProduct
+    }
+    
+    let newSpecificData = {}
+    switch (business.type) {
+      case 'hotel': {
+        const { services, ...restSpecificData } = specificData;
+         newSpecificData = {
+           hotel_detail: {
+             ...restSpecificData,
+             services: services.map(service => service.id)
+           }
+         }
+        break;
+      }
+    
+      default:
+        break;
+    }
+    const newBusiness = {
+      ...restBusiness,
+      district_id: district.district_id,
+      money_types: business.money_types.map(type => type.id),
+      photos: [secure_url],
+      ...newSpecificData
+    }
+    tinkuyAxios({
+      method: 'post',
+      url: '/stripe',
+      data: {
+        stripe_token,
+        user: newUser,
+        product: newProduct,
+        business: newBusiness
+      }
+    }).then(response => {
+      if (response.statusText === 'OK') {
+        cb(null, response.data);
+      } else {
+        cb (response.data)
+      }
+    }) 
+    console.log(newUser, newProduct, newBusiness);
+  }], (err, result) => {
+    console.log(result);
+  })
+  console.log(data);
+
+  return {
+    type: BUSINESS_PAYMENT
+  }
+}
+export const setCurrentMoneyTypes = moneyTypes => {
+  return {
+    type: SET_CURRENT_MONEY_TYPES,
+    payload: moneyTypes
+  }
+}
+export const setCurrentServices = services => {
+  return {
+    type: SET_CURRENT_SERVICES,
+    payload: services
+  }
+}
+export const setDetailedInfo = values => {
+  return {
+    type: SET_DETAILED_INFO,
+    payload: values
+  }
+}
+export const changeCompleted = status => {
+  return {
+    type: CHANGE_COMPLETED,
+    payload: status
+  }
+}
+export const fetchServicesSuccess = data => {
+  const hotelServices = dataToSelect(data);
+  return {
+    type: FETCH_SERVICES_SUCCESS,
+    payload: hotelServices
+  }
+}
+export const fetchMoneyTypesSuccess = data => {
+  const moneyTypes = dataToSelect(data);
+  return {
+    type: FETCH_MONEY_TYPES_SUCCESS,
+    payload: moneyTypes
+  }
+}
+export const setBusinessType = businessType => {
+  return {
+    type: SET_BUSINESS_TIME,
+    payload: businessType
+  }
+}
+export const setCurrentImage = file => {
+  return {
+    type: SET_CURRENT_IMAGE,
+    payload: file
+  }
+}
+export const setCurrentLocation = currentLocation => {
+  return {
+    type: SET_CURRENT_LOCATION,
+    payload: currentLocation
+  }
+}
 
 export const fetchDistrictsSuccess = data => {
   const districts = dataToSelect(data);
@@ -47,36 +201,13 @@ export const fetchRCSuccess = (data) => {
     }
   }
 }
-export const setGeneralInfo = (values) => {
-  const {
-    businessName,
-    district_id,
-    address,
-    city_code,
-    reference,
-    role_id
-  } = values;
+export const setGeneralInfo = (values, geo_location) => {
 
-  const user = {
-    role_id,
-    type: 'businessman',
-    subscribed: true
-  }
-
-  const business = {
-    name: businessName,
-    district_id,
-    address: {
-      details: address,
-      reference
-    },
-    city_code
-  }
   return {
     type: SET_GENERAL_INFO,
     payload: {
-      user,
-      business
+      values,
+      geo_location
     }
   }
 };
@@ -109,9 +240,10 @@ export const setProduct = () => ({
   type: SET_PRODUCT
 });
 
+
 export const fetchPlans = () => dispatch => {
   dispatch(fetchBegin());
-  return axios({
+  return tinkuyAxios({
     method: 'get',
     url: '/products',
     params: {
@@ -131,7 +263,7 @@ export const fetchUserRoles = (type) => dispatch => {
   dispatch(fetchBegin());
 
   async.parallel([(cb) => {
-    axios({
+    tinkuyAxios({
       method: 'get',
       url: `/roles`,
       params: {
@@ -145,7 +277,7 @@ export const fetchUserRoles = (type) => dispatch => {
       }
     })
   }, (cb) => {
-    axios({
+    tinkuyAxios({
       method: 'get',
       url: '/countries'
     }).then(response => {
@@ -162,7 +294,7 @@ export const fetchUserRoles = (type) => dispatch => {
 }
 export const fetchDepartments = (country_id) => dispatch => {
   dispatch(fetchBegin());
-  axios({
+  tinkuyAxios({
     method: 'get',
     url: '/departments',
     params: {
@@ -178,7 +310,7 @@ export const fetchDepartments = (country_id) => dispatch => {
 }
 export const fetchProvinces = (department_id) => dispatch => {
   dispatch(fetchBegin());
-  axios({
+  tinkuyAxios({
     method: 'get',
     url: '/provinces',
     params: {
@@ -194,7 +326,7 @@ export const fetchProvinces = (department_id) => dispatch => {
 }
 export const fetchDistricts = (province_id) => dispatch => {
   dispatch(fetchBegin());
-  axios({
+  tinkuyAxios({
     method: 'get',
     url: '/districts',
     params: {
@@ -203,6 +335,32 @@ export const fetchDistricts = (province_id) => dispatch => {
   }).then(response => {
     if (response.statusText === 'OK') {
       dispatch(fetchDistrictsSuccess(response.data));
+    } else {
+      dispatch(fetchFailed(response.data));
+    }
+  });
+}
+export const fetchMoneyTypes = () => dispatch => {
+  dispatch(fetchBegin());
+  return tinkuyAxios({
+    method: 'get',
+    url: '/money-types'
+  }).then(response => {
+    if (response.statusText === 'OK') {
+      dispatch(fetchMoneyTypesSuccess(response.data));
+    } else {
+      dispatch(fetchFailed(response.data));
+    }
+  });
+}
+export const fetchServices = () => dispatch => {
+  dispatch(fetchBegin());
+  return tinkuyAxios({
+    method: 'get',
+    url: '/services'
+  }).then(response => {
+    if (response.statusText === 'OK') {
+      dispatch(fetchServicesSuccess(response.data));
     } else {
       dispatch(fetchFailed(response.data));
     }

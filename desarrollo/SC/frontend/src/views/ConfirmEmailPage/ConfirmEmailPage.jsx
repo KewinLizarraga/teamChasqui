@@ -1,12 +1,7 @@
+// TODO: mostrar mensaje en caso de algun error o en caso de exito snackbark
+// TODO: implementar usando dispatch
 import React from 'react';
-
-// Thrid party library used by this component.
-
-// Materias-ui components and functions used by this component.
-
-// Components used by this component
-import axios from 'axios';
-// Styles for this component
+import { tinkuyAxios } from '../../services/axios';
 import confirmEmailStyle from '../../assets/jss/material-kit-react/views/handleConfirmationStyle';
 import { withStyles } from '@material-ui/core/styles';
 import GridContainer from '../../components/Grid/GridContainer';
@@ -17,21 +12,15 @@ import CardHeader from '../../components/Card/CardHeader';
 import image from '../../assets/img/login_bg.jpg';
 import CardBody from '../../components/Card/CardBody';
 import Button from '../../components/CustomButtons/Button';
-// Sections for this component
 
-// Component class
 class ConfirmEmailPage extends React.Component {
   handleClick = () => {
     const { token } = this.props.match.params;
-    axios({
+    tinkuyAxios({
       method: 'post',
-      url: 'http://206.189.175.34:8000/api/v1/auth/confirmation',
-      data: { token },
-      validateStatus: (status) => {
-        return status < 500
-      }
+      url: '/auth/confirmation',
+      data: { token }
     }).then(response => {
-      console.log(response.data)
       if (response.statusText === 'OK') {
         this.props.history.replace('/login');
       }

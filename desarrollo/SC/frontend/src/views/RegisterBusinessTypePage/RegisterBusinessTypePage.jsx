@@ -2,6 +2,7 @@ import React from 'react';
 
 // Thrid party library used by this component.
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 // Materias-ui components and functions used by this component.
 import { withStyles } from '@material-ui/core/styles';
 // Components used by this component
@@ -15,6 +16,7 @@ import styles from '../../assets/jss/material-kit-react/views/landingPage';
 import { data } from './content';
 import RegisterSection from './Sections/RegisterSection';
 import { loggedIn } from '../../services/AuthService';
+import { setBusinessType } from '../../actions/businessActions';
 
 const possiblyParams = ['hotel', 'restaurant', 'travel_agency'];
 // Component class
@@ -29,7 +31,9 @@ class RegisterBusinessTypePage extends React.Component {
       this.props.history.replace('/login');
     }
 
+    this.props.dispatchSetBusinessType(businessType)
   }
+
   render() {
     const { classes } = this.props;
     const { businesses } = data;
@@ -59,5 +63,12 @@ class RegisterBusinessTypePage extends React.Component {
 
 // ProtTypes for this component
 
+const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  dispatchSetBusinessType: businessType => {
+    dispatch(setBusinessType(businessType));
+  } 
+});
+
 // Export component
-export default withStyles(styles)(RegisterBusinessTypePage);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(RegisterBusinessTypePage));

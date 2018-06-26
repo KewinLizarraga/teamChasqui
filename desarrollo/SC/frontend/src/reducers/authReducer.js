@@ -32,7 +32,6 @@ export default (state = initialState, action) => {
       }
     }
     case LOGIN_FAILED: {
-      console.log(action) 
       return {
         ...initialState,
         error: action.payload

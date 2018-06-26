@@ -1,37 +1,25 @@
+// TODO: mostrar mensaje al re-enviar en caso de exito y error
 import React from 'react';
-
-// Thrid party library used by this component.
 import { withStyles } from '@material-ui/core/styles';
 import querySearch from 'stringquery';
-import axios from 'axios';
-// Materias-ui components and functions used by this component.
-
-
-// Components used by this component
-
-// Styles for this component
+import { tinkuyAxios } from '../../services/axios';
 import handleConfirmationStyle from '../../assets/jss/material-kit-react/views/handleConfirmationStyle';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import Footer from '../../components/Footer/Footer';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
-// Sections for this component
-
-// Component class
 import image from '../../assets/img/login_bg.jpg';
 import CardBody from '../../components/Card/CardBody';
 import Button from '../../components/CustomButtons/Button';
+
 class HandleConfirmation extends React.Component {
   handleClick = () => {
     const { email } = querySearch(this.props.location.search || '');
-    axios({
+    tinkuyAxios({
       method: 'post',
-      url: 'http://206.189.175.34:8000/api/v1/auth/resend',
-      data : { email },
-      validateStatus: (status) => {
-        return status < 500
-      }
+      url: '/auth/resend',
+      data: { email }
     });
   }
 

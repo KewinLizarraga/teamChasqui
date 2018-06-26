@@ -14,7 +14,10 @@ import PlanForm from './PlanForm';
 import { connect } from 'react-redux';
 import Progress from '../../../components/Progress/Progress';
 import GeneralForm from './GeneralForm';
-import { setProduct, bacoStep, setGeneralInfo } from '../../../actions/businessActions';
+import { setProduct, bacoStep, setGeneralInfo, setDetailedInfo } from '../../../actions/businessActions';
+import DetailedForm from './DetailedForm/DetailedForm';
+import PaymentConfirmation from './PaymentConfirmation/PaymentConfirmation';
+import Payments from '../../../components/Payments/Payments';
 
 function getSteps() {
   return ['Elegir plan', 'Llenar información general', 'Llenar información detallada', 'Confirmar Pago'];
@@ -24,10 +27,66 @@ const theme = createMuiTheme({
     primary: { main: '#9c27b0' }
   }
 });
+const arrayToState = (data, options) => {
+  return data.map(value => ({
+    id: value,
+    name: options[value]
+  }));
+}
+const mapDataToValues = (business, form) => {
+  const {
+    businessType,
+    currentImage,
+    currentMoneyTypes,
+    currentServices,
+    moneyTypes,
+    hotelServices
+  } = business;
+  const { detailedForm } = form;
+  const specificForm = form[`${businessType}Form`];
+  switch (businessType) {
+    case 'hotel': {
+      const detailedFormValues = detailedForm.values;
+      const specificFormValues = specificForm.values;
+      const { checkin_time, checkout_time } = specificFormValues;
+      const money_types = arrayToState(currentMoneyTypes, moneyTypes);
+      const services = arrayToState(currentServices, hotelServices);
+      const hotel_detail = Object.assign({}, specificFormValues, {
+        checkin_time: checkin_time.format('LT'),
+        checkout_time: checkout_time.format('LT'),
+        services
+      });
+      const { price_max, price_min, ...business } = detailedFormValues;
+      return {
+        business: {
+          ...business,
+          price: {
+            min: Number(price_min),
+            max: Number(price_max),
+            average: (price_min + price_max) / 2
+          },
+          money_types,
+          photos: [currentImage]
+        },
+        hotel_detail,
+      }
+    }
+    default: {
+      return {}
+    }
+  }
+}
 class StepperSection extends React.Component {
 
   getStepContent(stepIndex) {
     const { business, dispatch } = this.props;
+    const {
+      canNext,
+      completed,
+      businessType,
+      moneyTypes,
+      currentMoneyTypes
+    } = business;
     switch (stepIndex) {
       case 0:
         return (
@@ -45,7 +104,19 @@ class StepperSection extends React.Component {
           />
         );
       case 2:
-        return 'This is the bit I really care about!';
+        return (
+          <DetailedForm
+            canNext={canNext}
+            completed={completed}
+            businessType={businessType}
+            moneyTypes={moneyTypes}
+            currentMoneyTypes={currentMoneyTypes}
+          />
+        )
+        case 3:
+        return (
+          <PaymentConfirmation />
+        )
       default:
         return 'Uknown stepIndex';
     }
@@ -53,9 +124,9 @@ class StepperSection extends React.Component {
 
   handleNext = () => {
     const { form, business } = this.props;
-    console.log(this.props);
-    const { activeStep } = business;
-
+    const {
+      activeStep,
+    } = business;
 
     switch (activeStep) {
       case 0: {
@@ -66,11 +137,14 @@ class StepperSection extends React.Component {
       case 1: {
         console.log('Guardar datos generales');
         const { generalForm: { values } } = form;
-        this.props.dispatch(setGeneralInfo(values));
+        const { currentLocation } = business;
+        this.props.dispatch(setGeneralInfo(values, currentLocation));
         break;
       }
       case 2: {
         console.log('Guardar datos especificos');
+        const values = mapDataToValues(business, form);
+        this.props.dispatch(setDetailedInfo(values));
         break;
       }
       case 3: {
@@ -94,6 +168,13 @@ class StepperSection extends React.Component {
     });
   };
 
+  isDisabled = () => {
+    const { canNext, completed } = this.props.business;
+    if (completed === null)
+      return canNext;
+    else
+      return completed && canNext
+  }
   render() {
     // eslint-disable-next-line
     const { classes, dispatch, business } = this.props;
@@ -131,9 +212,13 @@ class StepperSection extends React.Component {
                   >
                     Atras
                   </Button>*/}
-                  <Button disabled={!business.canNext} variant="contained" color="primary" onClick={this.handleNext}>
-                    {activeStep === steps.length - 1 ? 'Pagar' : 'Siguiente'}
-                  </Button>
+                  {activeStep === steps.length - 1 ? (
+                    <Payments />
+                  ) : (
+                    <Button disabled={!this.isDisabled()} variant="contained" color="primary" onClick={this.handleNext}>
+                      Siguiente
+                    </Button>
+                  )}
                 </div>
               </GridItem>
             )}

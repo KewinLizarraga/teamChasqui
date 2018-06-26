@@ -18,8 +18,8 @@ class Plan extends React.Component {
     ))
   }
   handleClick = () => {
-    const { id, price_per_month } = this.props.plan;
-    this.props.dispatch(changeCurrentPlan({ id, amount: price_per_month }));
+    const { id, price_per_month, name } = this.props.plan;
+    this.props.dispatch(changeCurrentPlan({ id, name, amount: price_per_month }));
   }
   render = () => {
     const { plan, classes, currentPlan } = this.props;

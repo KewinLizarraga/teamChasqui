@@ -60,7 +60,6 @@ const handleLogin = (values, dispatch, pp) => {
 const LoginRegisterForm = ({ data, classes, handleSubmit, ...props }) => {
   const { inputs, buttonText, extraText } = data;
   INPUTS = inputs;
-  console.log(props)
   return (
     <form className={classes.form} onSubmit={handleSubmit(handleLogin)}>
       <CardBody>

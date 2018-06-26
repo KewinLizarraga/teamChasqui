@@ -22,7 +22,7 @@ class RegisterSection extends React.Component {
           <GridItem xs={12} sm={12} md={12}>
             <h2 className={classes.title}>Regístrese</h2>
             <h4 className={classes.description}>
-              Siga todo los pasaos y llene todo los campos con la información de su negocio.
+              Siga todos los pasos y llene todos los campos con la información de su negocio.
             </h4>
           </GridItem>
           <GridItem md={12}>

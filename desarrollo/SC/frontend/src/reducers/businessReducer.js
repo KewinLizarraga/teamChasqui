@@ -10,7 +10,16 @@ import {
   FETCH_RC_SUCCESS,
   FETCH_DEPARTMENTS_SUCCESS,
   FETCH_PROVINCES_SUCCESS,
-  FETCH_DISTRICTS_SUCCESS
+  FETCH_DISTRICTS_SUCCESS,
+  SET_CURRENT_LOCATION,
+  SET_CURRENT_IMAGE,
+  SET_BUSINESS_TIME,
+  FETCH_MONEY_TYPES_SUCCESS,
+  FETCH_SERVICES_SUCCESS,
+  CHANGE_COMPLETED,
+  SET_DETAILED_INFO,
+  SET_CURRENT_SERVICES,
+  SET_CURRENT_MONEY_TYPES
 } from '../actions/businessActions';
 
 const initialState = {
@@ -20,16 +29,101 @@ const initialState = {
   departments: {},
   provinces: {},
   districts: {},
+  moneyTypes: {},
+  hotelServices: {},
   data: {},
+  currentLocation: { lat: -34.397, lng: 150.644 },
+  currentImage: {},
+  markers: [],
   loading: false,
   error: null,
   currentPlan: {},
+  currentServices: [],
+  currentMoneyTypes: [],
   activeStep: 0,
-  canNext: false
+  canNext: false,
+  completed: null
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_CURRENT_MONEY_TYPES: {
+      return {
+        ...state,
+        currentMoneyTypes: action.payload
+      }
+    }
+    case SET_CURRENT_SERVICES: {
+      return {
+        ...state,
+        currentServices: action.payload
+      }
+    }
+    case SET_DETAILED_INFO: {
+      const { data, activeStep } = state;
+      let newState = initialState;
+      switch (state.businessType) {
+        case 'hotel':
+          const { business, hotel_detail } = action.payload;
+          newState = {
+            ...state,
+            canNext: true,
+            completed: null,
+            activeStep: activeStep + 1,
+            data: {
+              ...data,
+              business: {
+                ...data.business,
+                ...business,
+                hotel_detail
+              }
+            }
+          }
+          break;
+
+        default:
+          break;
+      }
+      return newState;
+    }
+    case CHANGE_COMPLETED: {
+      return {
+        ...state,
+        completed: action.payload
+      }
+    }
+    case FETCH_SERVICES_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        hotelServices: action.payload
+      }
+    }
+    case FETCH_MONEY_TYPES_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        moneyTypes: action.payload
+      }
+    }
+    case SET_BUSINESS_TIME: {
+      return {
+        ...state,
+        businessType: action.payload
+      }
+    }
+    case SET_CURRENT_IMAGE: {
+      return {
+        ...state,
+        currentImage: action.payload
+      }
+    }
+    case SET_CURRENT_LOCATION: {
+      return {
+        ...state,
+        currentLocation: action.payload
+      }
+    }
     case FETCH_DISTRICTS_SUCCESS: {
       return {
         ...state,
@@ -60,12 +154,66 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         userRoles,
-        countries 
+        countries
       }
     }
     case SET_GENERAL_INFO: {
-      const { data, activeStep } = state;
-      const { payload: { user, business } } = action;
+      const {
+        data,
+        activeStep,
+        userRoles,
+        countries,
+        departments,
+        provinces,
+        districts,
+        businessType
+      } = state;
+
+      const { payload: { values, geo_location } } = action;
+      const {
+        businessName,
+        country_id,
+        department_id,
+        province_id,
+        district_id,
+        address,
+        city_code,
+        reference,
+        role_id
+      } = values;
+
+      const user = {
+        role: {
+          role_id,
+          name: userRoles[role_id]
+        },
+        type: 'businessman',
+        subscribed: true
+      }
+
+      const business = {
+        name: businessName,
+        type: businessType,
+        country: {
+          name: countries[country_id]
+        },
+        department: {
+          name: departments[department_id]
+        },
+        province: {
+          name: provinces[province_id]
+        },
+        district: {
+          district_id,
+          name: districts[district_id]
+        },
+        address: {
+          details: address,
+          reference
+        },
+        city_code,
+        geo_location
+      }
       return {
         ...state,
         canNext: false,
@@ -103,7 +251,7 @@ export default (state = initialState, action) => {
         activeStep: activeStep + 1,
         data: {
           ...data,
-          producto: currentPlan
+          product: currentPlan
         }
       }
     }
@@ -138,3 +286,5 @@ export default (state = initialState, action) => {
     }
   }
 }
+
+

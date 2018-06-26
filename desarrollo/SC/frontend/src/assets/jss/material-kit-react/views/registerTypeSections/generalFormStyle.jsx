@@ -4,7 +4,7 @@ const generalFormStyle = {
     margin: '20px'
   },
   gridItem: {
-    marginBottom: '15px'
+    margin: '0 0 15px 0'
   }
 }
 

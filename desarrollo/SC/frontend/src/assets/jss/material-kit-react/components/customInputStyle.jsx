@@ -66,12 +66,12 @@ const customInputStyle = {
     marginTop: "16px"
   },
   formControl: {
-    paddingBottom: "7px",
+    paddingBottom: "0px",
     margin: "27px 0 0 0",
     position: "relative"
   },
   formControlLabel: {
-    margin: "11px 0 0 0",
+    margin: "0px 0 0 0",
   },
   whiteUnderline: {
     "&:hover:not($disabled):before,&:before": {

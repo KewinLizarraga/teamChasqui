@@ -1,5 +1,4 @@
-import _axios from 'axios';
-import axios from '../services/axios';
+import { tinkuyAxios } from '../services/axios';
 import { logout as logoutService } from '../services/AuthService';
 
 // constants
@@ -52,7 +51,7 @@ export const login = (datos) => (dispatch) => {
   // INICIO
   dispatch(loadingBegin());
   // CONSULTA ASINCRONICA
-  return axios({
+  return tinkuyAxios({
     method: 'post',
     url: '/auth/login',
     data: datos
@@ -71,7 +70,7 @@ export const login = (datos) => (dispatch) => {
 export const register = (datos) => (dispatch) => {
   dispatch(loadingBegin());
 
-  return axios({
+  return tinkuyAxios({
     method: 'post',
     url: '/auth/signup',
     data: datos
