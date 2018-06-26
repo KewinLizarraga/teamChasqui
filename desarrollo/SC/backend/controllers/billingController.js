@@ -4,31 +4,49 @@ const Business = require('mongoose').model('Business');
 const Invoice = require('mongoose').model('Invoice'); // crear endpoints para Envoice
 const FinancialTransaction = require('mongoose').model('FinancialTransaction'); // create endpoint
 const Subscription = require('mongoose').model('Subscription'); // create endpoint
-
-exports.pay_and_register = (req, res) => {
+const { keys } = require('../config/keys');
+const stripe = require('stripe')(keys.stripeSecretKey);
+exports.pay_and_register = async (req, res) => {
   const id = req.decoded._id;
   const { stripe_token, user, business, product } = req.body;
   // Realizamos pago
   // supuesto response del pago
-  payment_detail = {
-    payment_id: 'asdasd',
-    last4: '4242',
-    brand: 'visa',
-    name: 'joshua@gmail.com',
-    amount: '30'
+  console.log(stripe_token)
+  const charge = await stripe.charges.create({
+    amount: product.amount * 100,
+    currency: 'usd',
+    description: 'asd',
+    source: stripe_token.id
+  });
+  console.log(charge);
+  const payment_detail = {
+    payment_id: charge.source.id,
+    last4: charge.source.last4,
+    brand: charge.source.brand,
+    name: charge.source.name,
+    amount: charge.amount
   }
   // actualizamos usuario
   async.waterfall([
     (cb) => {
-      User.findByIdAndUpdate(id, { $set: user }, { new: true }, (err, user) => {
-        if (err) return cb({ status: 500, data: { success: false, message: err.message } });
-        if (!user) return cb({ stuts: 404, data: { success: false, message: 'User has not found' } });
+      User.findByIdAndUpdate(
+        id,
+        {
+          $set: {
+            ...user,
+            // type: `${req.decoded.type === admin ? 'admin' : 'businessman'}`
+          }
+        },
+        { new: true },
+        (err, user) => {
+          if (err) return cb({ status: 500, data: { success: false, message: err.message } });
+          if (!user) return cb({ stuts: 404, data: { success: false, message: 'User has not found' } });
 
-        const response = {
-          user: req.decoded
-        }
-        cb(null, response);
-      });
+          const response = {
+            user: req.decoded
+          }
+          cb(null, response);
+        });
     }, (response, cb) => {
       Business.create({ user_id: req.decoded._id, ...business }, (err, createdBusiness) => {
         if (err) return cb({ status: 500, data: { success: false, message: err.message } });
@@ -77,8 +95,8 @@ exports.pay_and_register = (req, res) => {
       })
     }
   ], (err, result) => {
-      if (err) return res.status(err.status).send(err.data);
-      res.status(200).send(result);
+    if (err) return res.status(err.status).send(err.data);
+    res.status(200).send(result);
   });
   // creamos business
 
