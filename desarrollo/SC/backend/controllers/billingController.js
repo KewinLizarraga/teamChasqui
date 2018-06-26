@@ -22,6 +22,7 @@ exports.pay_and_register = async (req, res) => {
     name: charge.source.name,
     amount: charge.amount
   }
+  
   // actualizamos usuario
   async.waterfall([
     (cb) => {
@@ -30,7 +31,7 @@ exports.pay_and_register = async (req, res) => {
         {
           $set: {
             ...user,
-            type: `${req.decoded.type === admin ? 'admin' : 'businessman'}`
+            type: `${req.decoded.type === 'admin' ? 'admin' : 'businessman'}`
           }
         },
         { new: true },
