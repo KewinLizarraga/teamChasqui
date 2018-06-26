@@ -11,7 +11,6 @@ import TypeTable from './Sections/TypeTable';
 
 class PaymentConfirmation extends React.Component {
   render = () => {
-    console.log('PaymentConfirmation.jsx ->', this.props);
     const { classes } = this.props;
     const { user, product, business } = this.props.data;
     return (

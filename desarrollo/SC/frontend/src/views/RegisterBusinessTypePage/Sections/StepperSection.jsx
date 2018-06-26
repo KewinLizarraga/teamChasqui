@@ -180,7 +180,6 @@ class StepperSection extends React.Component {
     const { classes, dispatch, business } = this.props;
     const steps = getSteps();
     const { activeStep } = business;
-    console.log('StepperSection ->', this.props)
     return (
       <MuiThemeProvider theme={theme}>
         <GridItem xs={12} sm={12} md={12}>

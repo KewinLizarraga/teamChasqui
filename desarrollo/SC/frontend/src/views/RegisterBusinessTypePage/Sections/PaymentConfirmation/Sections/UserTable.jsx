@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 
 class UserTable extends React.Component {
   render = () => {
-    console.log('UserTable.jsx ->', this.props);
     const { classes, user = [] } = this.props;
     return (
       <div>

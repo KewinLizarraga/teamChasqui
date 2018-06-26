@@ -9,7 +9,6 @@ import _ from 'lodash';
 
 class ProductTable extends React.Component {
   render = () => {
-    console.log('ProductTable.jsx ->', this.props);
     const { classes, product } = this.props;
     return (
       <div>

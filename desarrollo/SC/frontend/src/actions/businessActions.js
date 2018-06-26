@@ -1,4 +1,5 @@
 import { tinkuyAxios, stripeAxios } from '../services/axios';
+import { getToken } from '../services/AuthService';
 import _ from 'lodash';
 import async from 'async';
 const CLOUDINARY_PRESET = 'kfz8wwny';
@@ -89,6 +90,9 @@ export const businessPayment = (data) => dispatch => {
     tinkuyAxios({
       method: 'post',
       url: '/stripe',
+      headers: {
+        'x-access-token': getToken()
+      },
       data: {
         stripe_token,
         user: newUser,
@@ -102,11 +106,9 @@ export const businessPayment = (data) => dispatch => {
         cb (response.data)
       }
     }) 
-    console.log(newUser, newProduct, newBusiness);
   }], (err, result) => {
     console.log(result);
   })
-  console.log(data);
 
   return {
     type: BUSINESS_PAYMENT
