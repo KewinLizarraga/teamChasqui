@@ -23,14 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
-        
+
         FirebaseApp.configure()
         self.remoteConfig = RemoteConfig.remoteConfig()
         
         //FIXME: - Delete this when submit to production
         if let config = RemoteConfigSettings(developerModeEnabled: true) {
             self.remoteConfig?.configSettings = config
-            setupRemoteConfigDefaults()
+            //setupRemoteConfigDefaults()
             fetchRemoteConfig { [unowned self] in
                 self.configureWindow()
             }
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func setupRemoteConfigDefaults() {
-        self.remoteConfig?.setDefaults(MyRemoteConfig.remoteConfig)
+        //self.remoteConfig?.setDefaults(MyRemoteConfig.remoteConfig)
     }
     
     func fetchRemoteConfig(_ completion: @escaping () -> ()) {

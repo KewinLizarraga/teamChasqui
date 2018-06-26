@@ -11,6 +11,22 @@ import MapKit
 
 class InformationCell: GenericCell<Info> {
     
+    fileprivate static let font = Font.customFont(type: Font.FontName.regular, 14)
+    
+    fileprivate static let insets = UIEdgeInsets(top: 8, left: 45, bottom: 8, right: 10)
+    
+    static var singleLineHeight: CGFloat {
+        return font.lineHeight + insets.top + insets.bottom
+    }
+    
+    static func textHeight(_ text: String, width: CGFloat) -> CGFloat {
+        let constrainedSize = CGSize(width: width - insets.left - insets.right, height: CGFloat.greatestFiniteMagnitude)
+        let attributes = [ NSAttributedStringKey.font: font ]
+        let options: NSStringDrawingOptions = [.usesFontLeading, .usesLineFragmentOrigin]
+        let bounds = (text as NSString).boundingRect(with: constrainedSize, options: options, attributes: attributes, context: nil)
+        return ceil(bounds.height) + insets.top + insets.bottom
+    }
+    
     override var item: Info! {
         didSet {
             updateUI()
@@ -43,7 +59,7 @@ class InformationCell: GenericCell<Info> {
             informationName.snp.makeConstraints { (make) in
                 make.leading.equalTo(informationImage.snp.trailing).offset(10)
                 make.trailing.equalToSuperview().offset(-10)
-                make.centerY.equalToSuperview()
+                make.top.bottom.equalToSuperview().inset(8)
             }
             
         default:
@@ -93,7 +109,7 @@ class InformationCell: GenericCell<Info> {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = NSTextAlignment.left
-        label.font = Font.customFont(type: Font.FontName.regular, 14)
+        label.font = InformationCell.font
         return label
     }()
     

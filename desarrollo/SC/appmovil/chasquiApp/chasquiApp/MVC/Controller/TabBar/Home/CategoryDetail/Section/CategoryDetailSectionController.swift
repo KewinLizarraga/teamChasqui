@@ -9,14 +9,22 @@
 import IGListKit
 import UIKit
 
-class CategoryDetailSectionController: ListSectionController {
+protocol MoveMapDelegate {
+    func moveToCoord(location: GeoLocation)
+}
+
+
+class CategoryDetailSectionController: ListSectionController, ListDisplayDelegate {
     
     private var service: Service!
+    
+    var delegate: MoveMapDelegate? = nil
     
     override init() {
         super.init()
         minimumLineSpacing = 0
         minimumInteritemSpacing = 0
+        self.displayDelegate = self
     }
     
     override func cellForItem(at index: Int) -> UICollectionViewCell {
@@ -43,11 +51,31 @@ class CategoryDetailSectionController: ListSectionController {
         let controller = self.viewController
         let detailController = ServiceDetailViewController()
         detailController.id = service!.id
-        detailController.data =  [Globals.defaultPhotoURL,service!]
+        if let imageURL = service.photos.first {
+            detailController.data.append(imageURL)
+        }
+        detailController.data.append(service!)
         controller?.navigationController?.pushViewController(detailController, animated: true)
     }
     
+    // MARK: ListDisplayDelegate
     
+    func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController) {
+        delegate?.moveToCoord(location: service.geo_location)
+        
+    }
+    
+    func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController) {
+        
+    }
+    
+    func listAdapter(_ listAdapter: ListAdapter, willDisplay sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
+        
+    }
+    
+    func listAdapter(_ listAdapter: ListAdapter, didEndDisplaying sectionController: ListSectionController, cell: UICollectionViewCell, at index: Int) {
+        
+    }
     
     
 }

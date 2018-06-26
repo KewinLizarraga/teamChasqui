@@ -22,3 +22,20 @@ class MapButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class RoundedButton: UIButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layer.masksToBounds = true
+        backgroundColor = .clear
+        titleLabel?.font =  Font.customFont(type: Font.FontName.regular, 14)
+        translatesAutoresizingMaskIntoConstraints = false
+        setTitleColor(.white, for: .normal)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}

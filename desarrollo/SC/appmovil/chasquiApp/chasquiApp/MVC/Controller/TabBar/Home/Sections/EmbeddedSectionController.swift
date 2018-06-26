@@ -40,7 +40,10 @@ final class EmbeddedSectionController: ListSectionController {
         
         let controller = self.viewController
         let detailController = ServiceDetailViewController()
-        detailController.data =  [Globals.defaultPhotoURL,service!]
+        if let imageURL = service?.photos.first {
+            detailController.data.append(imageURL)
+        }
+        detailController.data.append(service!)
         detailController.id = service!.id
         controller?.navigationController?.pushViewController(detailController, animated: true)
     }

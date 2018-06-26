@@ -9,6 +9,29 @@
 import UIKit
 import IGListKit
 
+class AllCategories: ListDiffable {
+    
+    var name: String
+    var categories: [Category]
+    
+    init() {
+        self.name = "All categories"
+        self.categories = Category.categories()
+    }
+    
+    
+    func diffIdentifier() -> NSObjectProtocol {
+        return name as NSObjectProtocol
+    }
+    
+    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+        guard self !== object else { return true }
+        guard let object = object as? AllCategories else { return false }
+        return name == object.name
+    }
+}
+
+
 class Category: ListDiffable {
     
     var name: String
@@ -35,6 +58,7 @@ class Category: ListDiffable {
         return name == object.name
     }
     
+    
     //MARK: - Static categories
     
     static func categories() -> [Category] {
@@ -47,29 +71,4 @@ class Category: ListDiffable {
     
 }
 
-class AllCategories: ListDiffable {
-    
-    var name: String
-    var categories: [Category]
-    
-    init() {
-        self.name = "All categories available"
-        self.categories = Category.categories()
-    }
-    
-    
-    func diffIdentifier() -> NSObjectProtocol {
-        return name as NSObjectProtocol
-    }
-    
-    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        guard self !== object else { return true }
-        guard let object = object as? AllCategories else { return false }
-        return name == object.name
-    }
-    
-    
-    
-    
-}
 

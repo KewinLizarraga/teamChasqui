@@ -138,13 +138,22 @@ class SeeInMapController: UIViewController, ListAdapterDataSource {
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        return CategoryDetailSectionController()
+        let sectionController = CategoryDetailSectionController()
+        sectionController.delegate = self
+        return sectionController
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
         return nil
     }
+
+}
     
-    
-    
+extension SeeInMapController: MoveMapDelegate {
+    func moveToCoord(location: GeoLocation) {
+        let coord = CLLocationCoordinate2DMake(location.lat,location.lng)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(coord, 500, 500)
+        self.mapView.setRegion(coordinateRegion, animated: true)
+        
+    }
 }

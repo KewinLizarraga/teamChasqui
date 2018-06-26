@@ -14,6 +14,13 @@
 		1C18200A20C6FD0600BA48C5 /* NearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18200920C6FD0600BA48C5 /* NearCell.swift */; };
 		1C18200C20C6FD0F00BA48C5 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18200B20C6FD0F00BA48C5 /* RecentCell.swift */; };
 		1C18200E20C6FD2300BA48C5 /* RecentsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18200D20C6FD2300BA48C5 /* RecentsHeaderView.swift */; };
+		1C18E6BB20E29BE60079C8D9 /* ServiceFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E6BA20E29BE60079C8D9 /* ServiceFooterView.swift */; };
+		1C18E6BF20E2C0490079C8D9 /* MakeACommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E6BE20E2C0490079C8D9 /* MakeACommentController.swift */; };
+		1C18E6C220E2D10C0079C8D9 /* MiCuentaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E6C120E2D10C0079C8D9 /* MiCuentaViewController.swift */; };
+		1C18E6C420E2D1190079C8D9 /* MiCuentaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E6C320E2D1190079C8D9 /* MiCuentaDetailViewController.swift */; };
+		1C18E6C620E2D2670079C8D9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E6C520E2D2670079C8D9 /* User.swift */; };
+		1C18E6C920E2E3DB0079C8D9 /* CommentsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E6C820E2E3DA0079C8D9 /* CommentsSectionController.swift */; };
+		1C18E6CC20E2EC840079C8D9 /* AddCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E6CB20E2EC840079C8D9 /* AddCommentController.swift */; };
 		1C2A65B920A1D9E2002C4C4C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2A65B820A1D9E2002C4C4C /* CustomTabBarController.swift */; };
 		1C2A65BF20A217F1002C4C4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2A65BE20A217F1002C4C4C /* Extensions.swift */; };
 		1C2A65C220A21944002C4C4C /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2A65C120A21944002C4C4C /* ApiService.swift */; };
@@ -47,6 +54,10 @@
 		1C7A073220D03FF20015D085 /* SeeInMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A073120D03FF20015D085 /* SeeInMapController.swift */; };
 		1C7A073420D061920015D085 /* MoreInformationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A073320D061920015D085 /* MoreInformationService.swift */; };
 		1C7A073620D080CB0015D085 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A073520D080CB0015D085 /* SignInViewController.swift */; };
+		1C7AA07920E12BA50059C509 /* CommentsSectionController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA07820E12BA50059C509 /* CommentsSectionController copy.swift */; };
+		1C7AA07B20E14A120059C509 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA07A20E14A120059C509 /* Comment.swift */; };
+		1C7AA07D20E152220059C509 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA07C20E152220059C509 /* CommentCell.swift */; };
+		1C7AA07F20E175460059C509 /* CommentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA07E20E175460059C509 /* CommentSection.swift */; };
 		1C8D000D20C9DBD60084A4BF /* TitleServiceSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D000C20C9DBD60084A4BF /* TitleServiceSectionController.swift */; };
 		1CC5DCC7208FE65F00FF16B5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5DCC6208FE65F00FF16B5 /* HomeController.swift */; };
 		1CC5DCCA208FEFFE00FF16B5 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */; };
@@ -74,6 +85,13 @@
 		1C18200920C6FD0600BA48C5 /* NearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearCell.swift; sourceTree = "<group>"; };
 		1C18200B20C6FD0F00BA48C5 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		1C18200D20C6FD2300BA48C5 /* RecentsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsHeaderView.swift; sourceTree = "<group>"; };
+		1C18E6BA20E29BE60079C8D9 /* ServiceFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFooterView.swift; sourceTree = "<group>"; };
+		1C18E6BE20E2C0490079C8D9 /* MakeACommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeACommentController.swift; sourceTree = "<group>"; };
+		1C18E6C120E2D10C0079C8D9 /* MiCuentaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiCuentaViewController.swift; sourceTree = "<group>"; };
+		1C18E6C320E2D1190079C8D9 /* MiCuentaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiCuentaDetailViewController.swift; sourceTree = "<group>"; };
+		1C18E6C520E2D2670079C8D9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1C18E6C820E2E3DA0079C8D9 /* CommentsSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsSectionController.swift; sourceTree = "<group>"; };
+		1C18E6CB20E2EC840079C8D9 /* AddCommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentController.swift; sourceTree = "<group>"; };
 		1C2A65B820A1D9E2002C4C4C /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		1C2A65BE20A217F1002C4C4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1C2A65C120A21944002C4C4C /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -109,6 +127,10 @@
 		1C7A073120D03FF20015D085 /* SeeInMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeInMapController.swift; sourceTree = "<group>"; };
 		1C7A073320D061920015D085 /* MoreInformationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInformationService.swift; sourceTree = "<group>"; };
 		1C7A073520D080CB0015D085 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		1C7AA07820E12BA50059C509 /* CommentsSectionController copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentsSectionController copy.swift"; sourceTree = "<group>"; };
+		1C7AA07A20E14A120059C509 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		1C7AA07C20E152220059C509 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		1C7AA07E20E175460059C509 /* CommentSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSection.swift; sourceTree = "<group>"; };
 		1C8D000C20C9DBD60084A4BF /* TitleServiceSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleServiceSectionController.swift; sourceTree = "<group>"; };
 		1CC5DCC6208FE65F00FF16B5 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
@@ -179,6 +201,39 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		1C18E6BD20E2C01D0079C8D9 /* MakeAComment */ = {
+			isa = PBXGroup;
+			children = (
+				1C18E6BE20E2C0490079C8D9 /* MakeACommentController.swift */,
+			);
+			path = MakeAComment;
+			sourceTree = "<group>";
+		};
+		1C18E6C020E2D0FB0079C8D9 /* logueado */ = {
+			isa = PBXGroup;
+			children = (
+				1C18E6C120E2D10C0079C8D9 /* MiCuentaViewController.swift */,
+				1C18E6C320E2D1190079C8D9 /* MiCuentaDetailViewController.swift */,
+			);
+			path = logueado;
+			sourceTree = "<group>";
+		};
+		1C18E6C720E2E1910079C8D9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				1C18E6CB20E2EC840079C8D9 /* AddCommentController.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		1C18E6CA20E2E8E30079C8D9 /* New copyyyy */ = {
+			isa = PBXGroup;
+			children = (
+				1C7AA07820E12BA50059C509 /* CommentsSectionController copy.swift */,
+			);
+			path = "New copyyyy";
+			sourceTree = "<group>";
+		};
 		1C2A65BA20A1DA31002C4C4C /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +282,8 @@
 		1C3F675920C725B200304568 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				1C18E6C720E2E1910079C8D9 /* New Group */,
+				1C18E6BD20E2C01D0079C8D9 /* MakeAComment */,
 				1C3F675A20C725D700304568 /* ServiceDetailViewController.swift */,
 				1CDFAB3420CAE33B00665599 /* Components */,
 			);
@@ -236,6 +293,7 @@
 		1C3F675C20C727FF00304568 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				1C18E6C020E2D0FB0079C8D9 /* logueado */,
 				1C3F675D20C7281200304568 /* Login.storyboard */,
 				1C3F676120C728F900304568 /* icon.png */,
 				1C3F676320C72B4300304568 /* loginPhoto.jpg */,
@@ -304,6 +362,8 @@
 			children = (
 				1C7A071F20CF287E0015D085 /* AdditionalInformation.swift */,
 				1C7A073320D061920015D085 /* MoreInformationService.swift */,
+				1C7AA07A20E14A120059C509 /* Comment.swift */,
+				1C7AA07E20E175460059C509 /* CommentSection.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -389,6 +449,7 @@
 				1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */,
 				1CD00F0A20A33E6300B893A5 /* Fonts.swift */,
 				1C41588F20B47FAC00FFB9D4 /* Colors.swift */,
+				1C18E6C520E2D2670079C8D9 /* User.swift */,
 			);
 			path = Globals;
 			sourceTree = "<group>";
@@ -401,6 +462,7 @@
 				1C41588D20B46BBE00FFB9D4 /* ServiceHeaderView.swift */,
 				1CD00F1420A4FEF900B893A5 /* ServiceCell.swift */,
 				1C661AC420B4C07700D2F985 /* CustomSearchBar.swift */,
+				1C18E6BA20E29BE60079C8D9 /* ServiceFooterView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -440,6 +502,8 @@
 				1CDFAB3520CAE34F00665599 /* PhotoSectionController.swift */,
 				1C8D000C20C9DBD60084A4BF /* TitleServiceSectionController.swift */,
 				1CDFAB3C20CB1DEA00665599 /* AdditionalInformationSectionController.swift */,
+				1C18E6C820E2E3DA0079C8D9 /* CommentsSectionController.swift */,
+				1C18E6CA20E2E8E30079C8D9 /* New copyyyy */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -450,6 +514,7 @@
 				1CDFAB3820CAF7D800665599 /* ImageCell.swift */,
 				1CDFAB3A20CB110B00665599 /* TitleOfServiceCell.swift */,
 				1CDFAB3E20CB1E3C00665599 /* InformationCell.swift */,
+				1C7AA07C20E152220059C509 /* CommentCell.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -627,22 +692,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C7AA07F20E175460059C509 /* CommentSection.swift in Sources */,
 				1C3F676720C73CF600304568 /* MapViewController.swift in Sources */,
+				1C18E6C920E2E3DB0079C8D9 /* CommentsSectionController.swift in Sources */,
 				1C8D000D20C9DBD60084A4BF /* TitleServiceSectionController.swift in Sources */,
 				1C661ACB20B4CB6500D2F985 /* EmbeddedSectionController.swift in Sources */,
 				1CC5DCCA208FEFFE00FF16B5 /* Globals.swift in Sources */,
 				1C7A072A20CFEE7E0015D085 /* CategoryDetailSectionController.swift in Sources */,
+				1C7AA07D20E152220059C509 /* CommentCell.swift in Sources */,
 				1C2A65BF20A217F1002C4C4C /* Extensions.swift in Sources */,
 				1C18200120C6F93100BA48C5 /* Place.swift in Sources */,
 				1C2A65B920A1D9E2002C4C4C /* CustomTabBarController.swift in Sources */,
 				1CD00F1020A395DD00B893A5 /* CategorySectionController.swift in Sources */,
+				1C7AA07920E12BA50059C509 /* CommentsSectionController copy.swift in Sources */,
 				1C18200A20C6FD0600BA48C5 /* NearCell.swift in Sources */,
+				1C18E6C420E2D1190079C8D9 /* MiCuentaDetailViewController.swift in Sources */,
 				1C7A072020CF287E0015D085 /* AdditionalInformation.swift in Sources */,
 				1C2A65C420A23D9C002C4C4C /* Util.swift in Sources */,
 				1CF3D567209CCDD700A2F896 /* GenericCell.swift in Sources */,
 				1C3F676D20C7406100304568 /* SignUpViewController.swift in Sources */,
 				1C2A65C620A24622002C4C4C /* Category.swift in Sources */,
 				1C58966C208E555C001A5D5D /* AppDelegate.swift in Sources */,
+				1C18E6C620E2D2670079C8D9 /* User.swift in Sources */,
 				1CDFAB3620CAE34F00665599 /* PhotoSectionController.swift in Sources */,
 				1C7A072620CFE7BB0015D085 /* CategoryDetailController.swift in Sources */,
 				1C7A072D20CFEF410015D085 /* CategoryDetailCell.swift in Sources */,
@@ -650,20 +721,25 @@
 				1C41589220B4A17A00FFB9D4 /* FeaturedServices.swift in Sources */,
 				1C18200C20C6FD0F00BA48C5 /* RecentCell.swift in Sources */,
 				1C661AC920B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift in Sources */,
+				1C7AA07B20E14A120059C509 /* Comment.swift in Sources */,
 				1CD00F0D20A34DBC00B893A5 /* RemoteConfig.swift in Sources */,
 				1CDFAB3920CAF7D800665599 /* ImageCell.swift in Sources */,
 				1C7A073420D061920015D085 /* MoreInformationService.swift in Sources */,
 				1CD00F1720A4FF1D00B893A5 /* Service.swift in Sources */,
+				1C18E6BF20E2C0490079C8D9 /* MakeACommentController.swift in Sources */,
 				1C18200720C6FB8600BA48C5 /* RecentsSectionController.swift in Sources */,
 				1C3F675B20C725D700304568 /* ServiceDetailViewController.swift in Sources */,
 				1C7A072F20D0354D0015D085 /* MapButton.swift in Sources */,
 				1C181FFF20C6F6BC00BA48C5 /* SearchViewController.swift in Sources */,
 				1CDFAB3D20CB1DEA00665599 /* AdditionalInformationSectionController.swift in Sources */,
 				1C2A65C220A21944002C4C4C /* ApiService.swift in Sources */,
+				1C18E6C220E2D10C0079C8D9 /* MiCuentaViewController.swift in Sources */,
 				1C7A072320CF46CF0015D085 /* LoginViewController.swift in Sources */,
 				1C41589020B47FAC00FFB9D4 /* Colors.swift in Sources */,
 				1C7A073620D080CB0015D085 /* SignInViewController.swift in Sources */,
 				1C18200520C6FB7000BA48C5 /* NearSectionController.swift in Sources */,
+				1C18E6BB20E29BE60079C8D9 /* ServiceFooterView.swift in Sources */,
+				1C18E6CC20E2EC840079C8D9 /* AddCommentController.swift in Sources */,
 				1C661AC520B4C07700D2F985 /* CustomSearchBar.swift in Sources */,
 				1CD00F0B20A33E6300B893A5 /* Fonts.swift in Sources */,
 				1CD00F1520A4FEF900B893A5 /* ServiceCell.swift in Sources */,

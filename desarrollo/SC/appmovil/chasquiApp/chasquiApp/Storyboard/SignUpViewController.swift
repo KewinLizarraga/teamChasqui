@@ -47,10 +47,14 @@ class SignUpViewController: UIViewController {
         ]
         ApiService.sharedInstance.signup(parameters: parameters) { (err, statusCode, json) in
             if let error = err {
-                print(statusCode)
                 self.showAlert(title: "Error", message: error.localizedDescription)
             }else {
-                self.showAlert(title: "Exitoso", message: json!.description)
+                if statusCode == 200 {
+                    self.showAlert(title: "Exitoso", message: json!["message"].stringValue)
+                }else {
+                    self.showAlert(title: "Ocurrio algo", message: json!["message"].stringValue)
+                }
+                
             }
         }
     }

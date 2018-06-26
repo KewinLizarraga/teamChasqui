@@ -12,13 +12,15 @@ import UIKit
 final class AdditionalInformationSectionController: ListSectionController, ListSupplementaryViewSource {
     
     private var additionalInfo: AdditionalInformation!
+    
+    var expanded = false
  
     override init() {
         super.init()
         supplementaryViewSource = self
         minimumLineSpacing = 0
         minimumInteritemSpacing = 0
-        inset = UIEdgeInsetsMake(0, 10, 0, 10)
+        inset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     override func numberOfItems() -> Int {
@@ -26,9 +28,16 @@ final class AdditionalInformationSectionController: ListSectionController, ListS
     }
     
     override func sizeForItem(at index: Int) -> CGSize {
+        
         let width = collectionContext!.containerSize.width
         if additionalInfo.information[index].type == .geo_location {
             return  CGSize(width: width, height: 110)
+        }
+        if additionalInfo.information[index].type == .address {
+            if let address = additionalInfo.information[index].name as? Address {
+                let height = expanded ? InformationCell.textHeight(address.togetherInfo , width: width) : InformationCell.singleLineHeight
+                return CGSize(width: width, height: height)
+            }
         }
         return CGSize(width: width, height: 50)
     }
@@ -62,8 +71,26 @@ final class AdditionalInformationSectionController: ListSectionController, ListS
                         }
                     }
                 }
-            default:
-                print("do nothing")
+            case .geo_location:
+                if let vc = self.viewController as? ServiceDetailViewController {
+                    if let service = vc.data[1] as? Service {
+                        vc.seeInMapController.data = [service]
+                        vc.navigationController?.pushViewController(vc.seeInMapController, animated: true)
+                    }
+                }
+            case .address:
+                print("toco address")
+                    expanded = !expanded
+                    UIView.animate(withDuration: 0.5,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.4,
+                                   initialSpringVelocity: 0.6,
+                                   options: [],
+                                   animations: {
+                                    self.collectionContext?.invalidateLayout(for: self)
+                    })
+                
+            
             
         }
     }

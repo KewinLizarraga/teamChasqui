@@ -42,7 +42,8 @@ class Service: ListDiffable, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
-        photos = try container.decode([String].self, forKey: .photos)
+        let phot = try container.decode([String].self, forKey: .photos)
+        photos = phot.count == 0 ? [Globals.defaultPhotoURL] : phot
         stars = try container.decode(Double.self, forKey: .stars)
         type = try container.decode(String.self, forKey: .type)
         review_count = try container.decode(Int.self, forKey: .review_count)
@@ -73,7 +74,7 @@ struct GeoLocation: Decodable {
     
     //MARK: - Decodable methods
     
-    enum CodingKeys: String,CodingKey {
+    private enum CodingKeys: String,CodingKey {
         case lat,lng
     }
     
@@ -94,7 +95,7 @@ struct Price: Decodable {
     
     //MARK: - Decodable methods
     
-    enum CodingKeys: String,CodingKey {
+    private enum CodingKeys: String,CodingKey {
         case min,max,average
     }
     

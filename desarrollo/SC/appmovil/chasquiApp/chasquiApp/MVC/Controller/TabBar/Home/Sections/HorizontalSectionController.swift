@@ -16,7 +16,8 @@ final class HorizontalSectionController: ListSectionController, ListAdapterDataS
     
     lazy var adapter: ListAdapter = {
         let adapter = ListAdapter(updater: ListAdapterUpdater(),
-                                  viewController: self.viewController)
+                                  viewController: self.viewController,
+                                  workingRangeSize: 1)
         adapter.dataSource = self
         return adapter
     }()
@@ -64,7 +65,7 @@ final class HorizontalSectionController: ListSectionController, ListAdapterDataS
         if items is AllCategories {
             return (items as! AllCategories).categories
         }
-        return (items as! FeaturedServices).services
+        return Array((items as! FeaturedServices).services.prefix(10))
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {

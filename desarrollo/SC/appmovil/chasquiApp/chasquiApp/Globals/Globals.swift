@@ -10,16 +10,21 @@ import UIKit
 
 class Globals {
     
-    static var isInProduction = false
-    static var adoaksdok = false
+    static var isInProduction: Bool {
+        return (UIApplication.shared.delegate as! AppDelegate).remoteConfig?.configValue(forKey: MyRemoteConfig.is_in_production).boolValue ?? false
+    }
     
     static var baseURL: String {
         let enviroment = isInProduction ? MyRemoteConfig.rest_prod : MyRemoteConfig.rest_dev
-        return (UIApplication.shared.delegate as! AppDelegate).remoteConfig?.configValue(forKey: enviroment).stringValue ?? MyRemoteConfig.remoteConfig[enviroment] as! String
+        return (UIApplication.shared.delegate as! AppDelegate).remoteConfig?.configValue(forKey: enviroment).stringValue ?? ""
     }
     
-    static let defaultPhotoURL = "http://thednetworks.com/wp-content/uploads/2012/01/picture_not_available_400-300.png"
-    static let heightFromTopToNavigationBar = UIApplication.shared.statusBarFrame.height + 44
+    static var defaultPhotoURL: String {
+        return (UIApplication.shared.delegate as! AppDelegate).remoteConfig?.configValue(forKey: MyRemoteConfig.default_photo).stringValue ?? ""
+    }
+    static let heightFromTopToNavigationBarBottom = UIApplication.shared.statusBarFrame.height + 44
+    
+    static var usuario = userModel()
     
     //Auth
     
@@ -32,5 +37,14 @@ class Globals {
     //Business
     
     static let business = baseURL + "businesses"
+    
+    //Comments
+    
+    static let comments = business
+    
+    //Add comments
+    
+    static let addComment = baseURL + "reviews"
+    
     
 }

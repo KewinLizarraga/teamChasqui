@@ -36,7 +36,34 @@ class SignInViewController: UIViewController {
             if let error = err {
                 self.showAlert(title: "Error", message: error.localizedDescription)
             }else {
-                self.showAlert(title: "Exitoso", message: json!.description)
+                
+                if statusCode == 200 {
+                    self.showAlert(title: "Exitoso", message: "Correcto")
+                    let user = json!["user"]
+                    Globals.usuario.setnombre(value: user["first_name"].stringValue)
+                    Globals.usuario.setapellido(value: user["last_name"].stringValue)
+                    Globals.usuario.setcorreo(value: user["email"].stringValue)
+                    Globals.usuario.settoken(value: json!["token"].stringValue)
+                    Globals.usuario.saveSession()
+                    
+                    //changing view controller
+                    
+                    if var array = self.tabBarController?.viewControllers {
+                        array.remove(at: 2)
+                        
+                        let vc4 = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "inicio")
+                        vc4.view.backgroundColor = UIColor.white
+                        vc4.tabBarItem.image = #imageLiteral(resourceName: "round-account-button-with-user-inside (1)").withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+                        vc4.tabBarItem.selectedImage = #imageLiteral(resourceName: "round-account-button-with-user-inside").withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+                        vc4.tabBarItem.title = "Mi cuenta"
+                        
+                        array.append(vc4)
+                        self.tabBarController?.viewControllers = array
+                    }
+                }else {
+                    self.showAlert(title: "Ocurrio algo", message: json!.description)
+                }
+                
             }
         }
     }
@@ -46,14 +73,7 @@ class SignInViewController: UIViewController {
         let action = UIAlertAction(title: "OK", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
             guard let text = textField.text, text != "" else {
-                
-                if var array = self.tabBarController?.viewControllers {
-                    array.remove(at: 2)
-                    array.append(UIViewController())
-                    self.tabBarController?.viewControllers = array
-                }
-                return
-                
+                return 
             }
             ApiService.sharedInstance.forgot(email: text, { (err, statusCode, json) in
                 if let error = err {

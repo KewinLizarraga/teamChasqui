@@ -11,20 +11,42 @@ import IGListKit
 
 class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
     
-    var data: [Any]!
+    var data: [Any]! = []
     
     var id: String! {
         didSet {
-            loadMoreData()
+            loadMoreData({
+                self.loadComments()
+            })
         }
     }
     
-    private func loadMoreData() {
+    lazy var seeInMapController = SeeInMapController()
+    
+    fileprivate func loadComments() {
+        //Comments
+        
+        ApiService.sharedInstance.getComments(id: id, { (err, statusCode, json) in
+            if let error = err {
+                print(error)
+            }else {
+                if let comments = try? JSONDecoder().decode([Comment].self, from: json!.rawData()) {
+                    let commentSection = CommentSection(name: "Opiniones", comments: comments)
+                    self.data.append(commentSection)
+                    let additInfo2 = AdditionalInformation(name: "Preguntas", information: [Info]())
+                    self.data.append(additInfo2)
+                }
+            }
+            self.adapter.performUpdates(animated: true, completion: nil)
+        })
+    }
+    
+    private func loadMoreData(_ completion: @escaping () -> () ) {
+        
         ApiService.sharedInstance.getBusinessById(id: id) { (err, statusCode, json) in
             if let error = err {
                 print(error)
             }else {
-                print(json!)
                 if let newService = try? JSONDecoder().decode(MoreInformationService.self, from: json!.rawData()) {
                     var info = [Info]()
                     info.append(Info(name: newService.web, type: Info.TypeOfInfo.web))
@@ -32,15 +54,11 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
                     info.append(Info(name: newService.geo_location, type: Info.TypeOfInfo.geo_location))
                     info.append(Info(name: newService.address, type: Info.TypeOfInfo.address))
                     let additInfo = AdditionalInformation(name: "Información adicional", information: info)
-                    let additInfo1 = AdditionalInformation(name: "Opiniones", information: [Info]())
-                    let additInfo2 = AdditionalInformation(name: "Preguntas", information: [Info]())
                     self.data.append(additInfo)
-                    self.data.append(additInfo1)
-                    self.data.append(additInfo2)
                 }else {
                     print("error")
                 }
-                self.adapter.performUpdates(animated: true, completion: nil)
+                completion()
             }
         }
     }
@@ -65,6 +83,7 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     //FIXME: - ok
@@ -81,7 +100,6 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
         _ = adapter
         setupViews()
         configureNavigationBar()
-        
     }
     
     //MARK: - configureNavigationBar
@@ -100,7 +118,7 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.trailing.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(-Globals.heightFromTopToNavigationBar)
+            make.top.equalToSuperview().offset(-Globals.heightFromTopToNavigationBarBottom)
             make.bottom.equalTo(safeArea)
         }
         
@@ -117,7 +135,11 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
             return TitleServiceSectionController()
         }else if object is AdditionalInformation {
             return AdditionalInformationSectionController()
-        }else {
+        }
+        else if object is CommentSection {
+            return CommentsSectionController()
+        }
+        else {
             return PhotoSectionController()
         }
     }

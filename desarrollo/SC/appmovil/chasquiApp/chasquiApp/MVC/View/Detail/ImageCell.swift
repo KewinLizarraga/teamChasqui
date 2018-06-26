@@ -19,17 +19,7 @@ class ImageCell: GenericCell<String> {
     
     override func updateUI() {
         let url = URL(string: item)
-        serviceImage.sd_setImage(with: url) { (image, err, _, url) in
-            if let img = image {
-                print("image is",img)
-            }
-            if let error = err {
-                print("error is",error)
-            }
-            if let urls = url {
-                print("url is",urls)
-            }
-        }
+        serviceImage.sd_setImage(with: url)
     }
     
     override func layoutSubviews() {

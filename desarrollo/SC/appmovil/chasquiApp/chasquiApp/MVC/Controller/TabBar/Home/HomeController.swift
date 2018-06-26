@@ -95,7 +95,6 @@ class HomeController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-        self.tabBarController?.hidesBottomBarWhenPushed = true
     }
     
     //MARK: - Setup Views
@@ -113,7 +112,7 @@ class HomeController: UIViewController {
         searchButton.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview().inset(15)
             make.top.equalTo(discoverLabel.snp.bottom).offset(5)
-            make.height.equalTo(30)
+            make.height.equalTo(35)
         }
     
         self.view.addSubview(sectionCollectionView)

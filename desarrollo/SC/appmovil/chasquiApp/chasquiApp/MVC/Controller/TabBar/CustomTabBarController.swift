@@ -41,8 +41,13 @@ class CustomTabBarController: UITabBarController {
         vc2.tabBarItem.selectedImage = #imageLiteral(resourceName: "facebook-placeholder-for-locate-places-on-maps (1)").withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         vc2.tabBarItem.title = "Mi ubicacion"
         
-
-        let vc4 = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
+        let isSession = Globals.usuario.getisSession()
+        var vc4 = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
+        if isSession == true {
+            vc4 = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "inicio")
+        }
+        
+        
         vc4.view.backgroundColor = UIColor.white
         vc4.tabBarItem.image = #imageLiteral(resourceName: "round-account-button-with-user-inside (1)").withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         vc4.tabBarItem.selectedImage = #imageLiteral(resourceName: "round-account-button-with-user-inside").withRenderingMode(UIImageRenderingMode.alwaysOriginal)
