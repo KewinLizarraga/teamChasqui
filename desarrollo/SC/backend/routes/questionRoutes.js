@@ -6,6 +6,6 @@ const { auth } = require('../middlewares/auth');
 
 Router.get('/', questionController.getAll);
 Router.post('/', auth, questionController.create);
-Router.post('/:id/replies', questionController.getReplies);
+Router.get('/:id/replies', questionController.getReplies);
 
 module.exports = Router;
