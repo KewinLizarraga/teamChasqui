@@ -85,7 +85,7 @@ class StepperSection extends React.Component {
       completed,
       businessType,
       moneyTypes,
-      currentMoneyTypes
+      currentMoneyTypes,
     } = business;
     switch (stepIndex) {
       case 0:
@@ -113,7 +113,7 @@ class StepperSection extends React.Component {
             currentMoneyTypes={currentMoneyTypes}
           />
         )
-        case 3:
+      case 3:
         return (
           <PaymentConfirmation />
         )
@@ -214,10 +214,10 @@ class StepperSection extends React.Component {
                   {activeStep === steps.length - 1 ? (
                     <Payments />
                   ) : (
-                    <Button disabled={!this.isDisabled()} variant="contained" color="primary" onClick={this.handleNext}>
-                      Siguiente
+                      <Button disabled={!this.isDisabled()} variant="contained" color="primary" onClick={this.handleNext}>
+                        Siguiente
                     </Button>
-                  )}
+                    )}
                 </div>
               </GridItem>
             )}

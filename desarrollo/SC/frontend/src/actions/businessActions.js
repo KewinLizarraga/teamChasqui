@@ -25,96 +25,122 @@ export const SET_DETAILED_INFO = 'SET_DETAILED_INFO';
 export const SET_CURRENT_SERVICES = 'SET_CURRENT_SERVICES';
 export const SET_CURRENT_MONEY_TYPES = 'SET_CURRENT_MONEY_TYPES';
 export const BUSINESS_PAYMENT = 'BUSINESS_PAYMENT';
+export const BUSINESS_PAYMENT_SUCCESS = 'BUSINESS_PAYMENT_SUCCESS';
+export const CLOSE_DIALOG = 'CLOSE_DIALOG';
+export const OPEN_DIALOG = 'OPEN_DIALOG';
 
-const getIds = (data, idLabel) => {
-  if (_.isObject(data)) {
-    return data[idLabel]
+
+
+export const openDialog = (data) => {
+  return {
+    type: OPEN_DIALOG,
+    payload: data
   }
 }
-
+export const closeDialog = () => {
+  return {
+    type: CLOSE_DIALOG
+  }
+}
+export const businessPaymentSuccess = () => {
+  return {
+    type: BUSINESS_PAYMENT_SUCCESS
+  }
+}
 export const businessPayment = (data) => dispatch => {
   dispatch(fetchBegin());
-  async.waterfall([(cb) => {
-    const { photos } = data.business;
-    const formData = new FormData();
-    formData.append('file', photos[0]);
-    formData.append('upload_preset', CLOUDINARY_PRESET);
-
-    stripeAxios({
-      method: 'post',
-      url: '/upload',
-      data: formData
-    }).then(response => {
-      cb(null, response.data);
-    }).catch(err => {
-      cb(err);
-    })
-  }, (image, cb) => {
-    const { secure_url } = image;
-    const { user, product, business, stripe_token } = data;
-    const { role, ...restUser } = user;
-    const { name, ...restProduct } = product;
-    const { country, department, province, district, ...restBusiness } = business;
-    const specificData = business[`${business.type}_detail`]; 
-    const newUser = {
-      ...restUser,
-      role_id: getIds(role, 'role_id')
-    }
-    const newProduct = {
-      ...restProduct
-    }
-    
-    let newSpecificData = {}
-    switch (business.type) {
-      case 'hotel': {
-        const { services, ...restSpecificData } = specificData;
-         newSpecificData = {
-           hotel_detail: {
-             ...restSpecificData,
-             services: services.map(service => service.id)
-           }
-         }
-        break;
-      }
-    
-      default:
-        break;
-    }
-    const newBusiness = {
-      ...restBusiness,
-      district_id: district.district_id,
-      money_types: business.money_types.map(type => type.id),
-      photos: [secure_url],
-      ...newSpecificData
-    }
-    tinkuyAxios({
-      method: 'post',
-      url: '/stripe',
-      headers: {
-        'x-access-token': getToken()
-      },
-      data: {
-        stripe_token,
-        user: newUser,
-        product: newProduct,
-        business: newBusiness
-      }
-    }).then(response => {
-      if (response.statusText === 'OK') {
-        cb(null, response.data);
+  return new Promise((resolve, reject) => {
+    async.waterfall([(cb) => {
+      const { photos } = data.business;
+      if (!_.isEmpty(photos[0])) {
+        const formData = new FormData();
+        formData.append('file', photos[0]);
+        formData.append('upload_preset', CLOUDINARY_PRESET);
+  
+        stripeAxios({
+          method: 'post',
+          url: '/upload',
+          data: formData
+        }).then(response => {
+          cb(null, response.data);
+        }).catch(err => {
+          cb(err);
+        })
       } else {
-        cb (response.data)
+        cb(null, {
+          secure_url: ''
+        });
       }
-    }) 
-  }], (err, result) => {
-    if (err) dispatch(fetchFailed(err));
-    console.log(result);
-    window.location.replace('/');
-  })
+    }, (image, cb) => {
+      const { secure_url } = image;
+      const { user, product, business, stripe_token } = data;
+      const { role, ...restUser } = user;
+      const { name, ...restProduct } = product;
+      const { country, department, province, district, ...restBusiness } = business;
+      const specificData = business[`${business.type}_detail`];
+      const newUser = {
+        ...restUser,
+        role_id: getIds(role, 'role_id')
+      }
+      const newProduct = {
+        ...restProduct
+      }
 
-  return {
-    type: BUSINESS_PAYMENT
-  }
+      let newSpecificData = {}
+      switch (business.type) {
+        case 'hotel': {
+          const { services, ...restSpecificData } = specificData;
+          newSpecificData = {
+            hotel_detail: {
+              ...restSpecificData,
+              services: services.map(service => service.id)
+            }
+          }
+          break;
+        }
+
+        default:
+          break;
+      }
+      const newBusiness = {
+        ...restBusiness,
+        district_id: district.district_id,
+        money_types: business.money_types.map(type => type.id),
+        photos: secure_url === '' ? [] : [secure_url],
+        ...newSpecificData
+      }
+      tinkuyAxios({
+        method: 'post',
+        url: '/stripe',
+        headers: {
+          'x-access-token': getToken()
+        },
+        data: {
+          stripe_token,
+          user: newUser,
+          product: newProduct,
+          business: newBusiness
+        }
+      }).then(response => {
+        if (response.statusText === 'OK') {
+          cb(null, response.data);
+        } else {
+          cb(response.data)
+        }
+      })
+    }], (err, result) => {
+      if (err) {
+        dispatch(fetchFailed(err));
+        reject(err);
+      }
+      console.log('Rsultados', result);
+      dispatch(businessPaymentSuccess());
+      resolve({
+        success: true,
+        result
+      });
+    });
+  }).then(resp => resp).catch(error => error)
 }
 export const setCurrentMoneyTypes = moneyTypes => {
   return {
@@ -405,4 +431,9 @@ const dataToSelect = (array) => {
     }
   });
   return options;
+}
+const getIds = (data, idLabel) => {
+  if (_.isObject(data)) {
+    return data[idLabel]
+  }
 }

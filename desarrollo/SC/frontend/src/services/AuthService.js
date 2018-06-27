@@ -19,11 +19,13 @@ const isTokenExpired = (token) =>  {
 }
 
 const setToken = (idToken) =>  {
-  localStorage.setItem('token', idToken)
+  localStorage.setItem('token', idToken);
+  const userInfo = getProfile(idToken);
+  localStorage.setItem('userInfo', userInfo);
 }
 
 const getToken = () =>  {
-  return localStorage.getItem('token')
+  return localStorage.getItem('token') || ''
 }
 
 const logout = () =>  {
@@ -31,7 +33,12 @@ const logout = () =>  {
 }
 
 const getProfile = () =>  {
-  return decode(getToken());
+  try {
+    const profile = decode(getToken());
+    return profile;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export {

@@ -4,7 +4,7 @@ import React from 'react';
 import { Link as Linker } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {loggedIn} from '../../services/AuthService';
+import {loggedIn, getProfile} from '../../services/AuthService';
 
 // Materias-ui components and functions used by this component.
 import { withStyles } from '@material-ui/core/styles';
@@ -65,7 +65,7 @@ const HeaderLinks = ({ ...props }) => {
     }, {
       type: 'dropdownButton',
       id: 'profile',
-      name: 'Perfil',
+      name: loggedIn() ? getProfile().full_name : '',
       icon: 'face',
       options: [{
         id: 'profile',

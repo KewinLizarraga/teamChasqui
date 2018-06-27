@@ -5,6 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { getProfile } from '../../../../../services/AuthService';
 
 class UserTable extends React.Component {
   render = () => {
@@ -23,7 +24,7 @@ class UserTable extends React.Component {
             <TableBody>
               <TableRow>
                 <TableCell className={classes.fontBody} component='th' scope='row'>Nombre</TableCell>
-                <TableCell component='th' scope='row'>Joshua Navarro</TableCell>
+                <TableCell component='th' scope='row'>{getProfile().full_name}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className={classes.fontBody} component='th' scope='row'>Rol</TableCell>

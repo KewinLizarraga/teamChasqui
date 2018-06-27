@@ -1,5 +1,5 @@
 import { tinkuyAxios } from '../services/axios';
-import { logout as logoutService } from '../services/AuthService';
+import { logout as logoutService, setToken } from '../services/AuthService';
 
 // constants
 export const LOADING_BEGIN = 'LOADING_BEGIN';
@@ -19,7 +19,7 @@ export const loadingBegin = () => ({
 });
 
 export const loginSuccess = ({ user, token }) => {
-  window.localStorage.setItem('token', token);
+  setToken(token);
   return {
     type: LOGIN_SUCCESS,
     payload: user

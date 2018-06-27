@@ -19,7 +19,10 @@ import {
   CHANGE_COMPLETED,
   SET_DETAILED_INFO,
   SET_CURRENT_SERVICES,
-  SET_CURRENT_MONEY_TYPES
+  SET_CURRENT_MONEY_TYPES,
+  BUSINESS_PAYMENT_SUCCESS,
+  CLOSE_DIALOG,
+  OPEN_DIALOG
 } from '../actions/businessActions';
 
 const initialState = {
@@ -42,11 +45,46 @@ const initialState = {
   currentMoneyTypes: [],
   activeStep: 0,
   canNext: false,
-  completed: null
+  completed: null,
+  dialogInfo: {
+    open: false,
+    type: '',
+    title: '',
+    message: ''
+  }
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case OPEN_DIALOG: {
+      const { type, title, message } = action.payload;
+      return {
+        ...state,
+        dialogInfo: {
+          open: true,
+          type,
+          title,
+          message
+        }
+      }
+    }
+    case CLOSE_DIALOG: {
+      return {
+        ...state,
+        dialogInfo: {
+          open: false,
+          type: '',
+          title: '',
+          message: ''
+        }
+      }
+    }
+    case BUSINESS_PAYMENT_SUCCESS: {
+      return {
+        ...state,
+        loading: false
+      }
+    }
     case SET_CURRENT_MONEY_TYPES: {
       return {
         ...state,
