@@ -55,50 +55,11 @@ class NotFound extends React.Component {
   render() {
     const { handleSubmit, name = [] } = this.props;
     return (
-      <form style={{ marginTop: '200px' }} onSubmit={handleSubmit(values => console.log(values))}>
-        <FormControl>
-          <InputLabel htmlFor="select-multiple-chip">Chip</InputLabel>
-          <Select
-            multiple
-            value={this.state.values}
-            onChange={this.handleChange}
-            input={<Input id='select-multiple-chip' />}
-            renderValue={selected => (
-              <div >
-                {selected.map(value => <Chip key={value} label={options[value]} />)}
-              </div>
-            )}
-          >
-            {Object.keys(options).map(value => (
-              <MenuItem key={value} value={value} >{options[value]}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Field 
-          name='test'
-          type='select'
-          id='testId'
-          component={CustomMultiSelect}
-        />
-      </form>
+      <h1>Page not found</h1>
     )
   }
 }
 
 // ProtTypes for this component
-const validate = (values) => {
-  const errors = {};
-  if (!values.select) {
-    errors.select = 'Mal Mal'
-  }
-  if (!values.passwordField) {
-    errors.passwordField = 'field'
-  }
-
-  return errors;
-}
 // Export component
-export default reduxForm({
-  validate,
-  form: 'testForm'
-})(NotFound);
+export default NotFound;

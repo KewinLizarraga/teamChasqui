@@ -32,7 +32,7 @@ const initialState = {
   moneyTypes: {},
   hotelServices: {},
   data: {},
-  currentLocation: { lat: -34.397, lng: 150.644 },
+  currentLocation: { lat: -12.053417, lng: -77.085560 },
   currentImage: {},
   markers: [],
   loading: false,

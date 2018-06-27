@@ -33,7 +33,7 @@ const getIds = (data, idLabel) => {
 }
 
 export const businessPayment = (data) => dispatch => {
-
+  dispatch(fetchBegin());
   async.waterfall([(cb) => {
     const { photos } = data.business;
     const formData = new FormData();
@@ -107,7 +107,9 @@ export const businessPayment = (data) => dispatch => {
       }
     }) 
   }], (err, result) => {
+    if (err) dispatch(fetchFailed(err));
     console.log(result);
+    window.location.replace('/');
   })
 
   return {

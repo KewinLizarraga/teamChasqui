@@ -15,7 +15,7 @@ class Payments extends React.Component {
   render() {
     return (
       <StripeCheckout
-        name='Tinkuy'
+        name={process.env.REACT_APP_BRAND || 'Chasqui'}
         description='Llene sus datos para finalizar el pago'
         amount={this.props.amount*100}
         token={this.handleToken}
