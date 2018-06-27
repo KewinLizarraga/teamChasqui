@@ -16,6 +16,9 @@ target 'chasquiApp' do
   #RemoteConfig
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
+  
+  #Performance
+  pod 'Firebase/Performance'
 
   #IGListKit
   pod 'IGListKit'

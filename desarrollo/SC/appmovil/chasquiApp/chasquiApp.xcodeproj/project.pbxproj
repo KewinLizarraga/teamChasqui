@@ -58,6 +58,9 @@
 		1C7AA07B20E14A120059C509 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA07A20E14A120059C509 /* Comment.swift */; };
 		1C7AA07D20E152220059C509 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA07C20E152220059C509 /* CommentCell.swift */; };
 		1C7AA07F20E175460059C509 /* CommentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA07E20E175460059C509 /* CommentSection.swift */; };
+		1C848A6220E41E2A00C38011 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C848A6120E41E2A00C38011 /* Question.swift */; };
+		1C848A6420E4287E00C38011 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C848A6320E4287E00C38011 /* QuestionCell.swift */; };
+		1C848A6620E4294900C38011 /* QuestionsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C848A6520E4294900C38011 /* QuestionsSectionController.swift */; };
 		1C8D000D20C9DBD60084A4BF /* TitleServiceSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D000C20C9DBD60084A4BF /* TitleServiceSectionController.swift */; };
 		1CC5DCC7208FE65F00FF16B5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5DCC6208FE65F00FF16B5 /* HomeController.swift */; };
 		1CC5DCCA208FEFFE00FF16B5 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */; };
@@ -131,6 +134,9 @@
 		1C7AA07A20E14A120059C509 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1C7AA07C20E152220059C509 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		1C7AA07E20E175460059C509 /* CommentSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSection.swift; sourceTree = "<group>"; };
+		1C848A6120E41E2A00C38011 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		1C848A6320E4287E00C38011 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		1C848A6520E4294900C38011 /* QuestionsSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsSectionController.swift; sourceTree = "<group>"; };
 		1C8D000C20C9DBD60084A4BF /* TitleServiceSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleServiceSectionController.swift; sourceTree = "<group>"; };
 		1CC5DCC6208FE65F00FF16B5 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		1CC5DCC9208FEFFE00FF16B5 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
@@ -282,9 +288,8 @@
 		1C3F675920C725B200304568 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				1C18E6C720E2E1910079C8D9 /* New Group */,
-				1C18E6BD20E2C01D0079C8D9 /* MakeAComment */,
 				1C3F675A20C725D700304568 /* ServiceDetailViewController.swift */,
+				1C18E6BD20E2C01D0079C8D9 /* MakeAComment */,
 				1CDFAB3420CAE33B00665599 /* Components */,
 			);
 			path = Detail;
@@ -364,6 +369,7 @@
 				1C7A073320D061920015D085 /* MoreInformationService.swift */,
 				1C7AA07A20E14A120059C509 /* Comment.swift */,
 				1C7AA07E20E175460059C509 /* CommentSection.swift */,
+				1C848A6120E41E2A00C38011 /* Question.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -503,6 +509,8 @@
 				1C8D000C20C9DBD60084A4BF /* TitleServiceSectionController.swift */,
 				1CDFAB3C20CB1DEA00665599 /* AdditionalInformationSectionController.swift */,
 				1C18E6C820E2E3DA0079C8D9 /* CommentsSectionController.swift */,
+				1C848A6520E4294900C38011 /* QuestionsSectionController.swift */,
+				1C18E6C720E2E1910079C8D9 /* New Group */,
 				1C18E6CA20E2E8E30079C8D9 /* New copyyyy */,
 			);
 			path = Components;
@@ -515,6 +523,7 @@
 				1CDFAB3A20CB110B00665599 /* TitleOfServiceCell.swift */,
 				1CDFAB3E20CB1E3C00665599 /* InformationCell.swift */,
 				1C7AA07C20E152220059C509 /* CommentCell.swift */,
+				1C848A6320E4287E00C38011 /* QuestionCell.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -654,6 +663,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-chasquiApp/Pods-chasquiApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -669,6 +679,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
@@ -701,6 +712,7 @@
 				1C7A072A20CFEE7E0015D085 /* CategoryDetailSectionController.swift in Sources */,
 				1C7AA07D20E152220059C509 /* CommentCell.swift in Sources */,
 				1C2A65BF20A217F1002C4C4C /* Extensions.swift in Sources */,
+				1C848A6420E4287E00C38011 /* QuestionCell.swift in Sources */,
 				1C18200120C6F93100BA48C5 /* Place.swift in Sources */,
 				1C2A65B920A1D9E2002C4C4C /* CustomTabBarController.swift in Sources */,
 				1CD00F1020A395DD00B893A5 /* CategorySectionController.swift in Sources */,
@@ -711,6 +723,7 @@
 				1C2A65C420A23D9C002C4C4C /* Util.swift in Sources */,
 				1CF3D567209CCDD700A2F896 /* GenericCell.swift in Sources */,
 				1C3F676D20C7406100304568 /* SignUpViewController.swift in Sources */,
+				1C848A6220E41E2A00C38011 /* Question.swift in Sources */,
 				1C2A65C620A24622002C4C4C /* Category.swift in Sources */,
 				1C58966C208E555C001A5D5D /* AppDelegate.swift in Sources */,
 				1C18E6C620E2D2670079C8D9 /* User.swift in Sources */,
@@ -719,6 +732,7 @@
 				1C7A072D20CFEF410015D085 /* CategoryDetailCell.swift in Sources */,
 				1CDFAB3B20CB110B00665599 /* TitleOfServiceCell.swift in Sources */,
 				1C41589220B4A17A00FFB9D4 /* FeaturedServices.swift in Sources */,
+				1C848A6620E4294900C38011 /* QuestionsSectionController.swift in Sources */,
 				1C18200C20C6FD0F00BA48C5 /* RecentCell.swift in Sources */,
 				1C661AC920B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift in Sources */,
 				1C7AA07B20E14A120059C509 /* Comment.swift in Sources */,

@@ -23,7 +23,7 @@ class ApiService {
     //MARK: - Get business by id
     
     func getBusinessById(id: String, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
-        let url = Globals.business + "/\(id)?details=true&mode=populated"
+        let url = Globals.business + "/\(id)"
         request(url: url, httpMethod: .get, parameters: nil, headers: nil, completion: completion)
     }
     
@@ -63,7 +63,7 @@ class ApiService {
     //Comments
     
     func getComments(id: String, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
-        let url = Globals.comments + "/" + id + "/reviews?mode=populated"
+        let url = Globals.comments + "/" + id + "/reviews"
         request(url: url, httpMethod: .get, parameters: nil, headers: nil, completion: completion)
     }
     
@@ -74,6 +74,13 @@ class ApiService {
             "x-access-token": Globals.usuario.gettoken()
         ]
         request(url: url, httpMethod: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, completion: completion)
+    }
+    
+    //MARK: - Questions
+    
+    func getQuestions(id: String, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let url = Globals.comments + "/" + id + "/questions"
+        request(url: url, httpMethod: .get, parameters: nil, headers: nil, completion: completion)
     }
     
     

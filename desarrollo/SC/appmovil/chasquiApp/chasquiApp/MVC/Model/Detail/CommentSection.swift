@@ -34,3 +34,27 @@ class CommentSection: ListDiffable {
     
 }
 
+
+class QuestionSection: ListDiffable {
+    
+    var name: String
+    var questions: [Question]
+    
+    init(name: String, questions: [Question]) {
+        self.name = name
+        self.questions = questions
+    }
+    
+    
+    func diffIdentifier() -> NSObjectProtocol {
+        return name as NSObjectProtocol
+    }
+    
+    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+        guard self !== object else { return true }
+        guard let object = object as? CommentSection else { return false }
+        return name == object.name
+    }
+
+}
+

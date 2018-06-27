@@ -8,6 +8,7 @@
 
 import UIKit
 import IGListKit
+import FirebasePerformance
 
 class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
     
@@ -16,25 +17,50 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
     var id: String! {
         didSet {
             loadMoreData({
-                self.loadComments()
+                self.loadComments({
+                    self.loadQuestions()
+                })
             })
         }
     }
     
     lazy var seeInMapController = SeeInMapController()
     
-    fileprivate func loadComments() {
+    fileprivate func loadComments(_ completion: @escaping () -> () ) {
         //Comments
-        
+        guard let url = URL(string: Globals.comments), let metric = HTTPMetric(url: url, httpMethod: .get) else { return }
+        metric.start()
         ApiService.sharedInstance.getComments(id: id, { (err, statusCode, json) in
+            metric.responseCode = statusCode
+            metric.stop()
             if let error = err {
                 print(error)
             }else {
+                print(json!)
                 if let comments = try? JSONDecoder().decode([Comment].self, from: json!.rawData()) {
                     let commentSection = CommentSection(name: "Opiniones", comments: comments)
                     self.data.append(commentSection)
-                    let additInfo2 = AdditionalInformation(name: "Preguntas", information: [Info]())
-                    self.data.append(additInfo2)
+                }
+                completion()
+            }
+            
+        })
+    }
+    
+    fileprivate func loadQuestions() {
+        //QUestions
+        guard let url = URL(string: Globals.comments), let metric = HTTPMetric(url: url, httpMethod: .get) else { return }
+        metric.start()
+        ApiService.sharedInstance.getQuestions(id: id, { (err, statusCode, json) in
+            metric.responseCode = statusCode
+            metric.stop()
+            if let error = err {
+                print(error)
+            }else {
+                print(json!)
+                if let comments = try? JSONDecoder().decode([Question].self, from: json!.rawData()) {
+                    let commentSection = QuestionSection(name: "Preguntas", questions: comments)
+                    self.data.append(commentSection)
                 }
             }
             self.adapter.performUpdates(animated: true, completion: nil)
@@ -42,11 +68,15 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
     }
     
     private func loadMoreData(_ completion: @escaping () -> () ) {
-        
+        guard let url = URL(string: Globals.business), let metric = HTTPMetric(url: url, httpMethod: .get) else { return }
+        metric.start()
         ApiService.sharedInstance.getBusinessById(id: id) { (err, statusCode, json) in
+            metric.responseCode = statusCode
+            metric.stop()
             if let error = err {
                 print(error)
             }else {
+                
                 if let newService = try? JSONDecoder().decode(MoreInformationService.self, from: json!.rawData()) {
                     var info = [Info]()
                     info.append(Info(name: newService.web, type: Info.TypeOfInfo.web))
@@ -138,6 +168,8 @@ class ServiceDetailViewController: UIViewController, ListAdapterDataSource {
         }
         else if object is CommentSection {
             return CommentsSectionController()
+        }else if object is QuestionSection {
+            return QuestionsSectionController()
         }
         else {
             return PhotoSectionController()

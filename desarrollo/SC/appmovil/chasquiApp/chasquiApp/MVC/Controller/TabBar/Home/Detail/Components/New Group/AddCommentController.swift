@@ -12,9 +12,15 @@ import Cosmos
 class AddCommentController: UIViewController {
     
     
-    var service: String! {
+    var id: String! {
         didSet {
             
+        }
+    }
+    
+    var name: String? {
+        didSet{
+            serviceName.text = name
         }
     }
     
@@ -32,7 +38,7 @@ class AddCommentController: UIViewController {
         view.settings.updateOnTouch = true
         view.settings.starSize = 25
         view.rating = 0
-        view.settings.fillMode = .precise
+        view.settings.fillMode = .full
         view.settings.totalStars = 5
         view.settings.filledColor = Colors.dorado
         return view
@@ -67,14 +73,25 @@ class AddCommentController: UIViewController {
         ]
     
         let parameters: [String:Any] = [
-            "business_id": self.service,
-            "month_visited": "2018-04-11T07:06:57.504Z",
+            "business_id": self.id,
+            "month_visited": "2018-06-27T07:06:57.504Z",
             "visitor_type": "5b1e0c36e8783c10a8dec482",
             "body": body,
             "stars": rate.rating
         ]
         ApiService.sharedInstance.addComment(parameters: parameters) { (err, statusCode, json) in
-            print(json!)
+            if let error = err {
+                self.showAlert(title: "Error", message: error.localizedDescription)
+            }else {
+                if statusCode == 200 {
+                    self.showAlert(title: "Exitoso", message: "Su mensaje fue enviado",completion: {
+                        print(json!)
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }else {
+                     self.showAlert(title: "Ocurrio algo", message: json!.description)
+                }
+            }
         }
     }
     
@@ -93,7 +110,6 @@ class AddCommentController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
-        serviceName.text = "hlaldasdk"
         
         view.backgroundColor = UIColor(hexString: "F6F0F0")
         
@@ -106,11 +122,9 @@ class AddCommentController: UIViewController {
             
         }
         
-        
-        
         view.addSubview(rate)
         rate.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
+            make.centerX.equalTo(serviceName)
             make.top.equalTo(serviceName.snp.bottom).offset(15)
             make.size.equalTo(CGSize(width: 120, height: 30))
         }

@@ -90,6 +90,7 @@ class ServiceCell: GenericCell<Service> {
         serviceName.snp.makeConstraints { (make) in
             make.top.equalTo(serviceImage.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
         }
         
         contentView.addSubview(rate)
