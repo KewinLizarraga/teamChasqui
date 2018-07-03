@@ -6,6 +6,7 @@ const FinancialTransaction = require('mongoose').model('FinancialTransaction'); 
 const Subscription = require('mongoose').model('Subscription'); // create endpoint
 const { keys } = require('../config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey);
+const { generate } = require('../services/token');
 exports.pay_and_register = async (req, res) => {
   const id = req.decoded._id;
   const { stripe_token, user, business, product } = req.body;
@@ -40,7 +41,7 @@ exports.pay_and_register = async (req, res) => {
           if (!user) return cb({ stuts: 404, data: { success: false, message: 'User has not found' } });
 
           const response = {
-            user: req.decoded
+            user: generate(user)
           }
           cb(null, response);
         });

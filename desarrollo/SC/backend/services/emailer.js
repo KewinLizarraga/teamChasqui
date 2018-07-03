@@ -26,7 +26,7 @@ exports.sendVerification = (options, callback) => {
   
   // mover el host a config
   const data = {
-    from: 'no-reply@chasqui.com', //pasar a config
+    from: 'no-reply@tinkuy.com', //pasar a config
     to: email,
     subject: 'Account Verification Token',
     template: 'verify-email',
@@ -46,7 +46,7 @@ exports.sendForgot = (options, callback) => {
 
   // mover el host a config
   const data = {
-    from: 'no-reply@chasqui.com', //pasar a config
+    from: 'no-reply@tinkuy.com', //pasar a config
     to: email,
     subject: 'Password help has arrived!',
     template: 'forgot-password-email',
@@ -64,7 +64,7 @@ exports.sendForgot = (options, callback) => {
 exports.sendReset = (options, callback) => {
   const { email, name } = options;
   const data = {
-    from: 'no-reply@chasqui.com', //pasar a config
+    from: 'no-reply@tinkuy.com', //pasar a config
     to: email,
     subject: 'Password Reset Confirmation',
     template: 'reset-password-email',
