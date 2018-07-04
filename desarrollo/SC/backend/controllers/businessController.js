@@ -5,6 +5,7 @@ exports.getAll = (req, res) => {
 
   let hiddenFields = [
     'name',
+    'user_id',
     'geo_location',
     'stars',
     'type',
@@ -19,7 +20,7 @@ exports.getAll = (req, res) => {
   }
 
   Business.find(filter).select(hiddenFields).exec((err, businesses) => {
-    if (err) throw err;
+    if (err) return res.status(500).send({ success: false, message: err.message });
     if (!filter) {
       const orderedBusinesses = {
         hotel: [],
@@ -79,14 +80,14 @@ exports.create = (req, res) => {
 }
 
 exports.getReviews = (req, res) => {
-  let hiddenFields = ['-createdAt', '-updatedAt', '-__v'];
+  let hiddenFields = ['-updatedAt', '-__v'];
   if (req.query.details === 'true') {
     hiddenFields = [];
   }
 
   const populatePaths = [{
     path: 'user_id',
-    fields: ['first_name', 'last_name', 'email']
+    fields: ['first_name', 'last_name', 'email', 'photo']
   }, {
     path: 'business_id',
     fields: ['stars', 'review_count', 'question_count', 'type', 'name']

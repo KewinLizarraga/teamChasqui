@@ -74,6 +74,9 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   Review.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, (err, review) => {
     if (err) return res.status(500).send({ success: false, message: err.message });
-    return res.status(200).send(review);
+    Review.populate(review, { path: 'user_id' }, (err, populatedReview) => {
+      if (err) return res.status(500).send({ success: false, message: err.message });
+      return res.status(200).send(populatedReview);
+    })
   });
 }
