@@ -30,6 +30,9 @@ const CustomDatetime = ({
             placeholder,
             type,
           }}
+          style={{
+            border: '1px solid black'
+          }}
           {...input}
         />
       </FormControl>

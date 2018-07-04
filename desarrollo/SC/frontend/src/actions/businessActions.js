@@ -28,9 +28,29 @@ export const BUSINESS_PAYMENT = 'BUSINESS_PAYMENT';
 export const BUSINESS_PAYMENT_SUCCESS = 'BUSINESS_PAYMENT_SUCCESS';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 export const OPEN_DIALOG = 'OPEN_DIALOG';
+export const FETCH_FOOD_TYPES_SUCCESS = 'FETCH_FOOD_TYPES_SUCCESS';
+export const SET_CURRENT_FOOD_TYPES = 'SET_CURRENT_FOOD_TYPES';
+export const SET_BUSINESS_HOURS = 'SET_BUSINESS_HOURS';
 
-
-
+export const setBusinessHours = hours => {
+  return {
+    type: SET_BUSINESS_HOURS,
+    payload: hours
+  }
+}
+export const setCurrentFoodTypes = (foodTypes) => {
+  return {
+    type: SET_CURRENT_FOOD_TYPES,
+    payload: foodTypes
+  }
+}
+export const fetchFoodTypesSuccess = (data) => {
+  const payload = dataToSelect(data);
+  return {
+    type: FETCH_FOOD_TYPES_SUCCESS,
+    payload
+  }
+}
 export const openDialog = (data) => {
   return {
     type: OPEN_DIALOG,
@@ -50,23 +70,28 @@ export const businessPaymentSuccess = () => {
 export const businessPayment = (data) => dispatch => {
   dispatch(fetchBegin());
   return new Promise((resolve, reject) => {
+    console.log('ola',data.business)
     async.waterfall([(cb) => {
       const { photos } = data.business;
-      if (!_.isEmpty(photos[0])) {
+      console.log(photos[0]);
+      if (photos[0]) {
         const formData = new FormData();
         formData.append('file', photos[0]);
         formData.append('upload_preset', CLOUDINARY_PRESET);
-  
+        console.log('mande imagen')
         stripeAxios({
           method: 'post',
           url: '/upload',
           data: formData
         }).then(response => {
+          console.log(response)
           cb(null, response.data);
         }).catch(err => {
           cb(err);
         })
       } else {
+        console.log('no mande imagen')
+
         cb(null, {
           secure_url: ''
         });
@@ -74,6 +99,7 @@ export const businessPayment = (data) => dispatch => {
     }, (image, cb) => {
       const { secure_url } = image;
       const { user, product, business, stripe_token } = data;
+      console.log('DTAAAAAAA', data)
       const { role, ...restUser } = user;
       const { name, ...restProduct } = product;
       const { country, department, province, district, ...restBusiness } = business;
@@ -98,6 +124,15 @@ export const businessPayment = (data) => dispatch => {
           }
           break;
         }
+        case 'restaurant': {
+          const { food_types, ...restSpecificData } = specificData;
+          newSpecificData = {
+            restaurant_detail: {
+              ...restSpecificData,
+              food_types: food_types.map(foodType => foodType.id)
+            }
+          }
+        }
 
         default:
           break;
@@ -109,6 +144,7 @@ export const businessPayment = (data) => dispatch => {
         photos: secure_url === '' ? [] : [secure_url],
         ...newSpecificData
       }
+      console.log('businessActions.js->', newBusiness);
       tinkuyAxios({
         method: 'post',
         url: '/stripe',
@@ -271,6 +307,19 @@ export const setProduct = () => ({
 });
 
 
+export const fetchFoodTypes = () => dispatch => {
+  // dispatch(fetchBegin());
+  tinkuyAxios({
+    method: 'get',
+    url: 'food-types'
+  }).then(response => {
+    if (response.statusText === 'OK') {
+      dispatch(fetchFoodTypesSuccess(response.data));
+    } else {
+      dispatch(fetchFailed(response.data));
+    }
+  })
+}
 export const fetchPlans = () => dispatch => {
   dispatch(fetchBegin());
   return tinkuyAxios({

@@ -12,6 +12,8 @@ import CardHeader from '../../components/Card/CardHeader';
 import image from '../../assets/img/login_bg.jpg';
 import CardBody from '../../components/Card/CardBody';
 import Button from '../../components/CustomButtons/Button';
+import HeaderLinks from '../../components/Header/HeaderLinks';
+import Header from '../../components/Header/Header';
 
 class HandleConfirmation extends React.Component {
   handleClick = () => {
@@ -34,6 +36,16 @@ class HandleConfirmation extends React.Component {
           backgroundPosition: 'top center'
         }}
       >
+        <Header
+          color="transparent"
+          brand={process.env.REACT_APP_BRAND || 'Tinkuy'}
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 200,
+            color: 'white'
+          }}
+        />
         <div className={classes.container}>
           <GridContainer justify='center'>
             <GridItem xs={12} sm={9} md={7} lg={5} xl={10}>

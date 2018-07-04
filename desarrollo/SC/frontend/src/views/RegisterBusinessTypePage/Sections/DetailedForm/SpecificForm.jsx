@@ -12,6 +12,9 @@ const SpecificForm = ({
   canNext,
   dispatch,
   currentServices,
+  foodTypes,
+  currentFoodTypes,
+  restaurantForm,
   ...props
 }) => {
   switch (businessType) {
@@ -29,7 +32,15 @@ const SpecificForm = ({
     }
     case 'restaurant': {
       return (
-        <RestaurantForm completed={completed} classes={classes} />
+        <RestaurantForm
+          completed={completed}
+          classes={classes}
+          dispatch={dispatch}
+          canNext={canNext}
+          foodTypes={foodTypes}
+          currentFoodTypes={currentFoodTypes}
+          restaurantForm={restaurantForm}
+        />
       );
     }
     case 'travel_agency': {
@@ -42,20 +53,25 @@ const SpecificForm = ({
   }
 }
 
-const mapStateToProps = ({ business }) => {
+const mapStateToProps = ({ business, form }) => {
   const {
     hotelServices,
     canNext,
     businessType,
     completed,
-    currentServices
+    currentServices,
+    foodTypes,
+    currentFoodTypes
   } = business;
   return {
+    restaurantForm: form.restaurantForm ? form.restaurantForm.values || {} : {},
     hotelServices,
     canNext,
     businessType,
     completed,
-    currentServices
+    currentServices,
+    foodTypes,
+    currentFoodTypes
   }
 }
 

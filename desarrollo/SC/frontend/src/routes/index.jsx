@@ -6,6 +6,8 @@ import RegisterBusinessTypePage from '../views/RegisterBusinessTypePage/Register
 import RegisterPage from '../views/RegisterPage/RegisterPage';
 import HandleConfirmationPage from '../views/HandleConfirmationPage/HandleConfirmationPage';
 import ConfirmEmailPage from '../views/ConfirmEmailPage/ConfirmEmailPage';
+import Dashboard from '../views/Dashboard/Dashboard';
+import Home from '../views/Dashboard/Home';
 
 const indexRoutes = [{
   path: '/',
@@ -38,6 +40,14 @@ const indexRoutes = [{
   path: '/handle-confirmation/:token',
   name: 'ConfirmEmail',
   component: ConfirmEmailPage
+}, {
+  path: '/dashboard',
+  name: 'Dashboard',
+  component: Dashboard
+}, {
+  path: '/dashboard/home',
+  name: 'DashboardHome',
+  component: Home
 }, {
   name: 'NotFound',
   component: NotFound

@@ -1,5 +1,5 @@
 const businessData = {
-  title: process.env.REACT_APP_BRAND || 'Chasqui',
+  title: process.env.REACT_APP_BRAND || 'Tinkuy',
   description: 'Enfocados a brindarle la mejor experiencia a todos los turistas permitiéndoles aprovechar al máximo cada viaje. Los invitamos a conocer nuestro servicios ayudándoles a tomar la decisión correcta al momento de buscar y reservar hoteles, restaurantes y atracciones. Contarás con las mejores tarifas, opiniones y experiencias de otros usuarios.',
   subBusinessInfo: [{
     id: 'hotel',

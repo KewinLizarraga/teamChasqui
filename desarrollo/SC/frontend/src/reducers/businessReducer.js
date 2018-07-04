@@ -22,7 +22,10 @@ import {
   SET_CURRENT_MONEY_TYPES,
   BUSINESS_PAYMENT_SUCCESS,
   CLOSE_DIALOG,
-  OPEN_DIALOG
+  OPEN_DIALOG,
+  FETCH_FOOD_TYPES_SUCCESS,
+  SET_CURRENT_FOOD_TYPES,
+  SET_BUSINESS_HOURS
 } from '../actions/businessActions';
 
 const initialState = {
@@ -34,15 +37,20 @@ const initialState = {
   districts: {},
   moneyTypes: {},
   hotelServices: {},
+  foodTypes: {},
+  // falta crear la consulta asincronica para los tipos de comida y guardar al success
+  // tambien falta cuando elija una opcion y cambiar el current food typesx 
   data: {},
   currentLocation: { lat: -12.053417, lng: -77.085560 },
-  currentImage: {},
+  currentImage: null,
   markers: [],
   loading: false,
   error: null,
   currentPlan: {},
   currentServices: [],
   currentMoneyTypes: [],
+  currentFoodTypes: [],
+  businessHours: [],
   activeStep: 0,
   canNext: false,
   completed: null,
@@ -56,6 +64,27 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_BUSINESS_HOURS: {
+      console.log(action.payload);
+
+      return {
+        ...state,
+        businessHours: action.payload
+      }
+    }
+    case SET_CURRENT_FOOD_TYPES: {
+      return {
+        ...state,
+        currentFoodTypes: action.payload
+      }
+    }
+    case FETCH_FOOD_TYPES_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        foodTypes: action.payload
+      }
+    }
     case OPEN_DIALOG: {
       const { type, title, message } = action.payload;
       return {
@@ -69,6 +98,7 @@ export default (state = initialState, action) => {
       }
     }
     case CLOSE_DIALOG: {
+      console.log('asdas')
       return {
         ...state,
         dialogInfo: {
@@ -118,7 +148,24 @@ export default (state = initialState, action) => {
             }
           }
           break;
-
+        case 'restaurant': {
+          const { business, restaurant_detail } = action.payload;
+          newState = {
+            ...state,
+            canNext: true,
+            completed: null,
+            activeStep: activeStep + 1,
+            data: {
+              ...data,
+              business: {
+                ...data.business,
+                ...business,
+                restaurant_detail
+              }
+            }
+          }
+          break;
+        }
         default:
           break;
       }

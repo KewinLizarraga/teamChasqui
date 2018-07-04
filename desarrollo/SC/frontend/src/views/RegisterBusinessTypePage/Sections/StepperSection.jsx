@@ -40,35 +40,57 @@ const mapDataToValues = (business, form) => {
     currentMoneyTypes,
     currentServices,
     moneyTypes,
-    hotelServices
+    hotelServices,
+    foodTypes,
+    currentFoodTypes,
+    businessHours
   } = business;
   const { detailedForm } = form;
   const specificForm = form[`${businessType}Form`];
+  const detailedFormValues = detailedForm.values;
+  const { price_max, price_min, ...businessRest } = detailedFormValues;
+  const money_types = arrayToState(currentMoneyTypes, moneyTypes);
+  const formatedBusiness = {
+    ...businessRest,
+    price: {
+      min: Number(price_min),
+      max: Number(price_max),
+      average: (price_min + price_max) / 2
+    },
+    money_types,
+    photos: [currentImage]
+  }
   switch (businessType) {
     case 'hotel': {
-      const detailedFormValues = detailedForm.values;
       const specificFormValues = specificForm.values;
       const { checkin_time, checkout_time } = specificFormValues;
-      const money_types = arrayToState(currentMoneyTypes, moneyTypes);
       const services = arrayToState(currentServices, hotelServices);
       const hotel_detail = Object.assign({}, specificFormValues, {
         checkin_time: checkin_time.format('LT'),
         checkout_time: checkout_time.format('LT'),
         services
       });
-      const { price_max, price_min, ...business } = detailedFormValues;
       return {
         business: {
-          ...business,
-          price: {
-            min: Number(price_min),
-            max: Number(price_max),
-            average: (price_min + price_max) / 2
-          },
-          money_types,
-          photos: [currentImage]
+          ...formatedBusiness
         },
         hotel_detail,
+      }
+    }
+    case 'restaurant': {
+      const specificFormValues = specificForm.values;
+      const food_types = arrayToState(currentFoodTypes, foodTypes);
+      console.log(specificFormValues, food_types, businessHours);
+      const restaurant_detail = {
+        category: specificFormValues.category,
+        food_types,
+      }
+      return {
+        business: {
+          ...formatedBusiness,
+          business_hours: businessHours
+        },
+        restaurant_detail
       }
     }
     default: {

@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Thrid party library used by this component.
-import { Link as Linker } from 'react-router-dom';
+import { Link as Linker, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {loggedIn, getProfile} from '../../services/AuthService';
+import { loggedIn, getProfile } from '../../services/AuthService';
 
 // Materias-ui components and functions used by this component.
 import { withStyles } from '@material-ui/core/styles';
@@ -34,13 +34,6 @@ const HeaderLinks = ({ ...props }) => {
     { type: 'iconTextButton', id: 'login', name: 'Iniciar sesion', icon: 'person', to: '/login', onlyWhen: 'disconnected' },
     { type: 'iconTextButton', id: 'register', name: 'Registrarse', icon: 'person_add', to: '/register', onlyWhen: 'disconnected' },
     {
-      type: 'iconButton',
-      id: 'notify',
-      name: 'Notificaciones',
-      icon: 'fas fa-bell',
-      to: '#',
-      onlyWhen: 'connected'
-    }, {
       type: 'dropdownButton',
       id: 'registerBusiness',
       name: 'Registrar Negocio',
@@ -63,35 +56,49 @@ const HeaderLinks = ({ ...props }) => {
         to: '/registerBusiness/travel_agency'
       }]
     }, {
-      type: 'dropdownButton',
+      type: 'iconTextButton',
+      id: 'dashboard',
+      name: 'Dashboard',
+      icon: 'dashboard',
+      to: '/dashboard/home',
+      onlyWhen: 'connected'
+    }, {
+      type: 'iconTextButton',
       id: 'profile',
       name: loggedIn() ? getProfile().full_name : '',
-      icon: 'face',
-      options: [{
-        id: 'profile',
-        name: 'PERFIL',
-        type: 'link',
-        to: '/profile'
-      }, {
-        id: 'logout',
-        name: 'Cerrar sesión',
-        type: 'action',
-        action: (dispatch, event) => {
-          dispatch(logout());
-          window.location.replace('/login');
-        }
-      }],
+      icon: 'account_box',
+      to: '/dashboard/profile',
       onlyWhen: 'connected'
-    }
+    }, {
+      type: 'iconButton',
+      id: 'notify',
+      name: 'Notificaciones',
+      icon: 'fas fa-bell',
+      action: () => {
+        props.history.push('/dashboard/notifies')
+      },
+      onlyWhen: 'connected'
+    }, {
+      type: 'iconButton',
+      id: 'logout',
+      name: 'Cerrar sesión',
+      icon: 'fas fa-power-off',
+      action: (dispatch) => {
+        dispatch(logout());
+        props.history.push('/login');
+      },
+      onlyWhen: 'connected'
+    } 
   ]
-  const userStatus = loggedIn() ? 'connected': 'disconnected';
+  const userStatus = loggedIn() ? 'connected' : 'disconnected';
   const { classes } = props;
 
   const makeIconButton = (link) => {
     return (
       <IconButton
-        href={link.to}
-        target="_blank"
+        href={link.to || null}
+        onClick={link.action ? link.action.bind(null, props.dispatch) : null}
+        target={link.target || '_blank'}
         color="transparent"
         className={classes.navLink + ' ' + classes.socialIconsButton}
       >
@@ -158,14 +165,14 @@ const HeaderLinks = ({ ...props }) => {
             <ListItem key={link.id} className={classes.listItem}>
               {
                 link.type === 'iconTextButton' ? (
-                  makeIconTextButton(link)
+                  loggedIn() ? (getProfile().type === 'tourist' && link.id === 'dashboard') ? null : makeIconTextButton(link) : makeIconTextButton(link)
                 ) : (
-                  link.type === 'iconButton' ? (
-                    makeIconButton(link)
-                  ) : (
-                    makeDropdownButton(link, props.dispatch)
+                    link.type === 'iconButton' ? (
+                      makeIconButton(link)
+                    ) : (
+                        loggedIn() ? ( getProfile().type !== 'businessman' ? makeDropdownButton(link, props.dispatch) : null ) : null
+                      )
                   )
-                )
               }
             </ListItem>
           )
@@ -179,4 +186,4 @@ const HeaderLinks = ({ ...props }) => {
 // ProtTypes for this component
 
 // Export component
-export default connect(({ auth }) => ({ auth }))(withStyles(headerLinksStyle)(HeaderLinks));
+export default connect(({ auth }) => ({ auth }))(withStyles(headerLinksStyle)(withRouter(HeaderLinks)));

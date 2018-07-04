@@ -21,6 +21,8 @@ import DownloadSection from './Sections/DownloadSection';
 
 //utils
 import content from './content';
+import HeaderLinks from '../../components/Header/HeaderLinks';
+import Header from '../../components/Header/Header';
 
 // Page class
 class LandingPage extends React.Component {
@@ -29,6 +31,16 @@ class LandingPage extends React.Component {
     const { classes } = this.props;
     return (
       <div>
+        <Header
+          color="transparent"
+          brand={process.env.REACT_APP_BRAND || 'Tinkuy'}
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 200,
+            color: 'white'
+          }}
+        />
         <Parallax filter image={require('../../assets/img/landing_bg.jpg')}>
           <div className={classes.container}>
             <GridContainer >

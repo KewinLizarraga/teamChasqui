@@ -58,7 +58,7 @@ class Header extends React.Component {
       color,
       absolute,
       fixed,
-      brand='Chasqui',
+      brand='Tinkuy',
       leftLinks,
       rightLinks
     } = this.props;

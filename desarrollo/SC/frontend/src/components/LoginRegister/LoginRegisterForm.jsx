@@ -44,14 +44,14 @@ const handleLogin = (values, dispatch, pp) => {
     dispatch(login(values))
       .then(response => {
         if (response.statusText === 'OK') {
-          pp.history.replace('/');
+          pp.history.push('/');
         }
       });
   } else if (type === 'register') {
     dispatch(register(values))
       .then(response => {
         if (response.statusText === 'OK') {
-          pp.history.replace(`/handle-confirmation?email=${values.email}`);
+          pp.history.push(`/handle-confirmation?email=${values.email}`);
         }
       })
   }

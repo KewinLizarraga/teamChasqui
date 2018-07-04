@@ -20,6 +20,8 @@ import image from '../../assets/img/login_bg.jpg';
 // Component class
 import { loginData, registerData } from './fieldsData';
 import CustomSnackbar from '../CustomSnackbar/CustomSnackbar';
+import HeaderLinks from '../Header/HeaderLinks';
+import Header from '../Header/Header';
 
 class LoginRegister extends React.Component {
   constructor(props) {
@@ -58,6 +60,16 @@ class LoginRegister extends React.Component {
           backgroundPosition: 'top center'
         }}
       >
+        <Header
+          color="transparent"
+          brand={process.env.REACT_APP_BRAND || 'Tinkuy'}
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 200,
+            color: 'white'
+          }}
+        />
         <div className={classes.container}>
           <GridContainer justify='center'>
             <GridItem xs={12} sm={9} md={7} lg={5} xl={10}>

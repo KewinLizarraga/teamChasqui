@@ -17,6 +17,8 @@ import { data } from './content';
 import RegisterSection from './Sections/RegisterSection';
 import { loggedIn } from '../../services/AuthService';
 import { setBusinessType } from '../../actions/businessActions';
+import HeaderLinks from '../../components/Header/HeaderLinks';
+import Header from '../../components/Header/Header';
 
 const possiblyParams = ['hotel', 'restaurant', 'travel_agency'];
 // Component class
@@ -40,6 +42,16 @@ class RegisterBusinessTypePage extends React.Component {
     const { businessType } = this.props.match.params;
     return (
       <div>
+        <Header
+          color="transparent"
+          brand={process.env.REACT_APP_BRAND || 'Tinkuy'}
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 200,
+            color: 'white'
+          }}
+        />
         <Parallax filter image={require('../../assets/img/register_business_bg.jpg')}>
           <div className={classes.container}>
             <GridContainer >

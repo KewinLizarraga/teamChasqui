@@ -39,7 +39,20 @@ class TypeTable extends React.Component {
         )
         break;
       }
-    
+      case 'restaurant': {
+        tableBodyContent.push(
+          <TableRow key='0'>
+            <TableCell className={classes.fontBody} component='th' scope='row'>Datos</TableCell>
+            <TableCell component='th' scope='row'>{JSON.stringify(specific, null, 2)}</TableCell>
+          </TableRow>
+        );
+        tableBodyContent.push(
+          <TableRow key='1'>
+            <TableCell className={classes.fontBody} component='th' scope='row'>Horario</TableCell>
+            <TableCell component='th' scope='row'>{JSON.stringify(business.business_hours, null, 2)}</TableCell>
+          </TableRow>
+        );
+      }
       default:
         break;
     }

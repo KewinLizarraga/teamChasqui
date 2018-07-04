@@ -4,6 +4,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux';
 import { businessPayment, openDialog } from '../../actions/businessActions';
+import { updateToken } from '../../services/AuthService';
 
 class Payments extends React.Component {
   handleToken = (token) => {
@@ -13,6 +14,7 @@ class Payments extends React.Component {
     })
     ).then(result => {
       if (result.success) {
+        updateToken(result.result.user.token)
         this.props.dispatch(openDialog({
           type: 'success',
           title: 'Informacion',
@@ -24,7 +26,7 @@ class Payments extends React.Component {
   render() {
     return (
       <StripeCheckout
-        name={process.env.REACT_APP_BRAND || 'Chasqui'}
+        name={process.env.REACT_APP_BRAND || 'Tinkuy'}
         description='Llene sus datos para finalizar el pago'
         amount={this.props.amount * 100}
         token={this.handleToken}
