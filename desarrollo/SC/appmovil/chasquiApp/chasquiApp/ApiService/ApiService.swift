@@ -83,7 +83,14 @@ class ApiService {
         request(url: url, httpMethod: .get, parameters: nil, headers: nil, completion: completion)
     }
     
-    
+    func addQuestion(parameters: Parameters, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let url = Globals.addQuestion
+        
+        let headers: [String:String] = [
+            "x-access-token": Globals.usuario.gettoken()
+        ]
+        request(url: url, httpMethod: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, completion: completion)
+    }
     
     //MARK: - Request for all methods
     

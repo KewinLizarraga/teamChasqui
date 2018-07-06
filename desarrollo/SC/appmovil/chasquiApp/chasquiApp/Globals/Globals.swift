@@ -46,5 +46,9 @@ class Globals {
     
     static let addComment = baseURL + "reviews"
     
+    //Add questions
+    
+    static let addQuestion = baseURL + "questions"
+    
     
 }

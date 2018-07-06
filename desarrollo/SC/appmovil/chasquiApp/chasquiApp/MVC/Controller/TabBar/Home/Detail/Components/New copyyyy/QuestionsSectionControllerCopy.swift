@@ -9,7 +9,7 @@
 import UIKit
 import IGListKit
 
-class QuestionsSectionController: ListSectionController, ListSupplementaryViewSource {
+class QuestionsSectionControllerCopy: ListSectionController, ListSupplementaryViewSource {
     
     private var item: QuestionSection!
     
@@ -22,7 +22,7 @@ class QuestionsSectionController: ListSectionController, ListSupplementaryViewSo
     }
     
     override func numberOfItems() -> Int {
-        return item.questions.count < 3 ? item.questions.count : 3
+        return item.questions.count
     }
     
     
@@ -44,13 +44,16 @@ class QuestionsSectionController: ListSectionController, ListSupplementaryViewSo
         item = object as? QuestionSection
     }
     override func didSelectItem(at index: Int) {
-        
+        print("toco pregunta")
+        let i = item.questions[index]
+        print(i.id)
+        print(i.message)
     }
     
     // MARK: - ListSupplementaryViewSource
     
     func supportedElementKinds() -> [String] {
-        return [UICollectionElementKindSectionHeader,UICollectionElementKindSectionFooter]
+        return [UICollectionElementKindSectionHeader]
     }
     
     func viewForSupplementaryElement(ofKind elementKind: String, at index: Int) -> UICollectionReusableView {
@@ -58,7 +61,7 @@ class QuestionsSectionController: ListSectionController, ListSupplementaryViewSo
         case UICollectionElementKindSectionHeader:
             return userHeaderView(atIndex: index)
         default:
-            return userFooterView(atIndex: index)
+            fatalError()
         }
     }
     
@@ -80,7 +83,6 @@ class QuestionsSectionController: ListSectionController, ListSupplementaryViewSo
     private func userFooterView(atIndex index: Int) -> UICollectionReusableView {
         guard let view = collectionContext?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, for: self, class: ServiceFooterView.self, at: index) as? ServiceFooterView else { fatalError() }
         view.moreButton.addTarget(self, action: #selector(buttonPressed), for: UIControlEvents.touchUpInside)
-        view.addCommentButton.addTarget(self, action: #selector(addcommentPressed), for: UIControlEvents.touchUpInside)
         view.item = "Ver más preguntas"
         view.addCommentButton.setTitle("Hacer una pregunta", for: UIControlState.normal)
         return view
@@ -96,25 +98,6 @@ class QuestionsSectionController: ListSectionController, ListSupplementaryViewSo
         
     }
     
-    @objc func addcommentPressed() {
-        print("rn questions")
-        if Globals.usuario.getisSession() == false {
-            self.viewController?.showAlert(title: "Informacion", message: "Usted necesita tener una cuenta para realizar esta operacion")
-        }else {
-            let vc = AddQuestionController()
-            if let id = (self.viewController as! ServiceDetailViewController).id {
-                vc.id = id
-            }
-            if let ser = (self.viewController as! ServiceDetailViewController).data[1] as? Service{
-                let name = ser.name
-                vc.name = name
-            }else {
-                print("algo ocurre")
-            }
-
-            self.viewController?.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
     
 }
 

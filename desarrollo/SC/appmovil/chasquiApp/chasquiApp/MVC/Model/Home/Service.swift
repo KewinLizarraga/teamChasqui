@@ -23,6 +23,7 @@ class Service: ListDiffable, Decodable {
     var review_count: Int
     var geo_location: GeoLocation
     var price: Price
+    var money_types: String?
 
     
     //MARK: - Decodable methods
@@ -36,6 +37,7 @@ class Service: ListDiffable, Decodable {
         case review_count
         case geo_location
         case price
+        case money_types
     }
     
     required init(from decoder: Decoder) throws {
