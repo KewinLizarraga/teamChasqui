@@ -1,9 +1,11 @@
 module.exports = (io) => {
   io.on('connection', socket => {
     console.log(`${socket.id} has entered`);
+    console.log(io.engine.clientsCount)
     socket.on('disconnect', () => {
       console.log(`${socket.id} has left`);
-    })
+      console.log(io.engine.clientsCount)
+    });
     socket.on('join', data => {
       socket.join(data.room);
       console.log(`${socket.id} has entered to ${data.room}`)
@@ -19,10 +21,14 @@ module.exports = (io) => {
       });
     });
     socket.on('addMessage', data => {
+      console.log("assssss", data);
       socket.broadcast.to(data.room).emit('addMessage', {
         message: data.message,
         room: data.room
       })
+    });
+    socket.on('ejemplo', data => {
+      console.log(data);
     })
   });
 }

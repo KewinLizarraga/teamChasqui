@@ -1,0 +1,2 @@
+require('./Direction');
+require('./Location');

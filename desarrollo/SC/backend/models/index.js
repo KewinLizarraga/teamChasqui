@@ -8,3 +8,4 @@ require('./product');
 require('./payment');
 require('./product_detail');
 require('./chat');
+require('./map');
