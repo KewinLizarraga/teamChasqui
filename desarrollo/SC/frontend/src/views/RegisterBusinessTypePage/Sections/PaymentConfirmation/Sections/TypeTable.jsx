@@ -52,6 +52,7 @@ class TypeTable extends React.Component {
             <TableCell component='th' scope='row'>{JSON.stringify(business.business_hours, null, 2)}</TableCell>
           </TableRow>
         );
+        break;
       }
       default:
         break;

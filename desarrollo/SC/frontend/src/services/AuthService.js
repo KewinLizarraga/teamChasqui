@@ -19,13 +19,10 @@ const isTokenExpired = (token) =>  {
 }
 
 const updateToken = (idToken) => {
-  console.log('AuthService.js', idToken)
   setToken(idToken);
 }
 const setToken = (idToken) =>  {
   localStorage.setItem('token', idToken);
-  const userInfo = getProfile(idToken);
-  localStorage.setItem('userInfo', userInfo);
 }
 
 const getToken = () =>  {

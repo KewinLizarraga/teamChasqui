@@ -12,6 +12,7 @@ const MapComponent = compose(
   withScriptjs,
   withGoogleMap
 )(({ children, defaultCenter, defaultZoom, ...props }) => {
+  console.log(defaultZoom)
   return (
     <GoogleMap
       defaultZoom={defaultZoom}
@@ -24,7 +25,8 @@ const MapComponent = compose(
 });
 
 MapComponent.defaultProps = {
-  defaultZoom: 18
+  defaultZoom: 18,
+  defaultCenter: { lat: -12.053417, lng: -77.085560 }
 }
 
 export default MapComponent;

@@ -11,7 +11,7 @@ import Home from './Home'
 import Profile from './Profile';
 import Notifies from './Notifies/Notifies';
 import Footer from '../../components/Footer/Footer';
-import Progress from '../../components/Progress/Progress';
+import Inbox from './Chat/Inbox';
 
 // import ListItem from '@material-ui/core/ListItem'
 
@@ -76,6 +76,7 @@ class Dashboard extends React.Component {
             <Route path='/dashboard/home' component={Home} />
             <Route path='/dashboard/profile' component={Profile} />
             <Route path='/dashboard/notifies' component={Notifies} />
+            <Route path='/dashboard/inbox' component={Inbox} />
             <Redirect from='/dashboard/' to={loggedIn() ? '/dashboard/home' : '/login'} />
           </Switch>
           <Footer />

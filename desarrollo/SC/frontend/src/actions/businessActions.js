@@ -70,28 +70,22 @@ export const businessPaymentSuccess = () => {
 export const businessPayment = (data) => dispatch => {
   dispatch(fetchBegin());
   return new Promise((resolve, reject) => {
-    console.log('ola',data.business)
     async.waterfall([(cb) => {
       const { photos } = data.business;
-      console.log(photos[0]);
       if (photos[0]) {
         const formData = new FormData();
         formData.append('file', photos[0]);
         formData.append('upload_preset', CLOUDINARY_PRESET);
-        console.log('mande imagen')
         stripeAxios({
           method: 'post',
           url: '/upload',
           data: formData
         }).then(response => {
-          console.log(response)
           cb(null, response.data);
         }).catch(err => {
           cb(err);
         })
       } else {
-        console.log('no mande imagen')
-
         cb(null, {
           secure_url: ''
         });
@@ -99,7 +93,6 @@ export const businessPayment = (data) => dispatch => {
     }, (image, cb) => {
       const { secure_url } = image;
       const { user, product, business, stripe_token } = data;
-      console.log('DTAAAAAAA', data)
       const { role, ...restUser } = user;
       const { name, ...restProduct } = product;
       const { country, department, province, district, ...restBusiness } = business;
@@ -132,8 +125,8 @@ export const businessPayment = (data) => dispatch => {
               food_types: food_types.map(foodType => foodType.id)
             }
           }
+          break;
         }
-
         default:
           break;
       }
@@ -144,7 +137,6 @@ export const businessPayment = (data) => dispatch => {
         photos: secure_url === '' ? [] : [secure_url],
         ...newSpecificData
       }
-      console.log('businessActions.js->', newBusiness);
       tinkuyAxios({
         method: 'post',
         url: '/stripe',
@@ -169,7 +161,6 @@ export const businessPayment = (data) => dispatch => {
         dispatch(fetchFailed(err));
         reject(err);
       }
-      console.log('Rsultados', result);
       dispatch(businessPaymentSuccess());
       resolve({
         success: true,

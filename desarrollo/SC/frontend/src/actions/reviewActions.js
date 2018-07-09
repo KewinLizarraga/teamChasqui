@@ -103,7 +103,6 @@ export const fetchReviews = userId => dispatch => {
   });
 }
 export const submitReply = (message, reviewId) => dispatch => {
-  console.log(message, reviewId)
   dispatch(fetchBegin());
   tinkuyAxios({
     method: 'put',

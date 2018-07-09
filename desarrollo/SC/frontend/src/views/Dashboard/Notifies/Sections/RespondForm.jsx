@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field, destroy } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 
@@ -8,6 +8,10 @@ class RespondForm extends React.Component {
     const { currentReview, actions } = this.props;
     actions.submit(values, currentReview);
     // this.props.actions.close();
+  }
+  handleClose = () => {
+    this.props.actions.close();
+    this.props.actions.destroy('reviewForm');
   }
   render = () => {
     const { open, disabled, actions, handleSubmit } = this.props;
@@ -41,7 +45,7 @@ class RespondForm extends React.Component {
         </Button>
         <Dialog
           open={open}
-          onClose={() => actions.close()}
+          onClose={this.handleClose}
           fullWidth
         >
           <DialogTitle>Responder</DialogTitle>
@@ -64,7 +68,7 @@ class RespondForm extends React.Component {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => actions.close()} color='primary' >Cancelar</Button>
+              <Button onClick={this.handleClose} color='primary' >Cancelar</Button>
               <Button type='submit' color='primary' >Enviar</Button>
             </DialogActions>
           </form>

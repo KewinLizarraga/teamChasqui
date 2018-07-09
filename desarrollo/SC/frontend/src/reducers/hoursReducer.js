@@ -54,7 +54,6 @@ export default (state = initialState, action) => {
       const { idx, days } = action.payload;
       const { hours } = state;
       const newHours = hours.update(idx, hour => {
-        console
         const hourObject = hour.toJS()
         return _Map({
           ...hourObject,
@@ -78,11 +77,9 @@ export default (state = initialState, action) => {
     }
     case ADD_HOUR: {
       const hours = state.hours.toJS();
-      // const allOptions = OPTIONS;
       const last = _.last(hours);
       const oldOptions = last ? last.options : OPTIONS;
       const oldDays = last ? last.days : [];
-      // console.log('old', oldOptions)
       const newOptions = {};
       _.each(oldOptions, (option, key) => {
         if (oldDays.indexOf(key) === -1) {

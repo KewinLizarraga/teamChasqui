@@ -80,7 +80,6 @@ const mapDataToValues = (business, form) => {
     case 'restaurant': {
       const specificFormValues = specificForm.values;
       const food_types = arrayToState(currentFoodTypes, foodTypes);
-      console.log(specificFormValues, food_types, businessHours);
       const restaurant_detail = {
         category: specificFormValues.category,
         food_types,
@@ -152,29 +151,24 @@ class StepperSection extends React.Component {
 
     switch (activeStep) {
       case 0: {
-        console.log('Guardar datos del producto');
         this.props.dispatch(setProduct());
         break;
       }
       case 1: {
-        console.log('Guardar datos generales');
         const { generalForm: { values } } = form;
         const { currentLocation } = business;
         this.props.dispatch(setGeneralInfo(values, currentLocation));
         break;
       }
       case 2: {
-        console.log('Guardar datos especificos');
         const values = mapDataToValues(business, form);
         this.props.dispatch(setDetailedInfo(values));
         break;
       }
       case 3: {
-        console.log('Pagar');
         break;
       }
       default:
-        console.log('faillll')
         break;
     }
 

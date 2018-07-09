@@ -1,9 +1,9 @@
 // se conecta con store y manda todos los revies a listRevies
 import React from 'react';
 import { connect } from 'react-redux';
+import { destroy } from 'redux-form';
 import { getProfile } from '../../../../services/AuthService';
 import ListReviews from './ListReviews';
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core';
 import {
   fetchReviews,
   setCurrentReview,
@@ -19,7 +19,7 @@ class ReviewSection extends React.Component {
     this.props.fetchReviews(profile._id)
   }
   render = () => {
-    const { setCurrentReview, closeReviewDialog, openReviewDialog, submitReply } = this.props;
+    const { setCurrentReview, closeReviewDialog, openReviewDialog, submitReply, destroy } = this.props;
     const { loading, reviews, currentReview, disabledButton, open } = this.props.review;
     return (
       <div>
@@ -38,7 +38,8 @@ class ReviewSection extends React.Component {
           actions={{
             close: closeReviewDialog,
             open: openReviewDialog,
-            submit: submitReply
+            submit: submitReply,
+            destroy: destroy
           }}
         />
       </div>
@@ -52,7 +53,8 @@ const mapDispatchToProps = {
   setCurrentReview,
   closeReviewDialog,
   openReviewDialog,
-  submitReply
+  submitReply,
+  destroy
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewSection);

@@ -13,4 +13,9 @@ export default [{
   name: 'Notificaciones',
   to: '/dashboard/notifies',
   icon: 'notifications'
+}, {
+  id: 'chat',
+  name: 'Chat',
+  to: '/dashboard/inbox',
+  icon: 'chat'
 }]

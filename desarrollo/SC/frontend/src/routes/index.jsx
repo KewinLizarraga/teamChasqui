@@ -7,7 +7,7 @@ import RegisterPage from '../views/RegisterPage/RegisterPage';
 import HandleConfirmationPage from '../views/HandleConfirmationPage/HandleConfirmationPage';
 import ConfirmEmailPage from '../views/ConfirmEmailPage/ConfirmEmailPage';
 import Dashboard from '../views/Dashboard/Dashboard';
-import Home from '../views/Dashboard/Home';
+import MapShared from '../views/MapShared/MapShared';
 
 const indexRoutes = [{
   path: '/',
@@ -45,9 +45,9 @@ const indexRoutes = [{
   name: 'Dashboard',
   component: Dashboard
 }, {
-  path: '/dashboard/home',
-  name: 'DashboardHome',
-  component: Home
+  path: '/maps/:direction_id',
+  name: 'maps',
+  component: MapShared
 }, {
   name: 'NotFound',
   component: NotFound
