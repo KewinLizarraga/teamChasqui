@@ -44,6 +44,7 @@ class SignInViewController: UIViewController {
                     Globals.usuario.setapellido(value: user["last_name"].stringValue)
                     Globals.usuario.setcorreo(value: user["email"].stringValue)
                     Globals.usuario.settoken(value: json!["token"].stringValue)
+                    Globals.usuario.setId(value: user["_id"].stringValue)
                     Globals.usuario.saveSession()
                     
                     //changing view controller

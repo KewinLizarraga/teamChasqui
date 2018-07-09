@@ -58,6 +58,8 @@ class HomeController: UIViewController {
     }
     
     override func viewDidLoad() {
+        
+        print("User ID",Globals.usuario.getId())
         super.viewDidLoad()
         self.configureNavigationBar()
         self.setupViews()
@@ -71,12 +73,6 @@ class HomeController: UIViewController {
             if let error = err {
                 print("error getting businesses",error)
             }else {
-                
-                do {
-                    let featuredHotel = try JSONDecoder().decode([Service].self, from: json!["hotel"].rawData())
-                }catch let err{
-                    print(err)
-                }
                 
                 if let featuredHotel = try? JSONDecoder().decode([Service].self, from: json!["hotel"].rawData()) {
                     self.data.append(FeaturedServices(name: "Hoteles Destacados", services: featuredHotel))

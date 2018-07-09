@@ -48,6 +48,12 @@
 		1C661AC920B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C661AC820B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift */; };
 		1C661ACB20B4CB6500D2F985 /* EmbeddedSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C661ACA20B4CB6500D2F985 /* EmbeddedSectionController.swift */; };
 		1C70C77E208E877A00F93CB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C70C77D208E877A00F93CB7 /* GoogleService-Info.plist */; };
+		1C7954BB20F32409008A7FEA /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7954BA20F32409008A7FEA /* ChatViewController.swift */; };
+		1C7954BE20F32DD4008A7FEA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7954BD20F32DD4008A7FEA /* Message.swift */; };
+		1C7954C020F33288008A7FEA /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7954BF20F33288008A7FEA /* Chat.swift */; };
+		1C7954C320F334A9008A7FEA /* MessageSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7954C220F334A9008A7FEA /* MessageSectionController.swift */; };
+		1C7954C520F33577008A7FEA /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7954C420F33577008A7FEA /* MessageCell.swift */; };
+		1C7954C720F35C95008A7FEA /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7954C620F35C95008A7FEA /* SendView.swift */; };
 		1C7A072020CF287E0015D085 /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A071F20CF287E0015D085 /* AdditionalInformation.swift */; };
 		1C7A072320CF46CF0015D085 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A072220CF46CF0015D085 /* LoginViewController.swift */; };
 		1C7A072620CFE7BB0015D085 /* CategoryDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A072520CFE7BB0015D085 /* CategoryDetailController.swift */; };
@@ -127,6 +133,12 @@
 		1C661AC820B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedCollectionViewCell.swift; sourceTree = "<group>"; };
 		1C661ACA20B4CB6500D2F985 /* EmbeddedSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedSectionController.swift; sourceTree = "<group>"; };
 		1C70C77D208E877A00F93CB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1C7954BA20F32409008A7FEA /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		1C7954BD20F32DD4008A7FEA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		1C7954BF20F33288008A7FEA /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		1C7954C220F334A9008A7FEA /* MessageSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSectionController.swift; sourceTree = "<group>"; };
+		1C7954C420F33577008A7FEA /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		1C7954C620F35C95008A7FEA /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		1C7A071F20CF287E0015D085 /* AdditionalInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInformation.swift; sourceTree = "<group>"; };
 		1C7A072220CF46CF0015D085 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C7A072520CFE7BB0015D085 /* CategoryDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailController.swift; sourceTree = "<group>"; };
@@ -278,6 +290,7 @@
 		1C2A65BB20A1DA37002C4C4C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1C7954BC20F32DC2008A7FEA /* Chat */,
 				1CD00F1120A3AB1E00B893A5 /* Home */,
 				1C7A071E20CECF2F0015D085 /* Detail */,
 			);
@@ -386,6 +399,32 @@
 			path = RemoteConfig;
 			sourceTree = "<group>";
 		};
+		1C7954B920F2F82B008A7FEA /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				1C7954BA20F32409008A7FEA /* ChatViewController.swift */,
+				1C7954C120F33489008A7FEA /* Section */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		1C7954BC20F32DC2008A7FEA /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				1C7954BD20F32DD4008A7FEA /* Message.swift */,
+				1C7954BF20F33288008A7FEA /* Chat.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		1C7954C120F33489008A7FEA /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				1C7954C220F334A9008A7FEA /* MessageSectionController.swift */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
 		1C7A071E20CECF2F0015D085 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +508,7 @@
 				1C7A072720CFEE360015D085 /* CategoryDetail */,
 				1CD00F0E20A395C200B893A5 /* Sections */,
 				1C3F675920C725B200304568 /* Detail */,
+				1C7954B920F2F82B008A7FEA /* Chat */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -549,6 +589,7 @@
 				1CDFAB3E20CB1E3C00665599 /* InformationCell.swift */,
 				1C7AA07C20E152220059C509 /* CommentCell.swift */,
 				1C848A6320E4287E00C38011 /* QuestionCell.swift */,
+				1C7954C420F33577008A7FEA /* MessageCell.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -559,6 +600,7 @@
 				1CF3D566209CCDD700A2F896 /* GenericCell.swift */,
 				1C661AC820B4C85C00D2F985 /* EmbeddedCollectionViewCell.swift */,
 				1C7A072E20D0354D0015D085 /* MapButton.swift */,
+				1C7954C620F35C95008A7FEA /* SendView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -695,6 +737,8 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
@@ -711,6 +755,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyTimer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
@@ -735,6 +781,7 @@
 				1C18E6C920E2E3DB0079C8D9 /* CommentsSectionController.swift in Sources */,
 				1C8D000D20C9DBD60084A4BF /* TitleServiceSectionController.swift in Sources */,
 				1C661ACB20B4CB6500D2F985 /* EmbeddedSectionController.swift in Sources */,
+				1C7954C320F334A9008A7FEA /* MessageSectionController.swift in Sources */,
 				1CC5DCCA208FEFFE00FF16B5 /* Globals.swift in Sources */,
 				1C7A072A20CFEE7E0015D085 /* CategoryDetailSectionController.swift in Sources */,
 				1C7AA07D20E152220059C509 /* CommentCell.swift in Sources */,
@@ -756,6 +803,7 @@
 				1C18E6C620E2D2670079C8D9 /* User.swift in Sources */,
 				1CDFAB3620CAE34F00665599 /* PhotoSectionController.swift in Sources */,
 				1C7A072620CFE7BB0015D085 /* CategoryDetailController.swift in Sources */,
+				1C7954C520F33577008A7FEA /* MessageCell.swift in Sources */,
 				1C7A072D20CFEF410015D085 /* CategoryDetailCell.swift in Sources */,
 				1CDFAB3B20CB110B00665599 /* TitleOfServiceCell.swift in Sources */,
 				1C41589220B4A17A00FFB9D4 /* FeaturedServices.swift in Sources */,
@@ -767,6 +815,7 @@
 				1CDFAB3920CAF7D800665599 /* ImageCell.swift in Sources */,
 				1C7A073420D061920015D085 /* MoreInformationService.swift in Sources */,
 				1CD00F1720A4FF1D00B893A5 /* Service.swift in Sources */,
+				1C7954BE20F32DD4008A7FEA /* Message.swift in Sources */,
 				1C18E6BF20E2C0490079C8D9 /* MakeACommentController.swift in Sources */,
 				1C18200720C6FB8600BA48C5 /* RecentsSectionController.swift in Sources */,
 				1C3F675B20C725D700304568 /* ServiceDetailViewController.swift in Sources */,
@@ -776,6 +825,7 @@
 				1C2A65C220A21944002C4C4C /* ApiService.swift in Sources */,
 				1C18E6C220E2D10C0079C8D9 /* MiCuentaViewController.swift in Sources */,
 				1C7A072320CF46CF0015D085 /* LoginViewController.swift in Sources */,
+				1C7954BB20F32409008A7FEA /* ChatViewController.swift in Sources */,
 				1C41589020B47FAC00FFB9D4 /* Colors.swift in Sources */,
 				1C7A073620D080CB0015D085 /* SignInViewController.swift in Sources */,
 				1C18200520C6FB7000BA48C5 /* NearSectionController.swift in Sources */,
@@ -792,6 +842,8 @@
 				1C661AC720B4C82900D2F985 /* HorizontalSectionController.swift in Sources */,
 				1C1B304E20F005FE0084360D /* QuestionsSectionControllerCopy.swift in Sources */,
 				1C18200E20C6FD2300BA48C5 /* RecentsHeaderView.swift in Sources */,
+				1C7954C720F35C95008A7FEA /* SendView.swift in Sources */,
+				1C7954C020F33288008A7FEA /* Chat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

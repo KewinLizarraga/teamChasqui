@@ -23,7 +23,8 @@ class TitleServiceSectionController: ListSectionController {
     
     override func cellForItem(at index: Int) -> UICollectionViewCell {
         let cell = collectionContext!.dequeueReusableCell(of: TitleOfServiceCell.self, for: self, at: index) as! TitleOfServiceCell
-        cell.item = service;
+        cell.item = service
+        cell.bookButton.addTarget(self, action: #selector(openChat), for: UIControlEvents.touchUpInside)
         return cell
     }
     
@@ -35,8 +36,16 @@ class TitleServiceSectionController: ListSectionController {
     override func didUpdate(to object: Any) {
         service = object as? Service
     }
+    
+    @objc func openChat() {
+        let vc = ChatViewController()
+        vc.business_id = service.id
+        vc.owner_id = service.user_id
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func didSelectItem(at index: Int) {
-        
+
     }
     
 }

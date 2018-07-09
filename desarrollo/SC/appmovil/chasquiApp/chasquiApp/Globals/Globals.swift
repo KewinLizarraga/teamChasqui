@@ -50,5 +50,12 @@ class Globals {
     
     static let addQuestion = baseURL + "questions"
     
+    //Chat
+    static let chat = baseURL + "chats"
+    
+    //Messages
+    
+    static let messages = baseURL + "messages"
+    
     
 }

@@ -24,6 +24,7 @@ class Service: ListDiffable, Decodable {
     var geo_location: GeoLocation
     var price: Price
     var money_types: String?
+    var user_id: String
 
     
     //MARK: - Decodable methods
@@ -38,6 +39,7 @@ class Service: ListDiffable, Decodable {
         case geo_location
         case price
         case money_types
+        case user_id
     }
     
     required init(from decoder: Decoder) throws {
@@ -51,6 +53,7 @@ class Service: ListDiffable, Decodable {
         review_count = try container.decode(Int.self, forKey: .review_count)
         geo_location = try container.decode(GeoLocation.self, forKey: .geo_location)
         price = try container.decode(Price.self, forKey: .price)
+        user_id = try container.decode(String.self, forKey: .user_id)
     }
     
     

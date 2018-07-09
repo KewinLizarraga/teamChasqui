@@ -92,6 +92,47 @@ class ApiService {
         request(url: url, httpMethod: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, completion: completion)
     }
     
+    
+    //MARK: - Chat
+    
+    func verifyChatID(business_id: String, completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let url = Globals.chat + "?filter[business_id]=" + business_id +  "&filter[user_id]=\(Globals.usuario.getId())"
+        
+        request(url: url, httpMethod: .get, parameters: nil, headers: nil, completion: completion)
+    }
+    
+    func getChatID(business_id: String, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let url = Globals.chat
+        
+        let headers: [String:String] = [
+            "x-access-token": Globals.usuario.gettoken()
+        ]
+        
+        let parameters: Parameters = [
+            "business_id": business_id
+        ]
+        request(url: url, httpMethod: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, completion: completion)
+    }
+    
+    //MARK: - Message
+    
+    func getMessages(chat_id: String, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let url = Globals.chat + "/" + chat_id + "/messages"
+        
+        request(url: url, httpMethod: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, completion: completion)
+    }
+    
+    func sendMessage(parameters: Parameters, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let url = Globals.messages
+        
+        let headers: [String:String] = [
+            "x-access-token": Globals.usuario.gettoken()
+        ]
+    
+        request(url: url, httpMethod: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, completion: completion)
+    }
+    
+    
     //MARK: - Request for all methods
     
     func request(url: String,

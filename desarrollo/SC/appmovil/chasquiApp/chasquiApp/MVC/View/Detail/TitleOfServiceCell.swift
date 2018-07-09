@@ -32,6 +32,9 @@ class TitleOfServiceCell: GenericCell<Service> {
         layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 0.5
         self.layer.addSublayer(layer)
+        
+        bookButton.layer.cornerRadius = bookButton.bounds.height / 2
+        bookButton.layer.masksToBounds = true
     }
     
     //MARK: - Components
@@ -73,6 +76,12 @@ class TitleOfServiceCell: GenericCell<Service> {
         return label
     }()
     
+    let bookButton: RoundedButton = {
+        let button = RoundedButton()
+        button.setTitle("Reservar", for: UIControlState.normal)
+        button.backgroundColor = Colors.dorado
+        return button
+    }()
     
     //MARK: - Setup Views
     
@@ -104,6 +113,13 @@ class TitleOfServiceCell: GenericCell<Service> {
             make.leading.equalTo(serviceName)
             make.top.equalTo(rate.snp.bottom).offset(5)
             
+        }
+        
+        contentView.addSubview(bookButton)
+        bookButton.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().offset(-15)
+            make.bottom.equalToSuperview().inset(8)
+            make.size.equalTo(CGSize(width: 120, height: 40))
         }
         
         
