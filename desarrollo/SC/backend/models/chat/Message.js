@@ -11,7 +11,10 @@ const MessageSchema = new Schema({
 MessageSchema.statics.addToChat = function (Message, cb) {
   const Chat = mongoose.model('Chat');
   const { chat_id, message } = Message;
-  Chat.findById(chat_id, (err, chat) => {
+  Chat.findById(chat_id).populate({
+    path: 'user_id',
+    select: ['first_name', 'last_name', 'photo', 'email']
+  }).exec((err, chat) => {
     if (err) return cb({ status: 500, message: { success: false, message: err } });
     if (!chat) return cb({ status: 400, message: { success: false, message: 'Chat does not exist' } });
     chat.last_message = message;

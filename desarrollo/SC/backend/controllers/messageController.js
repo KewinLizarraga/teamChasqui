@@ -17,6 +17,7 @@ exports.create = (req, res) => {
     if (err) return res.status(500).send({ success: false, message: err.message });
     Message.addToChat(message, (err, chat) => {
       if (err) return res.status(err.status).send(err.message);
+      const populatedChat = chat.populate({ path: 'user_id', fields: ['first_name', 'last_name', 'photo', 'email']})
       res.status(200).send({ chat, message });
     });
   });
