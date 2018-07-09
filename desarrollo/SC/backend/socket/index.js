@@ -27,6 +27,13 @@ module.exports = (io) => {
         room: data.room
       })
     });
+
+    socket.on('addLocation', data => {
+      socket.broadcast.to(data.room).emit('addLocation', {
+        room: data.room,
+        location: data.location
+      });
+    });
     socket.on('ejemplo', data => {
       console.log(data);
     })
