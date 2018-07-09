@@ -30,6 +30,6 @@ target 'chasquiApp' do
   pod 'SDWebImage'
   
   #Socket.io
-  pod 'Socket.IO-Client-Swift'
+  pod 'Socket.IO-Client-Swift', '~> 13.2.0'
 
 end

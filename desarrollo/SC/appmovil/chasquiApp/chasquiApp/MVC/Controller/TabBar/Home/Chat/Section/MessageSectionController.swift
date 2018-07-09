@@ -19,6 +19,7 @@ class MessageSectionController: ListSectionController {
     override func cellForItem(at index: Int) -> UICollectionViewCell {
         let cell = collectionContext!.dequeueReusableCell(of: MessageCell.self, for: self, at: index) as! MessageCell
         cell.item = item
+        cell.changeColor()
         cell.layoutIfNeeded()
         return cell
     }

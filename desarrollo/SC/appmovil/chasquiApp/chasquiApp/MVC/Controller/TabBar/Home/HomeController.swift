@@ -59,7 +59,7 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         
-        print("User ID",Globals.usuario.getId())
+//        print("User ID",Globals.usuario.getId())
         super.viewDidLoad()
         self.configureNavigationBar()
         self.setupViews()

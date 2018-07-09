@@ -34,11 +34,13 @@ class MessageCell: GenericCell<Message> {
     
     override func updateUI() {
         title.text = item.message
+        
+    }
+    
+    func changeColor() {
         if item.from == Globals.usuario.getId() {
             backgroundColor = UIColor.blue
             title.textColor = UIColor.white
-        }else {
-            backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
         }
     }
     
@@ -47,7 +49,7 @@ class MessageCell: GenericCell<Message> {
     }
     
     override func setupViews() {
-    
+        backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
         contentView.addSubview(title)
         title.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview().inset(MessageCell.insets.top)
@@ -63,6 +65,7 @@ class MessageCell: GenericCell<Message> {
         label.textAlignment = NSTextAlignment.left
         label.font = MessageCell.font
         label.sizeToFit()
+        label.textColor = UIColor.black
         return label
     }()
     

@@ -8,7 +8,17 @@
 
 import IGListKit
 import SocketIO
+import SwiftyJSON
+
 class ChatViewController: UIViewController,ListAdapterDataSource {
+    
+    
+    //Socket.IO
+    let manager = SocketManager(socketURL: URL(string: "http://206.189.175.34:8000")!, config: [.log(true), .compress])
+    var socket: SocketIOClient!
+    
+    
+    //Components
     
     var business_id: String! {
         didSet{
@@ -27,6 +37,7 @@ class ChatViewController: UIViewController,ListAdapterDataSource {
     var chat_id: String! = nil {
         didSet {
             print("el chat_id es",chat_id)
+            setSocketEvents()
             getMessages()
         }
     }
@@ -36,6 +47,9 @@ class ChatViewController: UIViewController,ListAdapterDataSource {
     }
     
     var data: [Message]! = []
+
+
+    //MARK: All methods to get chat_id
     
     fileprivate func verifyIfExistsAChat() {
         
@@ -113,18 +127,45 @@ class ChatViewController: UIViewController,ListAdapterDataSource {
     
     let sendButtonView = SendView()
 
+    //MARK: - View Did Load
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = adapter
+        self.socket = manager.defaultSocket
         setupViews()
         configureNavigationBar()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
+        
     }
     
+    private func setSocketEvents() {
+        
+        
+        socket.on(clientEvent: .connect) { (data, ack) in
+            print("socket messages connected")
+            self.socket.emit("join", ["room":self.chat_id])
+            self.socket.on("addMessage") { [weak self] (data, ack) in
+                print("recibi algo")
+                let json = JSON(data[0])
+                if let msg = try? JSONDecoder().decode(Message.self, from: json["message"].rawData()) {
+                    self?.data.append(msg)
+                    self?.adapter.performUpdates(animated: true, completion: nil)
+                }
+            }
+        }
+        
+        socket.connect()
+        
+    }
     
+    private func getMessages(_ completion: @escaping (Message) -> Void) {
+       
+    }
     
     //MARK: - Setup Views
     
@@ -176,10 +217,17 @@ class ChatViewController: UIViewController,ListAdapterDataSource {
             }else {
                 if statusCode == 200 {
                     let message = json!["message"]
+                    let dataMessage = message.dictionaryObject!
                     if let newMessage = try? JSONDecoder().decode(Message.self, from: message.rawData()) {
                         self.data.append(newMessage)
                         self.adapter.performUpdates(animated: true, completion: nil)
                         self.sendButtonView.bodyTV.text = ""
+                        //Socket.IO
+                        let myJSON = [
+                            "room": self.chat_id,
+                            "message": dataMessage
+                            ] as [String : Any]
+                        self.socket.emit("addMessage", myJSON)
                     }
                 }else {
                     self.showAlert(title: "Ocurrio algo", message: json!.description)

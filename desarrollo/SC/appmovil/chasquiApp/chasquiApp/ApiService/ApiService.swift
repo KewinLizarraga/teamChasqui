@@ -132,6 +132,22 @@ class ApiService {
         request(url: url, httpMethod: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, completion: completion)
     }
     
+    //MARK: - Maps
+    
+    func getPathID(_ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let headers: [String:String] = [
+            "x-access-token": Globals.usuario.gettoken()
+        ]
+        request(url: Globals.directions, httpMethod: HTTPMethod.post, parameters: nil, encoding: JSONEncoding.default, headers: headers, completion: completion)
+    }
+    
+    func sendLocations(parameters: Parameters, _ completion: @escaping (_ error:Error?,_ statusCode:Int,_ json:JSON?) -> () ) {
+        let headers: [String:String] = [
+            "x-access-token": Globals.usuario.gettoken()
+        ]
+        request(url: Globals.locations, httpMethod: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers, completion: completion)
+    }
+    
     
     //MARK: - Request for all methods
     

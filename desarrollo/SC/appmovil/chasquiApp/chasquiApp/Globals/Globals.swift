@@ -26,6 +26,8 @@ class Globals {
     
     static var usuario = userModel()
     
+    static var path_id = ""
+    
     //Auth
     
     static let auth = baseURL + "auth"
@@ -57,5 +59,12 @@ class Globals {
     
     static let messages = baseURL + "messages"
     
+    //Directions
+    
+    static let directions = baseURL + "directions"
+    
+    //Locations
+    
+    static let locations = baseURL + "locations"
     
 }

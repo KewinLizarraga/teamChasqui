@@ -39,7 +39,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>necesito tu ubicacion siempre</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>necesito tu ubicacion mientras uses el app</string>
+	<string>necesito tu ubicacion</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>necesito acceso a tu libreria de fotos</string>
 	<key>UIAppFonts</key>

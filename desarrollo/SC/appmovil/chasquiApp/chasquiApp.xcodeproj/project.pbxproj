@@ -448,6 +448,7 @@
 		1C7A072420CF8DED0015D085 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				1CDC0F1520F39CAF00B3CD3F /* SocketManager */,
 				1C2A65BB20A1DA37002C4C4C /* Model */,
 				1C2A65BA20A1DA31002C4C4C /* View */,
 				1C2A65BC20A1DA3D002C4C4C /* Controller */,
@@ -564,6 +565,13 @@
 				1C18200F20C6FD7F00BA48C5 /* Search */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		1CDC0F1520F39CAF00B3CD3F /* SocketManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SocketManager;
 			sourceTree = "<group>";
 		};
 		1CDFAB3420CAE33B00665599 /* Components */ = {
