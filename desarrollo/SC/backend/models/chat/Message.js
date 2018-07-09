@@ -8,4 +8,19 @@ const MessageSchema = new Schema({
   chat_id: { type: Schema.Types.ObjectId, required: true, ref: 'Chat' }
 }, { timestamps: true });
 
+MessageSchema.statics.addToChat = function (Message, cb) {
+  const Chat = mongoose.model('Chat');
+  const { chat_id, message } = Message;
+  Chat.findById(chat_id, (err, chat) => {
+    if (err) return cb({ status: 500, message: { success: false, message: err } });
+    if (!chat) return cb({ status: 400, message: { success: false, message: 'Chat does not exist' } });
+    chat.last_message = message;
+    chat.count = chat.count + 1;
+    chat.save((error, chat) => {
+      if (error) return cb({ status: 500, message: { success: false, message: err } });
+      return cb(null, chat);
+    })
+  })
+}
+
 mongoose.model('Message', MessageSchema);

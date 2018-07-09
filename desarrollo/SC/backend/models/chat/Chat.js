@@ -8,6 +8,7 @@ const ChatSchema = new Schema({
   last_message: String
 }, { timestamps: true });
 
+
 ChatSchema.statics.getMessages = function (
   chat_id,
   hiddenFields,
