@@ -18,6 +18,8 @@ const financialTransactionRoutes = require('./financialTransactionRoutes');
 const questionRoutes = require('./questionRoutes');
 const replyRoutes = require('./replyRoutes');
 const foodTypeRoutes = require('./foodTypeRoutes');
+const chatRoutes = require('./chatRoutes');
+const messageRoutes = require('./messageRoutes');
 
 module.exports = (app) => {
   app.use('/api/v1/auth', authRoutes)
@@ -40,4 +42,6 @@ module.exports = (app) => {
   app.use('/api/v1/questions', questionRoutes);
   app.use('/api/v1/replies', replyRoutes);
   app.use('/api/v1/food-types', foodTypeRoutes);
+  app.use('/api/v1/chats', chatRoutes);
+  app.use('/api/v1/messages', messageRoutes);
 }

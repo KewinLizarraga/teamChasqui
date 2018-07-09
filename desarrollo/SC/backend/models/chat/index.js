@@ -1,0 +1,2 @@
+require('./Chat');
+require('./Message');
